@@ -1,0 +1,48 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View - MD) - US 100
+autonumber
+
+participant "userRoute" as Route <<Route>>
+participant "ctrl :\n IUserController" as Controller <<Controller>>
+participant "userDTO :\n IUserDTO" as UserDTO <<DTO>>
+participant "userServiceInstance :\n IUserService" as Service <<Service>>
+participant "user :\n user" as User <<Domain>>
+participant "userRepo :\n IUserRepository" as Repo <<Repository>>
+participant "DB" as DB <<DataBase>>
+
+?o-> Route : POST (.../users/profile)
+activate Route
+
+    Route -> Controller : execute(req, res, next)
+    activate Controller
+        Controller -> Controller : updateProfile(req, res, next)
+        activate Controller
+            Controller --> UserDTO** : create
+            Controller -> Service : updateProfile(userId, userDTO)
+
+            activate Service
+                Service --> User** : create
+                Service -> Repo : save(user)
+                activate Repo
+                    Repo -> DB : save(user)
+                    activate DB
+                    DB --> Repo :
+                    deactivate DB
+                    Repo --> Service :
+                deactivate Repo
+                Service --> Controller :
+            deactivate Service
+
+            Controller --> Controller : status: 201/400
+        deactivate Controller
+    Controller --> Route : status: 201/400
+    deactivate Controller
+
+<-- Route : status: 201/400
+deactivate Route
+
+@enduml

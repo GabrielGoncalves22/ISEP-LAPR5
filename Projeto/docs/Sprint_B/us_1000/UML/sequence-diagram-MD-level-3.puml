@@ -1,0 +1,48 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View - MD) - US 1000
+autonumber
+
+participant "deviceRoute" as Route <<Route>>
+participant "ctrlDeviceType :\n IDeviceTypeController" as Controller <<Controller>>
+participant "deviceTypeDTO :\n IDeviceTypeDTO" as DeviceTypeDTO <<DTO>>
+participant "deviceTypeServiceInstance :\n IDeviceTypeService" as Service <<Service>>
+participant "deviceType :\n deviceType" as DeviceType <<Domain>>
+participant "deviceTypeRepo :\n IDeviceTypeRepository" as Repo <<Repository>>
+participant "DB" as DB <<DataBase>>
+
+?o-> Route : POST (.../devices/types)
+activate Route
+
+    Route -> Controller : execute(req, res, next)
+    activate Controller
+        Controller -> Controller : createDeviceType(req, res, next)
+        activate Controller
+            Controller --> DeviceTypeDTO** : create
+            Controller -> Service : createDeviceType(deviceTypeDTO)
+
+            activate Service
+                Service --> DeviceType** : create
+                Service -> Repo : save(deviceType)
+                activate Repo
+                    Repo -> DB : create(deviceType)
+                    activate DB
+                    DB --> Repo :
+                    deactivate DB
+                    Repo --> Service :
+                deactivate Repo
+                Service --> Controller :
+            deactivate Service
+
+            Controller --> Controller : status: 201/400
+        deactivate Controller
+    Controller --> Route : status: 201/400
+    deactivate Controller
+
+<-- Route : status: 201/400
+deactivate Route
+
+@enduml

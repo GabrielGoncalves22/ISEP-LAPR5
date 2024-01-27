@@ -1,0 +1,29 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 2 - Process View) - US 1020
+autonumber
+
+participant "UI" as UI <<system (C4)>>
+participant "MD" as MD <<system (C4)>>
+
+?o-> UI : Ask to inhibit/disinhibit device
+activate UI
+
+<-- UI : Ask to choose an device
+deactivate UI
+
+?o-> UI : Choose the device
+activate UI
+
+    UI -> MD : PATH (.../devices/:code)
+    activate MD
+        UI <-- MD : status: 200/404
+    deactivate MD
+
+<-- UI : Device inhibited or disinhibited/data error
+deactivate UI
+
+@enduml

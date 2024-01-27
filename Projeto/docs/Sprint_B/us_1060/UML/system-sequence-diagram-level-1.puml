@@ -1,0 +1,22 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+autonumber
+
+title System Sequence Diagram (Level 1 - Process View) - US 170
+
+
+actor "Gestor de Frota" as actor
+participant "RobDroneGo" as UI <<system (C4)>>
+
+activate actor
+actor -> UI: Asks to list buildings
+activate UI
+actor <-- UI: lists buildings
+deactivate UI
+deactivate actor
+
+
+
+@enduml

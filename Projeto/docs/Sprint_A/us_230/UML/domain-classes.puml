@@ -1,0 +1,60 @@
+@startuml
+
+skinparam titleFontSize 25
+title <u>US 230 - Domain classes</u>
+
+hide methods
+skinparam classAttributeIconSize 0
+
+'Building aggregate
+package "<<aggregate>> Building" {
+    entity Building <<entity>> <<root>>
+    class Code <<(V, #FF8B40) value object>>
+
+    entity Floor <<entity>> {
+        number
+    }
+    class CellInfo <<(V, #FF8B40) value object>>
+
+    entity Elevator <<entity>>
+
+    entity Passageway <<entity>>
+    class PassagewayCode <<(V, #FF8B40) value object>>
+
+    class CellOrientation <<(V, #FF8B40) enum>>
+
+    entity Room <<entity>>
+    class RoomName <<(V, #FF8B40) value object>>
+
+    class CellPosition <<(V, #FF8B40) value object>>
+}
+
+Building --> Code
+
+Floor --> "*" CellInfo : map
+
+Room --> RoomName
+Room --> CellPosition : yStartCell
+Room --> CellPosition : xStartCell
+Room --> CellPosition : yEndCell
+Room --> CellPosition : xEndCell
+Room --> CellPosition : doors
+
+Elevator --> CellOrientation
+Elevator --> CellPosition : xStartCell
+Elevator --> CellPosition : yStartCell
+
+Passageway --> PassagewayCode
+Passageway --> CellOrientation
+Passageway --> CellPosition : xStartCell
+Passageway --> CellPosition : yStartCell
+
+Building "1" -- "*" Floor : has >
+
+Elevator "1" -- "*" Floor : serves >
+
+Passageway "1" -- "*" Floor : through >
+
+Floor "1" -- "*" Room : has >
+
+@enduml

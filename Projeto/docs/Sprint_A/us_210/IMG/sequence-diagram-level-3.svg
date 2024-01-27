@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="289px" preserveAspectRatio="none" style="width:403px;height:289px;background:#FFFFFF;" version="1.1" viewBox="0 0 403 289" width="403px" zoomAndPan="magnify"><defs/><g><rect fill="none" height="27.6094" id="_title" style="stroke:none;stroke-width:1.0;" width="374" x="13.5" y="10"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="364" x="18.5" y="29.5332">Sequence Diagram (Level 3 - Process View) - US 210</text><rect fill="#FFFFFF" height="91.0547" style="stroke:#181818;stroke-width:1.0;" width="10" x="214" y="126.1797"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="339" y="156.5313"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="219" x2="219" y1="93.8281" y2="235.2344"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="344" x2="344" y1="93.8281" y2="235.2344"/><rect fill="#E3E3E3" height="49.2188" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="106" x="166" y="43.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="92" x="173" y="65.1426">«system (C4)»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="18" x="210" y="82.752">BE</text><rect fill="#E3E3E3" height="49.2188" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="106" x="166" y="234.2344"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="92" x="173" y="255.7676">«system (C4)»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="18" x="210" y="273.377">BE</text><rect fill="#E3E3E3" height="49.2188" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="106" x="291" y="43.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="92" x="298" y="65.1426">«system (C4)»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="19" x="334.5" y="82.752">BD</text><rect fill="#E3E3E3" height="49.2188" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="106" x="291" y="234.2344"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="92" x="298" y="255.7676">«system (C4)»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="19" x="334.5" y="273.377">BD</text><rect fill="#FFFFFF" height="91.0547" style="stroke:#181818;stroke-width:1.0;" width="10" x="214" y="126.1797"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="339" y="156.5313"/><ellipse cx="4.5" cy="125.4297" fill="none" rx="4" ry="4" style="stroke:#181818;stroke-width:1.5;"/><polygon fill="#181818" points="202,122.1797,212,126.1797,202,130.1797,206,126.1797" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="9" x2="208" y1="126.1797" y2="126.1797"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="12" y="121.3232">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="176" x="23" y="121.3232">GET (.../buildings/:code/floors)</text><polygon fill="#181818" points="327,152.5313,337,156.5313,327,160.5313,331,156.5313" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="224" x2="333" y1="156.5313" y2="156.5313"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="231" y="151.6748">2</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="85" x="242" y="151.6748">Select building</text><polygon fill="#181818" points="235,182.8828,225,186.8828,235,190.8828,231,186.8828" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="229" x2="343" y1="186.8828" y2="186.8828"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="241" y="182.0264">3</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="252" y="182.0264"> </text><polygon fill="#181818" points="11,213.2344,1,217.2344,11,221.2344,7,217.2344" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="5" x2="218" y1="217.2344" y2="217.2344"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="17" y="212.3779">4</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="90" x="28" y="212.3779">status: 200/404</text><!--MD5=[4fd3195fac26875bfc4eba0405f27baa]
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View) - US 210
+autonumber
+
+participant "BE" as BE <<system (C4)>>
+participant "BD" as BD <<system (C4)>>
+
+?o-> BE : GET (.../buildings/:code/floors)
+activate BE
+
+    BE - -> BD : Select building
+    activate BD
+    BD - -> BE :
+    deactivate BD
+
+<- - BE : status: 200/404
+deactivate BE
+
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 18:01:30 WEST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: Cp1252
+Language: pt
+Country: PT
+--></g></svg>

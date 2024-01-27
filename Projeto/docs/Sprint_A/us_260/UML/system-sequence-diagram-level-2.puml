@@ -1,0 +1,16 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 2 - Process View) - US 260
+autonumber
+
+participant "MD" as MD <<system (C4)>>
+
+?o-> MD : GET (.../passageways?building_1=:building_1&building_2=building_2)
+activate MD
+    <-- MD : status: 200/404
+deactivate MD
+
+@enduml

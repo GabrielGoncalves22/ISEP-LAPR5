@@ -1,0 +1,126 @@
+{
+    "floor": {
+        "size": {
+            "numXCells": 12,
+            "numYCells": 20
+        },
+        "map": [
+            [3, 2, 2, 2, 2, 2, 2, 2, 0, 0, 2, 2, 0],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [3, 2, 2, 2, 2, 1, 0, 3, 2, 2, 2, 2, 1],
+            [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+            [3, 2, 2, 2, 2, 1, 0, 3, 2, 2, 2, 2, 1],
+            [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+            [3, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0]
+        ],
+        "passageways": [
+            {
+                "code": "D3-B2",
+                "destinationBuilding": "B",
+                "destinationFloor": 2,
+                "xStartCell": 9,
+                "yStartCell": 0,
+                "cellOrientation": "north"
+            },
+            {
+                "code": "D3-C3",
+                "destinationBuilding": "C",
+                "destinationFloor": 3,
+                "xStartCell": 11,
+                "yStartCell": 1,
+                "cellOrientation": "west"
+            }
+        ],
+        "elevator": {
+            "xStartCell": 1,
+            "yStartCell": 0.5,
+            "cellOrientation": "west"
+        },
+        "rooms": [
+            {
+                "name": "D301",
+                "xStartCell": 0,
+                "yStartCell": 2,
+                "xEndCell": 4,
+                "yEndCell": 10,
+                "doors": [
+                    {
+                        "xPositionCell": 5,
+                        "yPositionCell": 9,
+                        "cellOrientation": "west"
+                    }
+                ]
+            },
+            {
+                "name": "D302",
+                "xStartCell": 7,
+                "yStartCell": 2,
+                "xEndCell": 11,
+                "yEndCell": 10,
+                "doors": [
+                    {
+                        "xPositionCell": 7,
+                        "yPositionCell": 9,
+                        "cellOrientation": "west"
+                    }
+                ]
+            },
+            {
+                "name": "D303",
+                "xStartCell": 0,
+                "yStartCell": 11,
+                "xEndCell": 4,
+                "yEndCell": 16,
+                "doors": [
+                    {
+                        "xPositionCell": 5,
+                        "yPositionCell": 13,
+                        "cellOrientation": "west"
+                    }
+                ]
+            },
+            {
+                "name": "D304",
+                "xStartCell": 7,
+                "yStartCell": 11,
+                "xEndCell": 11,
+                "yEndCell": 16,
+                "doors": [
+                    {
+                        "xPositionCell": 7,
+                        "yPositionCell": 13,
+                        "cellOrientation": "west"
+                    }
+                ]
+            },
+            {
+                "name": "D305",
+                "xStartCell": 0,
+                "yStartCell": 17,
+                "xEndCell": 11,
+                "yEndCell": 19,
+                "doors": [
+                    {
+                        "xPositionCell": 6,
+                        "yPositionCell": 17,
+                        "cellOrientation": "north"
+                    }
+                ]
+            }
+        ]
+    }
+}

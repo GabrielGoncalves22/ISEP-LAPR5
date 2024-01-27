@@ -1,0 +1,38 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+autonumber
+
+title System Sequence Diagram (Level 3 - Process View) - US 1060
+
+
+actor "Gestor de Campus" as actor
+
+participant ":Component" as Component <<Component>>
+participant ":model" as Model
+participant ":service" as Service <<Service>>
+participant "MD" as MD <<container (C4)>>
+
+activate actor
+actor -> Component: Asks to list buildings
+activate Component
+Component -> Service: listAllBuildings()
+activate Service
+Service -> MD: GET(../buildings)
+activate MD
+Service <-- MD: status: 200/400
+
+deactivate MD
+loop for all buildings
+Service --> Model**
+end
+Service --> Component
+deactivate Service
+actor <-- Component: list buildings
+deactivate Component
+deactivate actor
+
+
+
+@enduml

@@ -1,0 +1,37 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View - UI) - US 100
+autonumber
+
+participant "View" as View <<Component>>
+participant "Component" as Component <<Component>>
+participant "Model" as Model <<Component>>
+participant "Service" as Service <<Component>>
+
+?o-> View : Ask to update profile
+activate View
+
+<-- View : Ask to insert data
+deactivate View
+
+?o-> View : Insert user data
+activate View
+    View -> Component : editPersonalData()
+    activate Component
+        Component --> Model** :
+        Component -> Service : updateUser(user)
+        activate Service
+            Service -> : POST (.../users/profile)
+            Service <--: status: 201/400
+            Service --> Component : Success / Error
+        deactivate Service
+
+        Component --> View : Information about the success/error
+    deactivate Component
+<-- View : User created/data error
+deactivate View
+
+@enduml

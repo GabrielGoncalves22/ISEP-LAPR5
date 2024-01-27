@@ -1,0 +1,42 @@
+<h1 class="center">Create Device</h1>
+
+<form (ngSubmit)="createDevice()" #formulario="ngForm" class="form-to-create">
+    <div class="form-group">
+        <label for="code">Code:</label>
+        <input type="text" id="code" name="code" [(ngModel)]="device.code" (focusout)="saveData()" required>
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" [(ngModel)]="device.description" (focusout)="saveData()"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="nickname">Nickname:</label>
+        <input type="text" id="nickname" name="nickname" [(ngModel)]="device.nickname" (focusout)="saveData()">
+    </div>
+
+    <div class="form-group">
+        <label for="serialNumber">Serial Number:</label>
+        <input type="text" id="serialNumber" name="serialNumber" [(ngModel)]="device.serialNumber" (focusout)="saveData()">
+    </div>
+
+<!--    <div class="form-group">-->
+<!--        <label for="type">Device Type:</label>-->
+<!--        <select id="type" name="type" [(ngModel)]="device.type" required>-->
+<!--            <option *ngFor="let type of deviceTypes" [value]="type.type">{{ type.type }}</option>-->
+<!--        </select>-->
+<!--    </div>-->
+
+    <div class="form-group">
+        <label for="deviceType">Device Type:</label>
+        <input type="text" id="deviceType" name="deviceType" [(ngModel)]="device.type" (focusout)="saveData()">
+    </div>
+
+    <div class="button-container">
+        <button type="submit" [disabled]="formulario.invalid">Create</button>
+    </div>
+
+    <p *ngIf="error" class="form-alert form-alert-error"><b>Error:</b> {{error}}</p>
+    <p *ngIf="success" class="form-alert form-alert-success"><b>Success:</b> {{success}}</p>
+</form>

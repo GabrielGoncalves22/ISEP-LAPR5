@@ -1,0 +1,88 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (SD) - US 160
+autonumber
+
+actor "Gestor de Campus" as actor
+participant buildingRoute as route <<Web>>
+control "passagewayController :\n passagewayController" as controller <<Controllers>>
+participant "passagewayDTO :\n PassagewayDTO" as passagewayDTO <<DTO>>
+participant "passagewayService :\n passagewayService" as passagewayService <<Use Cases>>
+participant "passageway :\n passageway" as passageway <<Domain>>
+database "passagewayRepo :\n passagewayRepo" as passagewayRepo <<Gateways>>
+participant PassagewayMap as passagewayMap <<Mapper>>
+participant "savedPassagewayDTO :\n BuildingDTO" as savedPassagewayDTO <<DTO>>
+participant "passagewayData :\n passageway" as passagewayData <<Domain>>
+participant "passagewaySchema :\n passagewaySchema" as passagewaySchema <<DB>>
+participant "savedPassageway :\n passageway" as savedPassageway <<Domain>>
+participant "savedPassagewayData :\n passageway" as savedPassagewayData <<Domain>>
+
+activate actor
+
+    actor -> route : PUT/PATCH (.../buildings/passageways/:id)
+    activate route
+
+        route -> controller : updatePassageway(json, ...)
+        activate controller
+            controller -> controller : validate(json)
+            activate controller
+            deactivate controller
+
+            controller -> passagewayMap : toDTO(json)
+            activate passagewayMap
+                passagewayMap --> passagewayDTO** : create(json)
+            deactivate passagewayMap
+
+            controller -> passagewayService : savedPassagewayDTO = updatePassageway(passagewayDTO)
+            activate passagewayService
+                passagewayService --> passagewayRepo : getPassageway(id)
+                activate passagewayRepo
+                    passagewayRepo --> passagewayMap : toDomain(passageway)
+                deactivate passagewayRepo
+
+                alt
+                    passagewayService --> passageway : changeBuilding()
+                    activate passageway
+                    deactivate passageway
+                end
+
+                alt
+                    passagewayService --> passageway : changeFloor()
+                    activate passageway
+                    deactivate passageway
+                end
+
+
+                passagewayService -> passagewayRepo : update(passageway)
+                activate passagewayRepo
+                    passagewayRepo -> passagewayMap : toDomain(passageway)
+                    activate passagewayMap
+                        passagewayMap --> savedPassageway** : create(passageway, id)
+                    deactivate passagewayMap
+                deactivate passagewayRepo
+
+                passagewayService -> passagewayMap : savedPassagewayDTO = toDTO(savedPassageway)
+                activate passagewayMap
+                    passagewayMap -> savedPassageway : id = id()
+                    passagewayMap -> savedPassageway : building1 = building1()
+                    passagewayMap -> savedPassageway : floor1 = floor1()
+                    passagewayMap -> savedPassageway : building2 = building2()
+                    passagewayMap -> savedPassageway : floor2 = floor2()
+                    passagewayMap -> savedPassagewayDTO** : create(id, building1, floor1, building2, floor2)
+                deactivate passagewayMap
+
+            deactivate passagewayService
+
+            controller -> passagewayMap : json = toJson(savedPassagewayDTO)
+            controller -> controller : generateResponse(json)
+            
+            controller --> route : response
+        deactivate controller
+        route --> actor : response
+    deactivate route
+deactivate actor
+
+@enduml

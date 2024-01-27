@@ -1,0 +1,53 @@
+<h1 class="center">List Passageways</h1>
+
+<div class="options-box">
+    <div class="options-box-option">
+        <input type="radio" id="listAllPassageways" name="listAllPassageways" [(ngModel)]="option" value="listAllPassageways">
+        <label for="listAllPassageways">List all passageways</label>
+    </div>
+
+    <div class="options-box-option">
+        <input type="radio" id="listPassagewaysBetweenTwoBuildings" name="listPassagewaysBetweenTwoBuildings" [(ngModel)]="option" value="listPassagewaysBetweenTwoBuildings">
+        <label for="listPassagewaysBetweenTwoBuildings">List passageways between two buildings</label>
+        
+        <div class="options-box-option-values">
+            <div class="options-box-option-values-value">
+                <label for="building1">Code Building 1:</label>
+                <input type="text" list="buildingList1" id="building1" name="building1" [(ngModel)]="codeBuilding1" required>
+                <datalist id="buildingList1">
+                    <option *ngFor="let building of buildings" [value]="building.code">{{building.code}}</option>
+                </datalist>
+            </div>
+            
+            <div class="options-box-option-values-value">
+                <label for="building2">Code Building 2:</label>
+                <input type="text" list="buildingList2" id="building2" name="building2" [(ngModel)]="codeBuilding2" required>
+                <datalist id="buildingList2">
+                    <option *ngFor="let building of buildings" [value]="building.code">{{building.code}}</option>
+                </datalist>
+            </div>
+        </div>
+    </div>
+
+    <div class="options-box-separator"></div>
+
+    <div class="option-box-button">
+        <button type="button" class="button-style-1" (click)="listPassageways()">Search</button>
+    </div>
+
+    <p *ngIf="error" class="form-alert form-alert-error"><b>Error:</b> {{error}}</p>
+
+</div>
+
+<div class="list-container">
+    <div *ngFor="let passageway of passageways" class="list-box">
+        <div class="list-box-title" [ngClass]="{'list-box-title-expanded': passageway.expanded, 'list-box-title-collapsed': !passageway.expanded}" (click)="passageway.expanded = !passageway.expanded">
+            <p><b>Passageway Code: </b>{{passageway.code}}</p>
+        </div>
+        <div class="list-box-body expandable" [ngClass]="{'expanded': passageway.expanded, 'collapsed': !passageway.expanded}">
+            <p><b>Passageway information:</b></p>
+            <p>From/To <b>Building</b> {{passageway.building1}} on the <b>floor</b> number {{passageway.floor1}}</p>
+            <p>From/To <b>Building</b> {{passageway.building2}} on the <b>floor</b> number {{passageway.floor2}}</p>
+        </div>
+    </div>
+</div>

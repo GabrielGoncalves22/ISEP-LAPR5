@@ -1,0 +1,81 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View - MD) - US 1090
+autonumber
+
+participant "buildingRoute" as Route <<Route>>
+participant "ctrlBuilding :\n IBuildingController" as Controller <<Controller>>
+participant "floorDTO :\n IFloorDTO" as FloorDTO <<DTO>>
+participant "buildingServiceInstance :\n IBuildingService" as Service <<Service>>
+participant "buildingDTOs :\n IBuildngDTO[]" as BuildingDTOList <<DTO>>
+participant "floor :\n floor" as Floor <<Domain>>
+participant "building :\n building" as Building <<Domain>>
+participant "buildingRepo :\n IBuildingRepository" as Repo <<Repository>>
+participant "DB" as DB <<DataBase>>
+
+?o-> Route : GET (.../buildings)
+activate Route
+
+    Route -> Controller : execute(req, res, next)
+    activate Controller
+        Controller -> Controller : getAllBuildings(req, res, next)
+        activate Controller
+            Controller -> Service : getBuildings()
+
+            activate Service
+                Service -> Repo : findAll()
+                activate Repo
+                    Repo -> DB :
+                    activate DB
+                    DB --> Repo :
+                    deactivate DB
+                    Repo --> Service :
+                deactivate Repo
+                Service --> BuildingDTOList** : create
+                Service --> Controller : buildingDTOs
+            deactivate Service
+
+            Controller --> Controller : status: 200/404
+        deactivate Controller
+    Controller --> Route : status: 200/404
+    deactivate Controller
+
+<-- Route : status: 200/404
+deactivate Route
+
+?o-> Route : POST (.../buildings/floors)
+activate Route
+
+    Route -> Controller : execute(req, res, next)
+    activate Controller
+        Controller -> Controller : createFloor(req, res, next)
+        activate Controller
+            Controller --> FloorDTO** : create
+            Controller -> Service : createFloor(floorDTO)
+
+            activate Service
+                Service --> Floor** : create
+                Service --> Building** : addFloor(floor)
+                Service -> Repo : update(building)
+                activate Repo
+                    Repo -> DB : save(building)
+                    activate DB
+                    DB --> Repo :
+                    deactivate DB
+                    Repo --> Service :
+                deactivate Repo
+                Service --> Controller :
+            deactivate Service
+
+            Controller --> Controller : status: 201/400
+        deactivate Controller
+    Controller --> Route : status: 201/400
+    deactivate Controller
+
+<-- Route : status: 201/400
+deactivate Route
+
+@enduml

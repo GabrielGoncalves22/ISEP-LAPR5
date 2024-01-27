@@ -1,0 +1,29 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 2 - Process View) - US 10
+autonumber
+
+participant "UI" as UI <<system (C4)>>
+participant "MD" as MD <<system (C4)>>
+
+?o-> UI : Ask to create user
+activate UI
+
+<-- UI : Ask to insert data
+deactivate UI
+
+?o-> UI : Insert user data
+activate UI
+
+    UI -> MD : POST (.../users/register)
+    activate MD
+        UI <-- MD : status: 201/400
+    deactivate MD
+
+<-- UI : User created/data error
+deactivate UI
+
+@enduml

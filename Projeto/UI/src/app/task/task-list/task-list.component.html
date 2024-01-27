@@ -1,0 +1,186 @@
+<h1 class="center">List Task Request</h1>
+
+<div class="options-box">
+    <div class="form-group">
+        <label for="taskType">Select Task Type: *</label>
+        <select id="taskType" [(ngModel)]="selectedTaskType" (ngModelChange)="onTaskTypeChange()" required>
+            <option value="surveillance">Surveillance</option>
+            <option value="delivery">Pickup and Delivery</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="status">Status:</label>
+        <select id="status" name="status" [(ngModel)]="selectedStatus">
+            <option *ngFor="let option of statusOptions;" [value]="option">{{ option }}</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <div class="input-group-item">
+            <label for="startDate">Start Date: </label>
+            <input type="date" id="startDate" [(ngModel)]="startDate">
+        </div>
+        <div class="input-group-item">
+            <label for="endDate">End Date: </label>
+            <input type="date" id="endDate" [(ngModel)]="endDate">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="user">User:</label>
+        <input list="userList" id="user" name="user" [(ngModel)]="selectedUser">
+        <datalist id="userList">
+            <option *ngFor="let user of users" [value]="user.email">{{ user.name }}</option>
+        </datalist>
+    </div>
+
+    <div class="option-box-button">
+        <button class="button-style-1" id="filterButton" (click)="onFilterButtonClick()">Filter</button>
+    </div>
+</div>
+
+<div *ngIf="surTask.length > 0">
+    <table class="user-table common-table">
+        <thead>
+            <tr>
+                <th (click)="sortSur('id')" [class.descending]="sortField === 'id' && sortDirection === 'desc'"
+                    [class.ascending]="sortField === 'id' && sortDirection === 'asc'">Id</th>
+                <th (click)="sortSur('buildingCode')"
+                    [class.descending]="sortField === 'buildingCode' && sortDirection === 'desc'"
+                    [class.ascending]="sortField === 'buildingCode' && sortDirection === 'asc'">Building Code</th>
+                <th (click)="sortSur('emergencyContactName')"
+                    [class.descending]="sortField === 'emergencyContactName' && sortDirection === 'desc'"
+                    [class.ascending]="sortField === 'emergencyContactName' && sortDirection === 'asc'">Emergency
+                    Contact Name</th>
+                <th (click)="sortSur('emergencyContactPhoneNumber')"
+                    [class.descending]="sortField === 'emergencyContactPhoneNumber' && sortDirection === 'desc'"
+                    [class.ascending]="sortField === 'emergencyContactPhoneNumber' && sortDirection === 'asc'">Emergency
+                    Contact Phone Number
+                </th>
+                <th (click)="sortSur('surveillanceTaskFloors')"
+                    [class.descending]="sortField === 'surveillanceTaskFloors' && sortDirection === 'desc'"
+                    [class.ascending]="sortField === 'surveillanceTaskFloors' && sortDirection === 'asc'">Surveillance
+                    Task Floors</th>
+                <th (click)="sortSur('robotTaskStatus')"
+                    [class.descending]="sortField === 'robotTaskStatus' && sortDirection === 'desc'"
+                    [class.ascending]="sortField === 'robotTaskStatus' && sortDirection === 'asc'">Status</th>
+                <th (click)="sortSur('createdByUser')"
+                    [class.descending]="sortField === 'createdByUser' && sortDirection === 'desc'"
+                    [class.ascending]="sortField === 'createdByUser' && sortDirection === 'asc'">Created By
+                </th>
+                <th (click)="sortSur('createdDate')"
+                    [class.descending]="sortField === 'createdDate' && sortDirection === 'desc'"
+                    [class.ascending]="sortField === 'createdDate' && sortDirection === 'asc'">Created In</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let task of sortedSurTasks | paginate: { itemsPerPage: pageSize, currentPage: currentPage }; let i = index"
+                [class.odd-row]="i % 2 === 0" [class.even-row]="i % 2 !== 0">
+                <td>{{ task.id }}</td>
+                <td>{{ task.buildingCode }}</td>
+                <td>{{ task.emergencyContactName }}</td>
+                <td>{{ task.emergencyContactPhoneNumber }}</td>
+                <td>{{ task.surveillanceTaskFloors.join(' | ') }}</td>
+                <td>{{ task.robotTaskStatus }}</td>
+                <td>{{ task.createdByUser }}</td>
+                <td>{{ task.createdDate }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pagination">
+        <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+    </div>
+</div>
+
+<div *ngIf="delTask.length > 0">
+    <table class="user-table common-table">
+        <thead>
+            <tr>
+                <th (click)="sortDel('id')" [class.descending]="sortFieldDel === 'id' && sortDirectionDel === 'desc'"
+                    [class.ascending]="sortFieldDel === 'id' && sortDirectionDel === 'asc'">Id</th>
+                <th (click)="sortDel('pickupContactName')"
+                    [class.descending]="sortFieldDel === 'pickupContactName' && sortDirectionDel === 'desc'"
+                    [class.ascending]="sortFieldDel === 'pickupContactName' && sortDirectionDel === 'asc'">Pickup
+                    Contact Name</th>
+                <th (click)="sortDel('pickupContactPhoneNumber')"
+                    [class.descending]="sortFieldDel === 'pickupContactPhoneNumber' && sortDirectionDel === 'desc'"
+                    [class.ascending]="sortFieldDel === 'pickupContactPhoneNumber' && sortDirectionDel === 'asc'">Pickup
+                    Contact Phone Number
+                </th>
+                <th (click)="sortDel('deliveryContactName')"
+                    [class.descending]="sortFieldDel === 'deliveryContactName' && sortDirectionDel === 'desc'"
+                    [class.ascending]="sortFieldDel === 'deliveryContactName' && sortDirectionDel === 'asc'">Delivery
+                    Contact Name</th>
+                <th (click)="sortDel('deliveryContactPhoneNumber')"
+                    [class.descending]="sortFieldDel === 'deliveryContactPhoneNumber' && sortDirectionDel === 'desc'"
+                    [class.ascending]="sortFieldDel === 'deliveryContactPhoneNumber' && sortDirectionDel === 'asc'">
+                    Delivery Contact Phone Number</th>
+                <th (click)="sortDel('taskDescription')"
+                    [class.descending]="sortFieldDel === 'taskDescription' && sortDirectionDel === 'desc'"
+                    [class.ascending]="sortFieldDel === 'taskDescription' && sortDirectionDel === 'asc'">Task
+                    Description</th>
+                <th (click)="sortDel('pickupBuildingCode')"
+                    [class.descending]="sortFieldDel === 'pickupBuildingCode' && sortDirectionDel === 'desc'"
+                    [class.ascending]="sortFieldDel === 'pickupBuildingCode' && sortDirectionDel === 'asc'">Pickup
+                    Building Code</th>
+                <th (click)="sortDel('pickupRoomName')"
+                    [class.descending]="sortFieldDel === 'pickupRoomName' && sortDirectionDel === 'desc'"
+                    [class.ascending]="sortFieldDel === 'pickupRoomName' && sortDirectionDel === 'asc'">Pickup
+                    Room Name</th>
+                <th (click)="sortDel('deliveryBuildingCode')"
+                    [class.descending]="sortFieldDel === 'deliveryBuildingCode' && sortDirectionDel === 'desc'"
+                    [class.ascending]="sortFieldDel === 'deliveryBuildingCode' && sortDirectionDel === 'asc'">Delivery
+                    Building Code</th>
+                <th (click)="sortDel('deliveryRoomName')"
+                    [class.descending]="sortFieldDel === 'deliveryRoomName' && sortDirectionDel === 'desc'"
+                    [class.ascending]="sortFieldDel === 'deliveryRoomName' && sortDirectionDel === 'asc'">Delivery Room
+                    Name</th>
+                <th (click)="sortDel('robotTaskStatus')"
+                    [class.descending]="sortFieldDel === 'robotTaskStatus' && sortDirectionDel === 'desc'"
+                    [class.ascending]="sortFieldDel === 'robotTaskStatus' && sortDirectionDel === 'asc'">Status</th>
+                <th (click)="sortDel('createdByUser')"
+                    [class.descending]="sortFieldDel === 'createdByUser' && sortDirectionDel === 'desc'"
+                    [class.ascending]="sortFieldDel === 'createdByUser' && sortDirectionDel === 'asc'">Created By
+                </th>
+                <th (click)="sortDel('createdDate')"
+                    [class.descending]="sortFieldDel === 'createdDate' && sortDirectionDel === 'desc'"
+                    [class.ascending]="sortFieldDel === 'createdDate' && sortDirectionDel === 'asc'">Created In</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let task of sortedDelTask | paginate: { itemsPerPage: pageSize, currentPage: currentPage }; let i = index"
+                [class.odd-row]="i % 2 === 0" [class.even-row]="i % 2 !== 0">
+                <td>{{ task.id }}</td>
+                <td>{{ task.pickupContactName }}</td>
+                <td>{{ task.pickupContactPhoneNumber }}</td>
+                <td>{{ task.deliveryContactName }}</td>
+                <td>{{ task.deliveryContactPhoneNumber }}</td>
+                <td>{{ task.taskDescription }}</td>
+                <td>{{ task.pickupBuildingCode }}</td>
+                <td>{{ task.pickupRoomName }}</td>
+                <td>{{ task.deliveryBuildingCode }}</td>
+                <td>{{ task.deliveryRoomName }}</td>
+                <td>{{ task.robotTaskStatus }}</td>
+                <td>{{ task.createdByUser }}</td>
+                <td>{{ task.createdDate }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pagination">
+        <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+    </div>
+</div>
+
+<div *ngIf="surTask.length === 0 && selectedTaskType === 'surveillance' && clickFilterButton"
+    class="no-surveillance-tasks">
+    <p>No surveillance tasks available for the indicated filters!</p>
+</div>
+
+<div *ngIf="delTask.length === 0 && selectedTaskType === 'delivery' && clickFilterButton" class="no-delivery-tasks">
+    <p>No pickup and delivery tasks available for the indicated filters!</p>
+</div>
+
+<div *ngIf="error" class="error">
+    <p>{{ error }}</p>
+</div>

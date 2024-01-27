@@ -1,0 +1,26 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 1 - Process View) - US 1000
+autonumber
+
+Actor "Fleet Manager" as FleetManager
+participant "RobDroneGo" as Sistema <<system (C4)>>
+
+activate FleetManager
+    FleetManager -> Sistema : Ask to create device type
+    activate Sistema
+
+    Sistema --> FleetManager : Ask to insert data
+    deactivate Sistema
+
+    FleetManager -> Sistema : Insert device type data
+    activate Sistema
+
+    Sistema --> FleetManager : Device type created/data error
+    deactivate Sistema
+deactivate FleetManager
+
+@enduml

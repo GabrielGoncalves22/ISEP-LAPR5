@@ -1,0 +1,48 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View - UI) - US 480
+autonumber
+
+participant "View" as View <<Component>>
+participant "Component" as Component <<Component>>
+participant "Model" as Model <<Component>>
+participant "Service" as Service <<Component>>
+participant "MDT" as MD <<system (C4)>>
+
+?o-> View : Ask to view tasks not approved
+activate View
+
+<-- View : asks to select task type (delivery or surveillance tasks)
+deactivate View
+
+?o-> View : selects task type
+activate View
+    View -> Component : fetchTasks()
+    activate Component
+        Component --> Model** :
+        alt
+
+        Component -> Service : getSurveillanceTasks(user)
+        activate Service
+            Service -> MD: GET (.../tasks/surveillances)
+            else
+        Component -> Service : getPickupAndDeliveryTask(user)
+        activate Service
+            Service -> MD: GET (.../tasks/delivery)
+
+        end
+            activate MD
+            Service <-- MD: status: 200/400
+            deactivate MD
+            Service --> Component : Success / Error
+        deactivate Service
+
+        Component --> View
+    deactivate Component
+<-- View :  shows select task type list
+deactivate View
+
+@enduml

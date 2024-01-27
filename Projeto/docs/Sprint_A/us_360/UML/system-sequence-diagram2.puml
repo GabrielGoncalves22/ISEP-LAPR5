@@ -1,0 +1,34 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+autonumber
+
+title System Sequence Diagram (SSD) Level 2 - US 360
+
+
+participant "RobDroneGo" as Sistema <<system (C4)>>
+participant "MD" as MD <<system (C4)>>
+
+?o-> Sistema : POST (../devices)
+activate Sistema
+
+Sistema -> MD : createDevice(req.body)
+
+alt
+    activate MD
+    MD -> MD: save(device)
+    MD --> Sistema : status: 201
+    <-- Sistema : Device criado
+    deactivate Sistema
+else
+    MD --> Sistema : status: 400
+    deactivate MD
+    activate Sistema
+    <-- Sistema : Erro nos dados
+    deactivate Sistema
+end
+
+
+
+@enduml

@@ -1,0 +1,26 @@
+[
+    {
+        "number": -8,
+        "description": "test1234"
+    },
+    {
+        "number": -2,
+        "description": "test123"
+    },
+    {
+        "number": 0,
+        "description": "Piso de teste 0"
+    },
+    {
+        "number": 1,
+        "description": "Piso de ferramentas"
+    },
+    {
+        "number": 2,
+        "description": "Piso de fios"
+    },
+    {
+        "number": 5,
+        "description": "Piso de materiais"
+    }
+]

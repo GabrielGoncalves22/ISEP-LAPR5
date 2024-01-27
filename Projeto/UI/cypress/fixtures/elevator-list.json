@@ -1,0 +1,14 @@
+{
+    "brand": "Otis",
+    "model": "Revit",
+    "serialNumber": "ANHVJNW-762",
+    "description": "Elevador de Eletrónica",
+    "floors": [
+        {
+            "number": 10
+        },
+        {
+            "number": 11
+        }
+    ]
+}

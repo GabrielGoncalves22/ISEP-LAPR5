@@ -1,0 +1,25 @@
+@startuml
+
+skinparam titleFontSize 25
+title <u>US 190 - Domain classes</u>
+
+hide methods
+skinparam classAttributeIconSize 0
+
+'Building aggregate
+package "<<aggregate>> Building" {
+    entity Building <<entity>> <<root>>
+    class Code <<(V, #FF8B40) value object>>
+
+    entity Floor <<entity>> {
+        number
+    }
+    class Description <<(V, #FF8B40) value object>>
+}
+
+Building -down-> Code
+Floor -up-> Description
+
+Building "1" -- "*" Floor : has >
+
+@enduml

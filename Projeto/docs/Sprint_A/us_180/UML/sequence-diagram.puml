@@ -1,0 +1,46 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (SD) - US 180
+autonumber
+
+participant buildingRoute as route <<Web>>
+control "buildingController :\n buildingController" as controller <<Controllers>>
+participant "buildingService :\n buildingService" as service <<Use Cases>>
+participant "building :\n building" as building <<Domain>>
+participant "floor :\n floor" as floor <<Domain>>
+participant "elevator :\n elevator" as elevator <<Domain>>
+database "buildingRepo :\n buildingRepo" as repo <<Gateways>>
+participant BuildingMap as map <<Mapper>>
+participant "buildingInfoDTO :\n BuildingInfoDTO" as dto <<DTO>>
+
+?o->route : GET (.../buildings?min=:min&max=:max)
+activate route
+    route -> controller : getBuildingsBetweenMinAndMaxFloors()
+
+    activate controller
+        controller -> service : getBuildingsBetweenMinAndMaxFloors()
+
+        activate service
+            service -> repo : buildingsInfos = getBuildingsBetweenMinAndMaxFloors(numMinFloors, numMaxFloors)
+            activate repo
+            deactivate repo
+
+            loop each buildingInfo
+                service -> map : buildingInfoDTO = toInfoDTO(buildingInfo)
+                activate map
+                    map --> dto** : create()
+                deactivate map
+            end
+
+            service --> controller : buildingInfoDTO
+        deactivate service
+
+        controller --> route : buildingInfoDTO
+    deactivate controller
+    <-- route : buildingInfoDTO
+deactivate route
+
+@enduml

@@ -1,0 +1,114 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View) - US 460 - Surveillance Task
+autonumber
+
+Actor "User" as user
+participant "View" as View <<Component>>
+participant "Component" as Component <<Component>>
+participant "buildingModel :\n building.model" as buildingModel
+participant "surveillanceTask :\n surveillanceTaskModel.model" as surveillanceTaskModel
+participant "floorModelList :\n floorModel.model" as floorModelList
+participant "Service" as Service <<Component>>
+participant "MD" as MD <<system (C4)>>
+participant "MDT" as MDT <<system (C4)>>
+
+activate user
+    user -> View : Ask to request a surveillance task
+    activate View
+
+        View -> Component : ngOnInit()
+        activate Component
+            Component -> Component : loadBuildings()
+            activate Component
+                Component --> buildingModel** :
+                Component -> Service : getAllBuildingsInfo()
+                activate Service
+                    Service -> MD : GET (../api/buildings)
+                    activate MD
+                        Service <-- MD : status: 200/404
+                    deactivate MD
+
+                    Component <-- Service : Success / Error
+                deactivate Service
+                View <-- Component : Information about the success/error
+            deactivate Component
+
+            Component -> Component : loadDefaultData()
+            activate Component
+                Component -> Service : getUserData()
+                activate Service
+                    Service -> MD : GET (../api/me)
+                    activate MD
+                        Service <-- MD : status: 200/404
+                    deactivate MD
+
+                    Component <-- Service : Success / Error
+                deactivate Service
+            deactivate Component
+        deactivate Component
+
+        View --> user : List buildings and ask to choose one
+    deactivate View
+
+    user -> View : Choose one building
+    activate View
+        View -> Component : onBuildingChange()
+        activate Component
+            Component --> floorModelList** :
+            Component -> Service : getFloorsByBuilding(buildingCode)
+            activate Service
+                Service -> MD : GET (.../api/buildings/:code/floors)
+                activate MD
+                    Service <-- MD : status: 200/404
+                deactivate MD
+
+                Component <-- Service : Success / Error
+            deactivate Service
+            View <-- Component : Information about the success/error
+        deactivate Component
+
+        View --> user : List building floors and ask to choose one or more
+    deactivate View
+
+    user -> View : Choose one or more floors
+    activate View
+        View -> Component : onFloorSelectionChange()
+        activate Component
+        deactivate Component
+
+        View --> user : Asks to insert the emergency contact name
+    deactivate View
+
+    user -> View : Insert the emergency contact name
+     activate View
+        View --> user : Asks to insert the emergency contact phone number
+    deactivate View
+
+    user -> View : Insert the emergency contact phone number
+    activate View
+        View -> Component : createSurveillanceTask()
+        activate Component
+            Component --> surveillanceTaskModel** :
+            Component -> Service : createSurveillanceTask(surveillanceTask)
+
+            activate Service
+                Service -> MDT : POST (.../api/tasks/surveillances)
+                activate MDT
+                    Service <-- MDT : status: 201/400
+                deactivate MDT
+                
+                Component <-- Service : Success / Error
+            deactivate Service
+
+            View <-- Component : Information about the success/error
+        deactivate Component
+
+        user <-- View : Task created / Data error
+    deactivate View
+deactivate user
+
+@enduml

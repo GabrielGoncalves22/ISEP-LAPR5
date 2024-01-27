@@ -1,0 +1,170 @@
+@startuml
+
+skinparam titleFontSize 25
+title <u>RobDroneGo - Domain Model</u>
+
+hide methods
+skinparam classAttributeIconSize 0
+
+'Passageway aggregate
+package "<<aggregate>> Passageway" {
+    entity Passageway <<entity>> <<root>>
+    class PassagewayCode <<(V, #FF8B40) value object>>
+}
+
+'Building aggregate
+package "<<aggregate>> Building" {
+    entity Building <<entity>> <<root>>
+    class Code <<(V, #FF8B40) value object>>
+    class BuildingName <<(V, #FF8B40) value object>>
+    class Description <<(V, #FF8B40) value object>>
+    class BuildingDimension <<(V, #FF8B40) value object>>
+
+    entity Floor <<entity>> {
+        number
+    }
+    class CellInfo <<(V, #FF8B40) value object>>
+
+    entity Elevator <<entity>>
+    class ElevatorBrand <<(V, #FF8B40) value object>>
+    class ElevatorModel <<(V, #FF8B40) value object>>
+    class ElevatorSerialNumber <<(V, #FF8B40) value object>>
+
+    class CellOrientation <<(V, #FF8B40) enum>>
+
+    class RoomCategory <<(V, #FF8B40) enum>>
+
+    entity Room <<entity>>
+    class RoomName <<(V, #FF8B40) value object>>
+
+    class CellPosition <<(V, #FF8B40) value object>>
+}
+
+Building -up-> Code
+Building -up-> BuildingName
+Building -up-> Description
+Building -up-> BuildingDimension : numXCells
+Building -up-> BuildingDimension : numYCells
+
+Floor -up-> Description
+Floor -up-> CellInfo
+
+Room --> RoomName
+Room --> RoomCategory
+Room --> Description
+Room --> CellPosition : yStartCell
+Room --> CellPosition : xStartCell
+Room --> CellPosition : yEndCell
+Room --> CellPosition : xEndCell
+Room --> CellPosition : doors
+
+Elevator -up-> Description
+Elevator -up-> ElevatorBrand
+Elevator -up-> ElevatorModel
+Elevator -up-> ElevatorSerialNumber
+Elevator --> CellOrientation
+Elevator --> CellPosition : xStartCell
+Elevator --> CellPosition : yStartCell
+
+Passageway --> PassagewayCode
+Passageway --> CellOrientation
+Passageway --> CellPosition : xStartCell
+Passageway --> CellPosition : yStartCell
+
+Building "1" -- "1" Elevator : has >
+Building "1" -- "*" Floor : has >
+
+Elevator "1" -- "*" Floor : serves >
+
+Passageway "*" -- "*" Building : has >
+Passageway "1" -- "*" Floor : through >
+
+Floor "1" -- "*" Room : has >
+
+'Task aggregate
+package "<<aggregate>> Task" {
+    entity Task <<entity>> <<root>>
+    class TaskStatus <<(V, #FF8B40) enum>>
+    class TaskType <<(V, #FF8B40) enum>>
+}
+
+'Task to Room
+Task "1" -- "1" Room : From >
+Task "1" -- "1" Room : To >
+
+'Device aggregate
+package "<<aggregate>> Device" {
+    entity Device <<entity>> <<root>> {
+    }
+    class DeviceCode <<(V, #FF8B40) value object>>
+    class DeviceDescription <<(V, #FF8B40) value object>>
+    class DeviceNickname <<(V, #FF8B40) value object>>
+    class DeviceSerialNumber <<(V, #FF8B40) value object>>
+    class DeviceStatus <<(V, #FF8B40) enum>>
+
+    entity DeviceType <<entity>>
+    class Type <<(V, #FF8B40) value object>>
+    class DeviceTypeModel <<(V, #FF8B40) value object>>
+    class DeviceTypeBrand <<(V, #FF8B40) value object>>
+}
+
+Device -up-> DeviceCode
+Device -up-> DeviceDescription
+Device -up-> DeviceNickname
+Device -up-> DeviceSerialNumber
+
+DeviceType -up-> Type
+DeviceType -up-> DeviceTypeModel
+DeviceType -up-> DeviceTypeBrand
+
+Device "1" -- "1" DeviceStatus : has >
+Device "*" -- "1" DeviceType : has >
+
+'Task to Device
+Task "*" -- "1" Device : has >
+
+'DeviceType to TaskType
+DeviceType "1" -- "*" TaskType : can perform >
+
+
+'SystemUser aggregate
+package "<<aggregate>> SystemUser" {
+    entity SystemUser <<entity>> <<root>>
+}
+
+'SystemManager aggregate
+package "<<aggregate>> SystemManager" {
+    entity SystemManager <<entity>> <<root>>
+}
+
+'SystemManager to SystemUser
+SystemManager "1" -- "1" SystemUser : is >
+
+'FleetManager aggregate
+package "<<aggregate>> FleetManager" {
+    entity FleetManager <<entity>> <<root>>
+}
+
+'FleetManager to SystemUser
+FleetManager "1" -- "1" SystemUser : is >
+
+'CampusManager aggregate
+package "<<aggregate>> CampusManager" {
+    entity CampusManager <<entity>> <<root>>
+}
+
+'CampusManager to SystemUser
+CampusManager "1" -- "1" SystemUser : is >
+
+'User aggregate
+package "<<aggregate>> User" {
+    entity User <<entity>> <<root>>
+}
+
+'User to SystemUser
+User "1" -- "1" SystemUser : is >
+
+'Task to User
+Task "*" -- "1" SystemUser : requested by >
+
+@enduml

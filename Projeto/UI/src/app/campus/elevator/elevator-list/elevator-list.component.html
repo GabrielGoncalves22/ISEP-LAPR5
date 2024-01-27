@@ -1,0 +1,37 @@
+<h1 class="center">List Elevator By Building</h1>
+
+<div class="options-box">
+    <div class="form-group">
+        <label for="building">Building Code:</label>
+        <input list="buildingList" id="building" name="building" [(ngModel)]="selectedBuilding" required>
+        <datalist id="buildingList">
+            <option *ngFor="let building of buildings" [value]="building.code">{{building.code}}</option>
+        </datalist>
+
+        <div class="options-box-separator"></div>
+
+        <div class="option-box-button">
+            <button class="button-style-1" (click)="listElevator()">Search</button>
+        </div>
+
+        <p *ngIf="error" class="form-alert form-alert-error"><b>Error:</b> {{error}}</p>
+    </div>
+</div>
+
+<div class="list-container">
+    <div *ngIf="elevator" class="list-box">
+        <div class="list-box-title">
+            <p><b>Building code:</b> {{elevator.building}} </p>
+        </div>
+        <div class="list-box-body">
+            <p><b>Brand:</b> {{elevator.brand ? elevator.brand : 'Not indicated'}} </p>
+            <p><b>Model:</b> {{elevator.model ? elevator.model : 'Not indicated'}} </p>
+            <p><b>Serial number:</b> {{elevator.serialNumber ? elevator.serialNumber : 'Not indicated'}} </p>
+            <p><b>Description: </b> {{elevator.description ? elevator.description : 'Not indicated'}} </p>
+            <p><b>Floors: </b></p>
+            <ul>
+                <li *ngFor="let floor of elevator.floors">{{floor.number}}</li>
+            </ul>
+        </div>
+    </div>
+</div>

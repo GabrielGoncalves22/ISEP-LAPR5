@@ -1,0 +1,26 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 1 - Process View) - US 1180
+autonumber
+
+Actor "Campus Manager" as manager
+participant "RobDroneGo" as Sistema <<system (C4)>>
+
+activate manager
+    manager -> Sistema : Ask to edit passageway
+    activate Sistema
+
+    Sistema --> manager : Ask to choose an passageway to edit data
+    deactivate Sistema
+
+    manager -> Sistema : Choose the passageway, and edits
+    activate Sistema
+
+    Sistema --> manager : Floor passageway/data error
+    deactivate Sistema
+deactivate manager
+
+@enduml

@@ -1,0 +1,70 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+
+participant buildingRoute as route <<Web>>
+control "buildingController :\n buildingController" as controller <<Controllers>>
+participant "floorDTOResult :\n FloorDTO" as dtoResult <<DTO>>
+participant "buildingService :\n buildingService" as service <<Use Cases>>
+database "buildingRepo :\n buildingRepo" as repo <<Gateways>>
+database "passagewaysRepo :\n passagewaysRepo" as repoPassageway <<Gateways>>
+participant FloorMap as map <<Mapper>>
+participant PassagewayMap as mapPassageway <<Mapper>>
+participant "BuildingSchema" as schema <<Schema>>
+participant "PassagewaySchema" as schemaPassageway <<Schema>>
+participant "passagewayResult: \n Passageway" as passagewayResult <<Domain>>
+participant "floorResult: \n Floor" as floorResult <<Domain>>
+
+?o-> route: GET(../buildings/:code/floors?withPassageway)
+activate route
+
+route -> controller: getFloorsWithPassagewaysToBuildingByBuilding(req, res, next)
+activate controller
+
+controller -> service: getFloorsWithPassagewaysToBuildingByBuilding(buildingCode): IFloorDTOResult[][]
+activate service
+service -> repoPassageway: findPassagewayWithBuilding(code): passagewaysResult
+
+
+activate repoPassageway
+
+repoPassageway -> schemaPassageway: findAll(query: code): passagewayRecord
+activate schemaPassageway
+deactivate schemaPassageway
+loop for each passageway found
+repoPassageway -> mapPassageway: toDomain(passagewayRecord): passageway
+activate mapPassageway
+mapPassageway -> passagewayResult**: create
+deactivate mapPassageway
+end
+
+deactivate repoPassageway
+loop for each end of the passageway
+service -> repo: findFloor(passagewayResult): floorsResult
+activate repo
+repo -> schema: findOne(query: code)
+
+repo -> map: toDomain(passagewayRecord): passageway
+activate map
+map -> floorResult**: create
+end
+deactivate map
+deactivate repo
+
+loop for each floor
+service -> map: toDTO(elevatorResult)
+deactivate service
+
+activate map
+map --> dtoResult**: create
+deactivate map
+end
+
+controller -> route: response
+
+<-- route : status: 200 OK mostra informação sobre os pisos \n e a que outros edificios/pisos tem passagem
+
+
+@enduml

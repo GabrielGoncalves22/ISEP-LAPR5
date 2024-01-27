@@ -1,0 +1,32 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 2 - Process View) - US 500
+autonumber
+
+participant "UI" as UI <<system (C4)>>
+participant "MDT" as MD <<system (C4)>>
+participant "Planning" as P <<system (C4)>>
+
+?o-> UI : Ask to calculate the best task execution order
+activate UI
+
+
+    UI -> MD : GET (.../tasks/exec)
+    activate MD
+
+        MD -> P : POST (.../planning/tasks)
+
+        MD -> P : GET (.../planning/tasks)
+
+        MD <-- P : status: 200/400
+
+        UI <-- MD : status: 200/400
+    deactivate MD
+
+<-- UI : shows best task execution order
+deactivate UI
+
+@enduml

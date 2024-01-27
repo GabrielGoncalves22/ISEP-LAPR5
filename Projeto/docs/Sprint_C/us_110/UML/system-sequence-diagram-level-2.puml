@@ -1,0 +1,26 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 2 - Process View) - US 110
+autonumber
+
+Actor "User" as User
+participant "UI" as UI <<system (C4)>>
+
+activate User
+    User -> UI : Ask to show his/her profile
+    activate UI
+        UI -> : GET (.../me)
+        UI <-- : status: 200/404
+        UI --> User : Show the user profile
+    deactivate UI
+
+    User -> UI : Ask to download a copy of personal data
+    activate UI
+        UI --> User : Gives and download the user personal data in a file
+    deactivate UI
+deactivate User
+
+@enduml

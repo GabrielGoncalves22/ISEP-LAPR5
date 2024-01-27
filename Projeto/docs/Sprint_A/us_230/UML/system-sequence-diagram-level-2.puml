@@ -1,0 +1,16 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 2 - Process View) - US 230
+autonumber
+
+participant "MD" as MD <<system (C4)>>
+
+?o-> MD : PATCH (.../buildings/:buildingCode/floors/:floorNumber/map)
+activate MD
+    <-- MD : status: 200/400
+deactivate MD
+
+@enduml

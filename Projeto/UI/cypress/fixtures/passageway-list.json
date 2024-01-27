@@ -1,0 +1,23 @@
+[
+    {
+        "code": "p1",
+        "building1": "E",
+        "floor1": 1,
+        "building2": "A",
+        "floor2": 1
+    },
+    {
+        "code": "p2",
+        "building1": "E",
+        "floor1": 2,
+        "building2": "A",
+        "floor2": 2
+    },
+    {
+        "code": "p5",
+        "building1": "E",
+        "floor1": 5,
+        "building2": "A",
+        "floor2": 5
+    }
+]

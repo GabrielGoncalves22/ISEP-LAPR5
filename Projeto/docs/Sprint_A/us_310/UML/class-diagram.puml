@@ -1,0 +1,94 @@
+@startuml
+
+title Class Diagram (CD) - US 310
+
+'Classes
+class buildingRoute <<Web>> {
+}
+
+class buildingController <<Controllers>> {
+    +createRoom(json : String)
+    -validate(json : String)
+}
+
+class buildingDTO <<DTO>> {
+}
+
+class roomDTO <<DTO>> {
+}
+
+class buildingService <<Use Cases>> {
+    +createRoom(roomDTO : roomDTO)
+}
+
+class buildingRepo <<Gateways>> {
+    +save(building : building)
+}
+
+class buildingMapper <<Mapper>> {
+    +toDTO(json : String) : buildingDTO
+    +toPersistence(building : building)
+    +toDomain(building : building)
+    +toJson(buildingDTO : buildingDTO)
+}
+
+class roomMapper <<Mapper>> {
+    +toDTO(json : String) : roomDTO
+    +toDomain(room : room)
+    +toJson(roomDTO : roomDTO)
+}
+
+class building <<Domain>> {
+    -floors : floor[]
+    +getFloors() : floor[]
+}
+
+class floor <<Domain>> {
+    -number : number
+    -description : description
+    +getNumber() : number
+    +getDescription() : description
+}
+
+class room <<Domain>> {
+    -name : string
+}
+
+class RoomName <<(V, #FF8B40) value object>>
+class RoomCategory <<(V, #FF8B40) enum>>
+
+
+'Navigation
+building --> buildingCode
+building --> buildingName
+building --> description
+building --> buildingDimension
+
+floor --> description
+
+Room --> RoomName
+Room --> RoomCategory
+Room --> Description
+
+buildingRoute --> buildingController : theController
+buildingController --> buildingService : service
+buildingService --> buildingMapper : mapper
+buildingService --> buildingRepo : repo
+buildingService --> building : building
+buildingService --> buildingDTO : buildingDTO
+buildingService --> room : room
+buildingService --> roomDTO : roomDTO
+buildingRepo --> buildingSchema : schema
+
+'Dependencies
+buildingController -[dashed]-> roomMapper
+buildingController -[dashed]-> room
+buildingController -[dashed]-> roomDTO
+buildingController -[dashed]-> buildingRepo
+buildingService -[dashed]-> buildingSchema
+
+building "1" -- "*" floor : has >
+
+Floor "1" -- "*" Room : has >
+
+@enduml

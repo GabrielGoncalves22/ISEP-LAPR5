@@ -1,0 +1,43 @@
+[
+    {
+        "id": "d809728f-4447-46be-90ea-90d0280ce0d5",
+        "name": "Cristiano Ronaldo",
+        "email": "campus@isep.ipp.pt",
+        "telephone": "923404331",
+        "role": "Campus Manager",
+        "active": true
+    },
+    {
+        "id": "4e0a2e05-2b78-4365-b77a-9d24098e24fe",
+        "name": "Rúben Dias",
+        "email": "fleet@isep.ipp.pt",
+        "telephone": "922404231",
+        "role": "Fleet Manager",
+        "active": true
+    },
+    {
+        "id": "1f554cf5-f45e-4a2f-b66c-44365103576c",
+        "name": "Bernardo Silva",
+        "email": "system@isep.ipp.pt",
+        "telephone": "922404331",
+        "role": "System Manager",
+        "active": true
+    },
+    {
+        "id": "ba10bc79-6ab0-4740-b773-652635920db6",
+        "name": "João Neves",
+        "email": "task@isep.ipp.pt",
+        "telephone": "922405231",
+        "role": "Task Manager",
+        "active": true
+    },
+    {
+        "id": "5fcfbef2-3623-45ca-ab49-e3fbf10af02a",
+        "name": "André Silva",
+        "email": "user@isep.ipp.pt",
+        "telephone": "922435231",
+        "taxPayerNumber": "152286411",
+        "role": "User",
+        "active": true
+    }
+]

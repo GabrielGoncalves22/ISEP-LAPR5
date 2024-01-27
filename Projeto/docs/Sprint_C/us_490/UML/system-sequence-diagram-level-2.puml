@@ -1,0 +1,36 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 2 - Process View) - US 490
+autonumber
+
+participant "UI" as UI <<system (C4)>>
+participant "MDT" as MDT <<system (C4)>>
+
+?o-> UI : Ask to list requests
+activate UI
+
+<-- UI : Ask to choose the filters
+deactivate UI
+
+?o-> UI : Choose the filters and asks to list
+activate UI
+
+   alt pickup and delivery task
+           UI -> MDT : GET (.../tasks/deliveries)
+           activate MDT
+               UI <-- MDT : status: 200/404
+           deactivate MDT
+   else surveillance task
+          UI -> MDT : GET (.../tasks/surveillances)
+          activate MDT
+              UI <-- MDT : status: 200/404
+          deactivate MDT
+   end
+
+<-- UI : Lists the requests that fulllfill the filters
+deactivate UI
+
+@enduml

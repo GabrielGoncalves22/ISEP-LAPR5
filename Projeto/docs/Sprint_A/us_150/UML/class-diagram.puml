@@ -1,0 +1,83 @@
+@startuml
+
+title Class Diagram (CD) - US 150
+
+'Classes
+class buildingRoute <<Web>> {
+}
+
+class buildingController <<Controllers>> {
+    +createBuilding(json : String)
+    -validate(json : String)
+}
+
+class buildingDTO <<DTO>> {
+}
+
+class buildingService <<Use Cases>> {
+    createBuilding(buildingDTO : buildingDTO)
+}
+
+
+class buildingRepo <<Gateways>> {
+    +save(building : building)
+}
+
+class buildingMapper <<Mapper>> {
+    +toDTO(json : String) : buildingDTO
+    +toPersistence(building : building)
+    +toDomain(building : building)
+    +toJson(buildingDTO : buildingDTO)
+}
+
+class buildingSchema <<DB>> {
+    +create(building : building)
+}
+
+class building <<Domain>> {
+    -code : buildingCode
+    -name : buildingName
+    -description : description
+    -numXCells : buildingDimension
+    -numYCells : buildingDimension
+    +getCode() : buildingCode
+    +getName() : buildingName
+    +getDescription() : description
+    +xCells() : buildingDimension
+    +yCells() : buildingDimension
+}
+
+class buildingCode <<Value Object>> {
+}
+
+class buildingName <<Value Object>> {
+}
+
+class description <<Value Object>> {
+}
+
+class buildingDimension <<Value Object>> {
+}
+
+'Navigation
+building --> buildingCode
+building --> buildingName
+building --> description
+building --> buildingDimension
+
+buildingRoute --> buildingController : theController
+buildingController --> buildingService : service
+buildingService --> buildingMapper : mapper
+buildingService --> buildingRepo : repo
+buildingService --> building : building
+buildingService --> buildingDTO : buildingDTO
+buildingRepo --> buildingSchema : schema
+
+'Dependencies
+buildingController -[dashed]-> buildingMapper
+buildingController -[dashed]-> building
+buildingController -[dashed]-> buildingDTO
+buildingController -[dashed]-> buildingRepo
+buildingService -[dashed]-> buildingSchema
+
+@enduml

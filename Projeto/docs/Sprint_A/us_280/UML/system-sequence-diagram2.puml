@@ -1,0 +1,33 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US 280
+autonumber
+
+participant "RobDroneGo" as Sistema <<system (C4)>>
+participant "MD" as MD <<system (C4)>>
+
+?o-> Sistema : PUT/PATCH(../buildings/:code/elevators)
+activate Sistema
+
+Sistema -> MD : updateElevator(buildingCode)
+
+activate MD
+MD -> MD: elevator = getElevator(buildingCode)
+MD -> MD: updateElevator(elevator)
+
+alt
+    MD --> Sistema : status: 201
+    <-- Sistema : Dados alterados
+    deactivate Sistema
+else
+    MD --> Sistema : status: 400
+    deactivate MD
+    activate Sistema
+    <-- Sistema : Erro nos dados
+    deactivate Sistema
+end
+
+@enduml

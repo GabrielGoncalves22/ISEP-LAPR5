@@ -1,0 +1,120 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View) - US 1110
+autonumber
+
+participant "Route:" as Route 
+participant "Controller:" as Controller
+participant "FloorDTO:" as FloorDTO
+participant "FloorService:" as Service
+participant "Floor:" as Floor
+participant "FloorRepository:" as Repo
+participant "DB:" as DB
+
+?o-> Route : GET (.../buildings)
+activate Route
+
+Route -> Controller : execute(req, res, next)
+activate Controller
+
+Controller -> Controller : getBuildings(req, res, next)
+activate Controller
+
+Controller -> Service : getBuildings(buildingCode)
+activate Service
+
+Service -> Repo : findBuildings(buildingCode)
+activate Repo
+
+Repo -> DB
+activate DB
+
+DB --> Repo
+deactivate DB
+
+Repo --> Service
+deactivate Repo
+
+Service --> Controller : DTOList
+deactivate Service
+
+Controller --> Controller : status: 200/404
+deactivate Controller
+
+Controller --> Route : status: 200/404
+deactivate Controller
+
+<-- Route : status: 200/404
+deactivate Route
+
+?o-> Route : GET (.../buildings/:code/floors)
+activate Route
+
+Route -> Controller : execute(req, res, next)
+activate Controller
+
+Controller -> Controller : getFloorsByBuilding(req, res, next)
+activate Controller
+
+Controller -> Service : getFloorsByBuilding(buildingCode)
+activate Service
+
+Service -> Repo : findFloorsByBuilding(buildingCode)
+activate Repo
+
+Repo -> DB
+activate DB
+
+DB --> Repo
+deactivate DB
+
+Repo --> Service
+deactivate Repo
+
+Service --> Controller : DTOList
+deactivate Service
+
+Controller --> Controller : status: 200/404
+deactivate Controller
+
+Controller --> Route : status: 200/404
+deactivate Controller
+
+<-- Route : status: 200/404
+deactivate Route
+
+?o-> Route : PUT/PATCH (.../buildings/:code/floors/:number)
+activate Route
+
+    Route -> Controller : execute(req, res, next)
+    activate Controller
+        Controller -> Controller : updateFloor(req, res, next)
+        activate Controller
+            Controller --> FloorDTO** : create
+            Controller -> Service : updateFloor(floorDTO)
+
+            activate Service
+                Service --> Floor** : create
+                Service -> Repo : update(floor)
+                activate Repo
+                    Repo -> DB :
+                    activate DB
+                    DB --> Repo :
+                    deactivate DB
+                    Repo --> Service :
+                deactivate Repo
+                Service --> Controller :
+            deactivate Service
+
+            Controller --> Controller : status: 200/404
+        deactivate Controller
+    Controller --> Route : status: 200/404
+    deactivate Controller
+
+<-- Route : status: 200/404
+deactivate Route
+
+@enduml

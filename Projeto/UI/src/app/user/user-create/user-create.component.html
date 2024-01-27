@@ -1,0 +1,43 @@
+<h1 class="center">Create User</h1>
+
+<form (ngSubmit)="createUser()" #formulario="ngForm" class="form-to-create">
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" [(ngModel)]="user.name" required>
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" [(ngModel)]="user.email" required>
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" [(ngModel)]="user.password" required>
+    </div>
+
+    <div class="form-group">
+        <label for="repeatPassword">Repeat Password:</label>
+        <input type="password" id="repeatPassword" name="repeatPassword" [(ngModel)]="repeatPassword"
+            (ngModelChange)="passwordsMatch()" required>
+    </div>
+
+    <div class="form-group">
+        <label for="telephone">Telephone Number:</label>
+        <input type="string" id="telephone" name="telephone" [(ngModel)]="user.telephone" required>
+    </div>
+
+    <div class="form-group">
+        <label for="role">Role:</label>
+        <select id="role" name="role" [(ngModel)]="user.role" required>
+            <option *ngFor="let option of roleOptions;" [value]="option">{{ option }}</option>
+        </select>
+    </div>
+
+    <div class="button-container">
+        <button type="submit" [disabled]="formulario.invalid">Create</button>
+    </div>
+
+    <p *ngIf="error" class="form-alert form-alert-error"><b>Error:</b> {{error}}</p>
+    <p *ngIf="success" class="form-alert form-alert-success"><b>Success:</b> {{success}}</p>
+</form>

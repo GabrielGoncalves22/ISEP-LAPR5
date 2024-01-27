@@ -1,0 +1,14 @@
+<ng-container *ngIf="isLoginRoute(); else registerRoute">
+    <app-login></app-login>
+</ng-container>
+
+<ng-template #registerRoute>
+    <ng-container *ngIf="isRegisterRoute(); else otherRoutes">
+        <app-register></app-register>
+    </ng-container>
+</ng-template>
+
+<ng-template #otherRoutes>
+    <app-menu (onToggleMenu)="onToggleMenu($event)"></app-menu>
+    <app-body [collapsed]="isMenuCollapsed" [screenWidth]="screenWidth"></app-body>
+</ng-template>

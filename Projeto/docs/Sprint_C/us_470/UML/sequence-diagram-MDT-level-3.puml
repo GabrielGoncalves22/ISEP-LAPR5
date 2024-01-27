@@ -1,0 +1,129 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View - MDT) - US 470
+autonumber
+
+participant "pickupAndDeliveryTaskController :\n Controller" as ControllerDelivery <<Controller>>
+participant "surveillanceTaskController :\n Controller" as ControllerSurveillance <<Controller>>
+participant "pickupAndDeliveryTaskServiceInstance :\n Service" as ServiceDelivery <<Service>>
+participant "surveillanceServiceInstance :\n Service" as ServiceSurveillance <<Service>>
+participant "pickupAndDeliveryTaskRepo :\n Repository" as RepoDelivery <<Repository>>
+participant "surveillanceTaskRepo :\n Repository" as RepoSurveillance <<Repository>>
+participant "DB" as DB <<DataBase>>
+participant "pickupAndDeliveryTask :\n pickupAndDeliveryTask" as PickupAndDeliveryTask <<Domain>>
+participant "surveillanceTask :\n SurveillanceTask" as SurveillanceTask <<Domain>>
+participant "pickupAndDeliveryTaskDTO :\n pickupAndDeliveryTaskDTO" as PickupAndDeliveryTaskDTO <<DTO>>
+participant "surveillanceTaskDTO :\n SurveillanceTaskDTO" as SurveillanceTaskDTO <<DTO>>
+
+alt pickup and delivery task
+    ?o-> ControllerDelivery : GET (.../tasks/deliveries/requesteds)
+    activate ControllerDelivery
+        ControllerDelivery -> ControllerDelivery : GetByStatusRequested()
+        activate ControllerDelivery
+            ControllerDelivery -> ServiceDelivery : GetByStatusRequestedAsync()
+            activate ServiceDelivery
+                ServiceDelivery -> RepoDelivery : Find()
+                activate RepoDelivery
+                    RepoDelivery -> DB :
+                    activate DB
+                    DB --> RepoDelivery :
+                    deactivate DB
+                    RepoDelivery --> ServiceDelivery :
+                deactivate RepoDelivery
+                ServiceDelivery --> PickupAndDeliveryTaskDTO**: create
+                ServiceDelivery --> ControllerDelivery : deliveriesDTO
+            deactivate ServiceDelivery
+            ControllerDelivery --> ControllerDelivery : status: 200/404
+        deactivate ControllerDelivery
+
+        <-- ControllerDelivery : status: 200/404
+    deactivate ControllerDelivery
+else surveillance task
+    ?o-> ControllerSurveillance : GET (.../tasks/surveillances/requesteds)
+    activate ControllerSurveillance
+        ControllerSurveillance -> ControllerSurveillance : GetByStatusRequested()
+        activate ControllerSurveillance
+            ControllerSurveillance -> ServiceSurveillance : GetByStatusRequestedAsync()
+            activate ServiceSurveillance
+                ServiceSurveillance -> RepoSurveillance : Find()
+                activate RepoSurveillance
+                    RepoSurveillance -> DB :
+                    activate DB
+                    DB --> RepoSurveillance :
+                    deactivate DB
+                    RepoSurveillance --> ServiceSurveillance :
+                deactivate RepoSurveillance
+                ServiceSurveillance --> SurveillanceTaskDTO**: create
+                ServiceSurveillance --> ControllerSurveillance : surveillancesDTO
+            deactivate ServiceSurveillance
+            ControllerSurveillance --> ControllerSurveillance : status: 200/404
+        deactivate ControllerSurveillance
+
+        <-- ControllerSurveillance : status: 200/404
+    deactivate ControllerSurveillance
+
+alt pickup and delivery task
+    alt approve
+        ?o-> ControllerDelivery : PATCH (.../tasks/deliveries/:code/approve)
+        activate ControllerDelivery
+            ControllerDelivery -> ControllerDelivery : Approve()
+            activate ControllerDelivery
+                ControllerDelivery -> ServiceDelivery : ApproveAsync()
+                activate ServiceDelivery
+    else reject
+        ?o-> ControllerDelivery : PATCH (.../tasks/deliveries/:code/reject)
+            ControllerDelivery -> ControllerDelivery : Reject()
+                ControllerDelivery -> ServiceDelivery : RejectAsync()
+    end
+                ServiceDelivery -> RepoDelivery : Find()
+                activate RepoDelivery
+                    ServiceDelivery -> RepoDelivery : UpdateOneAsync()
+                    RepoDelivery -> DB : update(delivery)
+                    activate DB
+                    DB --> RepoDelivery :
+                    deactivate DB
+                RepoDelivery --> ServiceDelivery :
+                deactivate RepoDelivery
+                ServiceDelivery --> ControllerDelivery :
+            deactivate ServiceDelivery
+            ControllerDelivery --> ControllerDelivery : status: 200/404
+        deactivate ControllerDelivery
+
+    <-- ControllerDelivery : status: 200/404
+        deactivate ControllerDelivery
+    else surveillance task
+    alt approve
+        ?o-> ControllerSurveillance : PATCH (.../tasks/surveillances/:code/approve)
+        activate ControllerSurveillance
+            ControllerSurveillance -> ControllerSurveillance : Approve()
+            activate ControllerSurveillance
+                ControllerSurveillance -> ServiceSurveillance : ApproveAsync()
+                activate ServiceSurveillance
+    else reject
+        ?o-> ControllerSurveillance : PATCH (.../tasks/surveillances/:code/reject)
+            ControllerSurveillance -> ControllerSurveillance : Reject()
+                ControllerSurveillance -> ServiceSurveillance : RejectAsync()
+    end
+                ServiceSurveillance -> RepoSurveillance : Find()
+                activate RepoSurveillance
+                    ServiceSurveillance -> RepoSurveillance : UpdateOneAsync()
+                    RepoSurveillance -> DB : update(surveillance)
+                    activate DB
+                    DB --> RepoSurveillance :
+                    deactivate DB
+                RepoSurveillance --> ServiceSurveillance :
+                deactivate RepoSurveillance
+                ServiceSurveillance --> ControllerSurveillance :
+            deactivate ServiceSurveillance
+            ControllerSurveillance --> ControllerSurveillance : status: 200/404
+        deactivate ControllerSurveillance
+
+    <-- ControllerSurveillance : status: 200/404
+        deactivate ControllerSurveillance
+end
+
+
+@enduml

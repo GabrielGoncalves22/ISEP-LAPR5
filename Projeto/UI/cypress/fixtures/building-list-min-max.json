@@ -1,0 +1,11 @@
+[
+  {
+    "code": "A",
+    "name": "Arquitetura",
+    "description": "",
+    "numXCells": 10,
+    "numYCells": 15,
+    "hasElevator": true,
+    "numFloors": 5
+  }
+]

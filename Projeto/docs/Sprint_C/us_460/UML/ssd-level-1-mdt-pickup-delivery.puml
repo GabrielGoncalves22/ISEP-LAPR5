@@ -1,0 +1,16 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 1 - Process View) - US 460 - Pickup & Delivery Task
+autonumber
+
+participant "RobDroneGo" as Sistema <<system (C4)>>
+
+?o-> Sistema : POST (.../api/tasks/deliveries)
+activate Sistema
+    <-- Sistema : status: 201/400
+deactivate Sistema
+
+@enduml

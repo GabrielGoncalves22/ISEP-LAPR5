@@ -1,0 +1,48 @@
+<h1 class="center">Create Elevator</h1>
+
+<form (ngSubmit)="createElevator()" #formulario="ngForm" class="form-to-create">
+    <div class="form-group">
+        <label for="building">Building Code:</label>
+        <input list="buildingList" id="building" name="building" [(ngModel)]="elevator.building" required
+            (input)="onBuildingChange()">
+        <datalist id="buildingList">
+            <option *ngFor="let building of buildings" [value]="building.code">{{ building.code }}</option>
+        </datalist>
+    </div>
+
+    <div class="form-group">
+        <label for="brand">Brand:</label>
+        <input type="text" id="brand" name="brand" [(ngModel)]="elevator.brand" (focusout)="saveData()">
+    </div>
+
+    <div class="form-group">
+        <label for="model">Model:</label>
+        <input type="text" id="model" name="model" [(ngModel)]="elevator.model" (focusout)="saveData()">
+    </div>
+
+    <div class="form-group">
+        <label for="serialNumber">Serial number:</label>
+        <input type="text" id="serialNumber" name="serialNumber" [(ngModel)]="elevator.serialNumber" (focusout)="saveData()">
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" [(ngModel)]="elevator.description" (focusout)="saveData()"></textarea>
+    </div>
+
+    <div *ngIf="elevator.building">
+        <label *ngIf="checkboxesFloors.length > 0">Floors:</label>
+        <div *ngFor="let checkboxFloor of checkboxesFloors;">
+            <input type="checkbox" [(ngModel)]="checkboxFloor.checked" name="checkboxFloor.number"
+                [value]="checkboxFloor.number" (change)="onFloorSelectionChange(checkboxFloor)" />
+            {{ checkboxFloor.number }}
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button type="submit" [disabled]="formulario.invalid">Create</button>
+    </div>
+
+    <p *ngIf="error" class="form-alert form-alert-error"><b>Error:</b> {{error}}</p>
+    <p *ngIf="success" class="form-alert form-alert-success"><b>Success:</b> {{success}}</p>
+</form>

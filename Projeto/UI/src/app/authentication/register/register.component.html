@@ -1,0 +1,58 @@
+<div class="center-container">
+    <h1 class="center">Register</h1>
+
+    <form (ngSubmit)="register()" #formulario="ngForm" class="form-to-create">
+        <a class="login-route" routerLink="/login">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" [(ngModel)]="user.name" (focusout)="saveData()" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" [(ngModel)]="user.email" (focusout)="saveData()" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" [(ngModel)]="user.password" required>
+        </div>
+
+        <div class="form-group">
+            <label for="repeatPassword">Repeat Password:</label>
+            <input type="password" id="repeatPassword" name="repeatPassword" [(ngModel)]="repeatPassword"
+                (ngModelChange)="passwordsMatch()" required>
+        </div>
+
+        <div class="form-group">
+            <label for="telephone">Telephone Number:</label>
+            <input type="string" id="telephone" name="telephone" [(ngModel)]="user.telephone" (focusout)="saveData()" required>
+        </div>
+
+        <div class="form-group">
+            <label for="taxPayerNumber">Tax Payer Number:</label>
+            <input type="string" id="taxPayerNumber" name="taxPayerNumber" [(ngModel)]="user.taxPayerNumber" (focusout)="saveData()" required>
+        </div>
+
+        <label for="consent">
+            <input type="checkbox" id="consent" name="consent" [(ngModel)]="consent" required>
+            <a class="rgpd-route" routerLink="/info/rgpd">I accept the collection and processing of my personal data by
+                <i>RobDroneGo</i></a>
+        </label>
+
+        <div class="button-container">
+            <button type="submit" [disabled]="formulario.invalid">Register</button>
+        </div>
+
+        <div class="button-container">
+            <a *ngIf="showFacebookButton" (click)="registerWithFacebook()"
+                class="register-with-facebook-button">Register with Facebook</a>
+        </div>
+
+        <p *ngIf="error" class="form-alert form-alert-error"><b>Error:</b> {{error}}</p>
+        <p *ngIf="success" class="form-alert form-alert-success"><b>Success:</b> {{success}}</p>
+    </form>
+</div>

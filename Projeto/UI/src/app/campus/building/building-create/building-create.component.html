@@ -1,0 +1,35 @@
+<h1 class="center">Create Building</h1>
+
+<form (ngSubmit)="createBuilding()" #formulario="ngForm" class="form-to-create">
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" [(ngModel)]="building.name" (focusout)="saveData()" required>
+    </div>
+  
+    <div class="form-group">
+        <label for="code">Code:</label>
+        <input type="text" id="code" name="code" [(ngModel)]="building.code" (focusout)="saveData()" required>
+    </div>
+  
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" [(ngModel)]="building.description" (focusout)="saveData()"></textarea>
+    </div>
+  
+    <div class="form-group">
+        <label for="numXCells">Number of cells in the axis X:</label>
+        <input type="number" id="numXCells" name="numXCells" [(ngModel)]="building.numXCells" (focusout)="saveData()" required>
+    </div>
+  
+    <div class="form-group">
+        <label for="numYCells">Number of cells in the axis Y:</label>
+        <input type="number" id="numYCells" name="numYCells" [(ngModel)]="building.numYCells" (focusout)="saveData()" required>
+    </div>
+
+    <div class="button-container">
+        <button type="submit" [disabled]="formulario.invalid">Create</button>
+    </div>
+
+    <p *ngIf="error" class="form-alert form-alert-error"><b>Error:</b> {{error}}</p>
+    <p *ngIf="success" class="form-alert form-alert-success"><b>Success:</b> {{success}}</p>
+</form>

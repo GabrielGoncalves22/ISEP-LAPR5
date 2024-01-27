@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Basic Thumb Raiser</title>
+</head>
+
+<body>
+    <div #pathContainer id="path-container" class="path-container" *ngIf="!show3DVisualization">
+        <h1 class="center">Path Animation</h1>
+
+        <form #formulario="ngForm" class="form-to-create">
+            <div class="form-group">
+                <label for="building1">Building Code Inicial: </label>
+                <input list="building1List" id="building1" name="building1" [(ngModel)]="building1Code" required
+                    (input)="loadFloorsOfBuilding1()">
+                <datalist id="building1List">
+                    <option *ngFor="let building of buildings" [value]="building.code">{{ building.code }}</option>
+                </datalist>
+            </div>
+
+            <div class="form-group">
+                <label for="floor1">Floor Number Inicial:</label>
+                <select id="floor1" name="floor1" [(ngModel)]="floor1Number" required>
+                    <option *ngFor="let floor1 of floors1" [value]="floor1.number">{{floor1.number}}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <div class="coordinate-container">
+                    <label>X: </label>
+                    <input type="text" id="x1" name="x1" [(ngModel)]="x1" required>
+                    <label>Y: </label>
+                    <input type="text" id="y1" name="y1" [(ngModel)]="y1" required>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="building2">Building Code Final: </label>
+                <input list="building2List" id="building2" name="building2" [(ngModel)]="building2Code" required
+                    (input)="loadFloorsOfBuilding2()">
+                <datalist id="building2List">
+                    <option *ngFor="let building of buildings" [value]="building.code">{{ building.code }}</option>
+                </datalist>
+            </div>
+
+            <div class="form-group">
+                <label for="floor2">Floor Number Final:</label>
+                <select id="floor2" name="floor2" [(ngModel)]="floor2Number" required>
+                    <option *ngFor="let floor2 of floors2" [value]="floor2.number">{{floor2.number}}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <div class="coordinate-container">
+                    <label>X: </label>
+                    <input type="text" id="x2" name="x2" [(ngModel)]="x2" required>
+                    <label>Y: </label>
+                    <input type="text" id="y2" name="y2" [(ngModel)]="y2" required>
+                </div>
+            </div>
+
+
+            <div class="button-container">
+                <button type="submit" [disabled]="formulario.invalid"
+                    (click)="automaticPathAnimationSetup()">Animate</button>
+            </div>
+        </form>
+    </div>
+
+    <div #gameContainer id="game-container" class="game-container" *ngIf="show3DVisualization">
+        <button *ngIf="showReturnButton" class="return-button" (click)="turnOffPathAnimation()">Return</button>
+        <button *ngIf="showAnimateButton" class="animate-button" (click)="automaticPathAnimation()">Animate</button>
+
+        <div id="parent">
+            <div id="views-panel">
+                <table class="views">
+                    <tr>
+                        <td>
+                            <p>Current Building: {{ selectedBuilding }}</p>
+                        </td>
+                        <td>
+                            <p>Current Floor: {{ selectedFloor }}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>View:</label>
+                            <select id="view">
+                                <option value="fixed">Fixed</option>
+                                <option value="first">First-person</option>
+                                <option value="third">Third-person</option>
+                                <option value="top">Top</option>
+                            </select>
+                        </td>
+                        <td>
+                            <label>Orientation (h):</label>
+                            <input type="number" id="horizontal" required>
+                        </td>
+                        <td>
+                            <label>Orientation (v):</label>
+                            <input type="number" id="vertical" required>
+                        </td>
+                        <td>
+                            <input type="button" id="reset" value="Reset view">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Projection:</label>
+                            <select id="projection">
+                                <option value="perspective">Perspective</option>
+                                <option value="orthographic">Orthographic</option>
+                            </select>
+                        </td>
+                        <td>
+                            <label>Distance:</label>
+                            <input type="number" id="distance" required>
+                        </td>
+                        <td>
+                            <label>Zoom:</label>
+                            <input type="number" id="zoom" required>
+                        </td>
+                        <td>
+                            <input type="button" id="reset-all" value="Reset all views">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="help-panel">
+                <table class="help" id="help-table">
+                    <tr>
+                        <th colspan="2" style="font-size: 3.0vmin">
+                            Help
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="2" style="text-align: left">Select active view</th>
+                    </tr>
+                    <tr>
+                        <td>Digit1</td>
+                        <td>Fixed view</td>
+                    </tr>
+                    <tr>
+                        <td>Digit2</td>
+                        <td>First-person view</td>
+                    </tr>
+                    <tr>
+                        <td>Digit3</td>
+                        <td>Third-person view</td>
+                    </tr>
+                    <tr>
+                        <td>Digit4</td>
+                        <td>Top view</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2" style="text-align: left">Toggle view mode</th>
+                    </tr>
+                    <tr>
+                        <td>KeyV</td>
+                        <td>Single-view mode / multiple-views mode</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2" style="text-align: left">Display / hide subwindows</th>
+                    </tr>
+                    <tr>
+                        <td>KeyU</td>
+                        <td>User interface</td>
+                    </tr>
+                    <tr>
+                        <td>KeyM</td>
+                        <td>Mini-map</td>
+                    </tr>
+                    <tr>
+                        <td>KeyH</td>
+                        <td>Help</td>
+                    </tr>
+                    <tr>
+                        <td>KeyS</td>
+                        <td>Statistics</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2" style="text-align: left">Move character</th>
+                    </tr>
+                    <tr>
+                        <td>KeyR</td>
+                        <td>Walk / run (modifier key)</td>
+                    </tr>
+                    <tr>
+                        <td>ArrowLeft</td>
+                        <td>Turn left slowly / quickly</td>
+                    </tr>
+                    <tr>
+                        <td>ArrowRight</td>
+                        <td>Turn right slowly / quickly</td>
+                    </tr>
+                    <tr>
+                        <td>ArrowDown</td>
+                        <td>Walk / run backward</td>
+                    </tr>
+                    <tr>
+                        <td>ArrowUp</td>
+                        <td>Walk / run forward</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2" style="text-align: left">Emote character</th>
+                    </tr>
+                    <tr>
+                        <td>KeyJ</td>
+                        <td>Dance</td>
+                    </tr>
+                    <tr>
+                        <td>KeyY</td>
+                        <td>Opening</td>
+                    </tr>
+                    <tr>
+                        <td>KeyN</td>
+                        <td>Clicking</td>
+                    </tr>
+                    <tr>
+                        <td>KeyW</td>
+                        <td>Wave</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2" style="text-align: left">Interaction with objects</th>
+                    </tr>
+                    <tr>
+                        <td>KeyQ</td>
+                        <td>Open door</td>
+                    </tr>
+                    <tr>
+                        <td>KeyA</td>
+                        <td>Close door</td>
+                    </tr>
+                    <tr>
+                        <td>KeyE</td>
+                        <td>Open elevator</td>
+                    </tr>
+                    <tr>
+                        <td>KeyX</td>
+                        <td>Close elevator</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: right">
+                            Maze designed by Cecília Fernandes and Nikita.
+                            Model created by <a
+                                href='https://www.turbosquid.com/3d-models/3d-model-claptrap-borderlands-1669553'
+                                target='_blank' rel='noopener'>Oleksii Chyzhov</a>. CC0 1.0.
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="subwindows-panel">
+                <table class="subwindows">
+                    <tr>
+                        <td>
+                            <label>Multiple views:</label>
+                            <input type="checkbox" id="multiple-views">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>User interface:</label>
+                            <input type="checkbox" id="user-interface">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Mini-map:</label>
+                            <input type="checkbox" id="mini-map">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Help:</label>
+                            <input type="checkbox" id="help">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Statistics:</label>
+                            <input type="checkbox" id="statistics">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+{
+    "user": {
+        "id": "8c8d4c7c-bacd-429a-b58b-967f565d600b",
+        "name": "Bernardo Silva",
+        "email": "system@isep.ipp.pt",
+        "telephone": "922404331",
+        "role": "System Manager"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhjOGQ0YzdjLWJhY2QtNDI5YS1iNThiLTk2N2Y1NjVkNjAwYiIsIm5hbWUiOiJCZXJuYXJkbyBTaWx2YSIsImVtYWlsIjoic3lzdGVtQGlzZXAuaXBwLnB0IiwidGVsZXBob25lIjoiOTIyNDA0MzMxIiwicm9sZSI6IlN5c3RlbSBNYW5hZ2VyIiwiZXhwIjoxNzA0OTI1NzA1MTQwLCJpYXQiOjE3MDIzMzM3MDV9.GAZn56hJ2cj5LgbHnf_xqpKm8s0ZKu-xI1NmVmL5atg"
+}

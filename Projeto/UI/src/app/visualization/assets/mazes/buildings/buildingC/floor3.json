@@ -1,0 +1,168 @@
+{
+    "floor": {
+        "size": {
+            "numXCells": 12,
+            "numYCells": 20
+        },
+        "map": [
+            [3, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 1],
+            [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 3, 0, 2, 3, 2, 2, 2, 2, 1],
+            [1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1],
+            [2, 2, 2, 2, 0, 0, 0, 2, 2, 2, 2, 2, 1],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 3, 2, 0, 2, 2, 1],
+            [3, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 3, 2, 2, 2, 2, 1],
+            [3, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+            [0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 1],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [3, 2, 2, 0, 3, 2, 0, 2, 3, 2, 0, 2, 1],
+            [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
+            [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
+            [1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
+            [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0]
+        ],
+        "passageways": [
+            {
+                "code": "C3-D3",
+                "destinationBuilding": "D",
+                "destinationFloor": 3,
+                "xStartCell": 0,
+                "yStartCell": 14,
+                "cellOrientation": "west"
+            },
+            {
+                "code": "C3-B2",
+                "destinationBuilding": "B",
+                "destinationFloor": 2,
+                "xStartCell": 0,
+                "yStartCell": 9,
+                "cellOrientation": "west"
+            }
+        ],
+        "elevator": {
+            "xStartCell": 1,
+            "yStartCell": 11.5,
+            "cellOrientation": "west"
+        },
+        "rooms": [
+            {
+                "name": "C301",
+                "xStartCell": 0,
+                "yStartCell": 0,
+                "xEndCell": 3,
+                "yEndCell": 8,
+                "doors": [
+                    {
+                        "xPositionCell": 4,
+                        "yPositionCell": 6,
+                        "cellOrientation": "west"
+                    }
+                ]
+            },
+            {
+                "name": "C302",
+                "xStartCell": 4,
+                "yStartCell": 0,
+                "xEndCell": 11,
+                "yEndCell": 3,
+                "doors": [
+                    {
+                        "xPositionCell": 5,
+                        "yPositionCell": 4,
+                        "cellOrientation": "north"
+                    }
+                ]
+            },
+            {
+                "name": "C303",
+                "xStartCell": 0,
+                "yStartCell": 16,
+                "xEndCell": 3,
+                "yEndCell": 19,
+                "doors": [
+                    {
+                        "xPositionCell": 3,
+                        "yPositionCell": 16,
+                        "cellOrientation": "north"
+                    }
+                ]
+            },
+            {
+                "name": "C304",
+                "xStartCell": 7,
+                "yStartCell": 4,
+                "xEndCell": 11,
+                "yEndCell": 7,
+                "doors": [
+                    {
+                        "xPositionCell": 7,
+                        "yPositionCell": 6,
+                        "cellOrientation": "west"
+                    }
+                ]
+            },
+            {
+                "name": "C305",
+                "xStartCell": 4,
+                "yStartCell": 16,
+                "xEndCell": 7,
+                "yEndCell": 19,
+                "doors": [
+                    {
+                        "xPositionCell": 6,
+                        "yPositionCell": 16,
+                        "cellOrientation": "north"
+                    }
+                ]
+            },
+            {
+                "name": "C310",
+                "xStartCell": 8,
+                "yStartCell": 16,
+                "xEndCell": 11,
+                "yEndCell": 19,
+                "doors": [
+                    {
+                        "xPositionCell": 10,
+                        "yPositionCell": 16,
+                        "cellOrientation": "north"
+                    }
+                ]
+            },
+            {
+                "name": "C306",
+                "xStartCell": 7,
+                "yStartCell": 10,
+                "xEndCell": 11,
+                "yEndCell": 11,
+                "doors": [
+                    {
+                        "xPositionCell": 9,
+                        "yPositionCell": 10,
+                        "cellOrientation": "north"
+                    }
+                ]
+            },
+            {
+                "name": "C308",
+                "xStartCell": 7,
+                "yStartCell": 12,
+                "xEndCell": 11,
+                "yEndCell": 13,
+                "doors": [
+                    {
+                        "xPositionCell": 9,
+                        "yPositionCell": 14,
+                        "cellOrientation": "north"
+                    }
+                ]
+            }
+        ]
+    }
+}

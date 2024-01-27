@@ -1,0 +1,49 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 1 - Process View) - US 460 - Pickup & Delivery Task
+autonumber
+
+Actor "User" as user
+participant "RobDroneGo WebApp" as WebSite <<system (C4)>>
+
+activate user
+    user -> WebSite : Ask to request a pickup & delivery task
+    activate WebSite
+        WebSite --> user : List the existing rooms and ask to choose one for pickup
+    deactivate WebSite
+
+    user -> WebSite : Choose one room to pickup
+    activate WebSite
+        WebSite --> user : List the existing rooms and ask to choose one for delivery
+    deactivate WebSite
+    user -> WebSite : Choose one room for delivery
+    
+    activate WebSite
+        WebSite --> user : Ask to insert name and phone number for pickup contact
+    deactivate WebSite
+    user -> WebSite : Insert data
+
+    activate WebSite
+        WebSite --> user : Ask to insert name and phone number for delivery contact
+    deactivate WebSite
+    user -> WebSite : Insert data
+
+    activate WebSite
+        WebSite --> user : Ask to insert a description
+    deactivate WebSite
+    user --> WebSite : Insert description
+
+    activate WebSite
+        WebSite --> user : Ask to insert a confirmation code
+    deactivate WebSite
+    user --> WebSite : Insert a confirmation code
+
+    activate WebSite
+        WebSite --> user : Task created / Data error
+    deactivate WebSite
+deactivate user
+
+@enduml

@@ -1,0 +1,29 @@
+[
+    {
+        "code": "E",
+        "name": "Eletrónica",
+        "description": "Edifício E",
+        "numXCells": 10,
+        "numYCells": 10,
+        "hasElevator": true,
+        "numFloors": 6
+    },
+    {
+        "code": "A",
+        "name": "Arquitetura",
+        "description": "",
+        "numXCells": 10,
+        "numYCells": 15,
+        "hasElevator": true,
+        "numFloors": 6
+    },
+    {
+        "code": "B",
+        "name": "Trolhice",
+        "description": "",
+        "numXCells": 10,
+        "numYCells": 15,
+        "hasElevator": true,
+        "numFloors": 0
+    }
+]

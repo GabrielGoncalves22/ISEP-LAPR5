@@ -1,0 +1,10 @@
+{
+    "user": {
+        "id": "a88a56fd-b229-4aed-b2e5-a2ad68695a12",
+        "name": "Cristiano Ronaldo",
+        "email": "campus@isep.ipp.pt",
+        "telephone": "923404331",
+        "role": "Campus Manager"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE4OGE1NmZkLWIyMjktNGFlZC1iMmU1LWEyYWQ2ODY5NWExMiIsIm5hbWUiOiJDcmlzdGlhbm8gUm9uYWxkbyIsImVtYWlsIjoiY2FtcHVzQGlzZXAuaXBwLnB0IiwidGVsZXBob25lIjoiOTIzNDA0MzMxIiwicm9sZSI6IkNhbXB1cyBNYW5hZ2VyIiwiZXhwIjoxNzA0OTI1Njc4MDg3LCJpYXQiOjE3MDIzMzM2Nzh9.pdApBeP2outokQUAr9h4DnYq-ZyXIkx9CmYneLi1osY"
+}

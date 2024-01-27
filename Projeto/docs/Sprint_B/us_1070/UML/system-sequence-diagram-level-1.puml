@@ -1,0 +1,26 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 1 - Process View) - US 1070
+autonumber
+
+Actor "Campus Manager" as CampusManager
+participant "RobDroneGo" as Sistema <<system (C4)>>
+
+activate CampusManager
+    CampusManager -> Sistema : Ask to edit bulding
+    activate Sistema
+
+    Sistema --> CampusManager : Ask to choose an building and to edit data
+    deactivate Sistema
+
+    CampusManager -> Sistema : Choose the building and edit
+    activate Sistema
+
+    Sistema --> CampusManager : Building edited/data error
+    deactivate Sistema
+deactivate CampusManager
+
+@enduml

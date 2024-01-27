@@ -1,0 +1,69 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View - MDT) - US 480
+autonumber
+
+participant "pickupAndDeliveryTaskController :\n Controller" as ControllerDelivery <<Controller>>
+participant "surveillanceTaskController :\n Controller" as ControllerSurveillance <<Controller>>
+participant "pickupAndDeliveryTaskServiceInstance :\n Service" as ServiceDelivery <<Service>>
+participant "surveillanceServiceInstance :\n Service" as ServiceSurveillance <<Service>>
+participant "pickupAndDeliveryTaskRepo :\n Repository" as RepoDelivery <<Repository>>
+participant "surveillanceTaskRepo :\n Repository" as RepoSurveillance <<Repository>>
+participant "DB" as DB <<DataBase>>
+participant "pickupAndDeliveryTask :\n pickupAndDeliveryTask" as PickupAndDeliveryTask <<Domain>>
+participant "surveillanceTask :\n SurveillanceTask" as SurveillanceTask <<Domain>>
+participant "pickupAndDeliveryTaskDTO :\n pickupAndDeliveryTaskDTO" as PickupAndDeliveryTaskDTO <<DTO>>
+participant "surveillanceTaskDTO :\n SurveillanceTaskDTO" as SurveillanceTaskDTO <<DTO>>
+
+alt pickup and delivery task
+    ?o-> ControllerDelivery : GET (.../tasks/deliveries)
+    activate ControllerDelivery
+        ControllerDelivery -> ControllerDelivery : GetPickupAndDeliveryTask()
+        activate ControllerDelivery
+            ControllerDelivery -> ServiceDelivery : GetPickupAndDeliveryTaskAsync()
+            activate ServiceDelivery
+                ServiceDelivery -> RepoDelivery : Find()
+                activate RepoDelivery
+                    RepoDelivery -> DB :
+                    activate DB
+                    DB --> RepoDelivery :
+                    deactivate DB
+                    RepoDelivery --> ServiceDelivery :
+                deactivate RepoDelivery
+                ServiceDelivery --> PickupAndDeliveryTaskDTO**: create
+                ServiceDelivery --> ControllerDelivery : deliveriesDTO
+            deactivate ServiceDelivery
+            ControllerDelivery --> ControllerDelivery : status: 200/404
+        deactivate ControllerDelivery
+
+        <-- ControllerDelivery : status: 200/404
+    deactivate ControllerDelivery
+
+else surveillance task
+    ?o-> ControllerSurveillance : GET (.../tasks/surveillances)
+    activate ControllerSurveillance
+        ControllerSurveillance -> ControllerSurveillance : GetSurveillanceTasks()
+        activate ControllerSurveillance
+            ControllerSurveillance -> ServiceSurveillance : GetSurveillanceTasksAsync()
+            activate ServiceSurveillance
+                ServiceSurveillance -> RepoSurveillance : Find()
+                activate RepoSurveillance
+                    RepoSurveillance -> DB :
+                    activate DB
+                    DB --> RepoSurveillance :
+                    deactivate DB
+                    RepoSurveillance --> ServiceSurveillance :
+                deactivate RepoSurveillance
+                ServiceSurveillance --> SurveillanceTaskDTO**: create
+                ServiceSurveillance --> ControllerSurveillance : surveillancesDTO
+            deactivate ServiceSurveillance
+            ControllerSurveillance --> ControllerSurveillance : status: 200/404
+        deactivate ControllerSurveillance
+
+        <-- ControllerSurveillance : status: 200/404
+    deactivate ControllerSurveillance
+end
+@enduml

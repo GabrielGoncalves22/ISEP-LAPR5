@@ -1,0 +1,56 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View) - US 460
+autonumber
+
+participant "controller :\n Controller" as controller <<Controller>>
+participant "serviceInstance :\n Service" as service <<Service>>
+participant "mapper :\n Mapper" as mapper <<Mapper>>
+participant "pickupAndDeliveryTaskRepo :\n Repository" as repo <<Repository>>
+participant "DB" as db <<DataBase>>
+
+participant "pickupAndDeliveryTask :\n pickupAndDeliveryTask" as pickupAndDeliveryTask <<Domain>>
+participant "pickupAndDeliveryTaskSchema :\n PickupAndDeliveryTaskSchema" as pickupAndDeliveryTaskSchema <<Schema>>
+participant "createPickDeliveryTaskDTO :\n CreatePickupAndDeliveryTaskDTO" as pickupAndDeliveryTaskDTO <<DTO>>
+participant "user :\n User" as user <<Domain>>
+
+?o-> controller : POST (.../api/tasks/deliveries)
+activate controller
+    controller -> controller : CreatePickupAndDeliveryTask(createPickDeliveryTaskDTO)
+    activate controller
+        controller --> pickupAndDeliveryTaskDTO** :
+        controller -> service : CreatePickupAndDeliveryTask(pickupAndDeliveryTaskDTO, userEmail)
+        activate service
+            service --> pickupAndDeliveryTask** : create
+
+            service -> service : CheckBuildingRoom(PickupBuildingCode, PickupRoomName)
+            activate service
+                service -> : GET (.../api/buildings/:PickupBuildingCode/rooms/:PickupRoomName)
+                service <-- : 200/404
+            deactivate service
+
+            service -> service : CheckBuildingRoom(DeliveryBuildingCode, DeliveryRoomName)
+            activate service
+                service -> : GET (.../api/buildings/:DeliveryBuildingCode/rooms/:DeliveryRoomName)
+                service <-- : 200/404
+            deactivate service
+
+            service -> mapper : pickupAndDeliveryTaskSchema = ToPersistence(pickupAndDeliveryTask)
+            service -> repo : InsertOneAsync(pickupAndDeliveryTaskSchema)
+            activate repo
+                repo -> db : create(pickupAndDeliveryTaskSchema)
+                db --> repo :
+                repo --> service :
+            deactivate repo
+            service --> controller :
+        deactivate service
+        controller --> controller : status: 201/400
+    deactivate controller
+
+    <-- controller : status: 201/400
+deactivate controller
+
+@enduml

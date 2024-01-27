@@ -1,0 +1,23 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View) - US 210
+autonumber
+
+participant "BE" as BE <<system (C4)>>
+participant "BD" as BD <<system (C4)>>
+
+?o-> BE : GET (.../buildings/:code/floors)
+activate BE
+
+    BE --> BD : Select building
+    activate BD
+    BD --> BE :
+    deactivate BD
+
+<-- BE : status: 200/404
+deactivate BE
+
+@enduml

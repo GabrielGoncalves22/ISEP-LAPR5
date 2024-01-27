@@ -1,0 +1,34 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 2 - Process View) - US 1140
+autonumber
+
+participant "UI" as UI <<system (C4)>>
+participant "MD" as MD <<system (C4)>>
+
+?o-> UI : Ask to list an elevator in a building
+activate UI
+
+    UI -> MD : GET (.../buildings)
+    activate MD
+        UI <-- MD : status: 200/404
+    deactivate MD
+
+<-- UI : Ask to choose an building
+deactivate UI
+
+?o-> UI : Choose the building
+activate UI
+
+    UI -> MD : GET (.../buildings/:code/elevators)
+    activate MD
+        UI <-- MD : status: 200/404
+    deactivate MD
+
+<-- UI : Sucess / Error
+deactivate UI
+
+@enduml

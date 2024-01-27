@@ -1,0 +1,40 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 1 - Process View) - US 460 - Surveillance Task
+autonumber
+
+Actor "User" as user
+participant "RobDroneGo WebApp" as WebSite <<system (C4)>>
+
+activate user
+    user -> WebSite : Ask to request a surveillance task
+    activate WebSite
+        WebSite --> user : List buildings and ask to choose one
+    deactivate WebSite
+
+    user -> WebSite : Choose one building
+    activate WebSite
+        WebSite --> user : List building floors and ask to choose one or more
+    deactivate WebSite
+
+    user -> WebSite : Choose one or more floors
+    activate WebSite
+        WebSite --> user : Ask to insert the emergency contact name
+    deactivate WebSite
+
+    user -> WebSite : Insert the emergency contact name
+    activate WebSite
+        WebSite --> user : Ask to insert the emergency contact phone number
+    deactivate WebSite
+
+    user -> WebSite : Insert the emergency contact phone number
+    activate WebSite
+        WebSite --> user : Task created / Data error
+    deactivate WebSite
+
+deactivate user
+
+@enduml

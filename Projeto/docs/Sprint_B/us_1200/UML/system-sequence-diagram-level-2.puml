@@ -1,0 +1,35 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+autonumber
+
+title System Sequence Diagram (Level 3 - Process View) - US 220/1200
+
+
+actor "Gestor de Campus" as actor
+
+participant "UI" as UI <<container (C4)>>
+participant "MD" as MD <<container (C4)>>
+
+activate actor
+actor -> UI: Asks to list floors with passageway to other buildings
+activate UI
+UI -> MD: GET(../buildings)
+activate MD
+MD --> UI: status: 200/400
+deactivate MD
+actor <-- UI: Asks to choose a building
+deactivate UI
+actor -> UI: Selects a building
+activate UI
+UI -> MD: GET(../buildings/building/floors/passageways)
+activate MD
+MD --> UI: status: 200/400
+deactivate MD
+actor <-- UI: Lists floors with passageways
+deactivate UI
+deactivate actor
+
+
+@enduml

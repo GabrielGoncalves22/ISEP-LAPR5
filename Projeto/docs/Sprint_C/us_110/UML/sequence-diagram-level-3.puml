@@ -1,0 +1,58 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 3 - Process View) - US 110
+autonumber
+
+Actor "User" as User
+participant "View" as View <<Component>>
+participant "Component" as Component <<Component>>
+participant "userModel :\n user.model" as userModel <<Component>>
+participant "Service" as Service <<Component>>
+participant "MD" as MD <<system (C4)>>
+
+activate User
+    User -> View : Ask to show his/her profile
+    activate View
+
+        View -> Component : loadUserData()
+        activate Component
+            Component --> userModel** :
+            Component -> Service : getUserData()
+            activate Service
+                Service -> MD : GET (.../me)
+                activate MD
+                    Service <-- MD : status: 200/404
+                deactivate MD
+                Component <-- Service : Success / Error
+            deactivate Service
+            View <-- Component : Information about the success/error
+        deactivate Component
+
+        View --> User : Show the user profile
+    deactivate View
+
+    User -> View : Ask to download a copy of personal data
+    activate View
+        View -> Component : downloadUserData()
+        activate Component
+            Component -> Service : downloadUserData()
+            activate Service
+                Service -> Service : getUserData()
+                activate Service
+                    Service -> MD : GET (.../me)
+                    activate MD
+                        Service <-- MD : status: 200/404
+                    deactivate MD
+                deactivate Service
+                Component <-- Service : theFile
+            deactivate Service
+            View <-- Component : theFile
+        deactivate Component
+        View --> User : Gives and download the user personal data in a file
+    deactivate View
+deactivate User
+
+@enduml

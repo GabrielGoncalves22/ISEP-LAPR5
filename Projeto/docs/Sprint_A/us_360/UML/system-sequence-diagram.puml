@@ -1,0 +1,23 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+autonumber
+
+title System Sequence Diagram (SSD)  - US 360
+
+
+actor "Gestor de Frota" as actor
+participant "RobDroneGo" as sys <<system (C4)>>
+
+activate actor
+actor -> sys: POST (../devices)
+
+activate sys
+sys -> actor: success
+deactivate sys
+deactivate actor
+
+
+
+@enduml

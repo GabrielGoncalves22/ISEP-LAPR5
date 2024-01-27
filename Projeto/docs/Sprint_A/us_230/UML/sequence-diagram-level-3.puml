@@ -1,0 +1,40 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View) - US 230
+autonumber
+
+participant "BE" as BE <<system (C4)>>
+participant "BD" as BD <<system (C4)>>
+
+?o-> BE : PATCH (.../buildings/:buildingCode/floors/:floorNumber/map)
+activate BE
+
+    BE --> BD : verify if building exists and get it
+    activate BD
+        BD --> BE :
+    deactivate BD
+
+    loop foreach passageway
+        BE --> BD : Verify passageway exists and get it
+        activate BD
+            BD --> BE : Update passageway
+        deactivate BD
+
+        BE --> BD : Update passageway
+        activate BD
+            BD --> BE :
+        deactivate BD
+    end
+
+    BE --> BD : Update building
+    activate BD
+        BD --> BE :
+    deactivate BD
+
+<-- BE : status: 200/400
+deactivate BE
+
+@enduml

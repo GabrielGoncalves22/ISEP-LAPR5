@@ -1,0 +1,50 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+autonumber
+
+title System Sequence Diagram (Level 3 - Process View) - US 1200
+
+
+actor "Gestor de Campus" as actor
+
+participant ":Component" as Component <<Component>>
+participant ":model" as Model
+participant ":service" as Service <<Service>>
+participant "MD" as MD <<container (C4)>>
+
+activate actor
+actor -> Component: Asks to list floors with\npassageway to other buildings
+activate Component
+Component -> Service: getAllBuildings()
+activate Service
+Service -> MD: GET(../buildings)
+activate MD
+Service <-- MD: status: 200/400
+deactivate MD
+Service --> Component
+deactivate Service
+actor <-- Component: asks to choose a building
+deactivate Component
+actor -> Component: selects building
+activate Component
+Component -> Service: getFloorsWithPassagewaysToBuildingByBuilding()
+activate Service
+Service -> MD: GET(../buildings/building/floors/passageways)
+activate MD
+Service <-- MD: status: 200/400
+
+deactivate MD
+loop for all buildings
+Service --> Model**
+end
+Service --> Component
+deactivate Service
+actor <-- Component: list floors
+deactivate Component
+deactivate actor
+
+
+
+@enduml

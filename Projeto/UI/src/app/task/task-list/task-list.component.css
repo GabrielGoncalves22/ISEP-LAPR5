@@ -1,0 +1,87 @@
+p {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+input,
+select {
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.input-group {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.input-group-item {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.input-group-item:last-child {
+    margin-right: 0;
+}
+
+.common-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.common-table th {
+    background-color: lightgrey;
+    padding: 10px;
+    text-align: left;
+    cursor: pointer;
+    position: relative;
+}
+
+.common-table th::after {
+    content: '\25B2';
+    position: absolute;
+    right: 8px;
+    opacity: 0.5;
+}
+
+.common-table th.descending::after {
+    content: '\25BC';
+    opacity: 1;
+}
+
+.common-table th.ascending::after {
+    content: '\25B2';
+    opacity: 1;
+}
+
+.common-table td {
+    padding: 10px;
+}
+
+.common-table .odd-row {
+    background-color: white;
+}
+
+.common-table .even-row {
+    background-color: lightgrey;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}

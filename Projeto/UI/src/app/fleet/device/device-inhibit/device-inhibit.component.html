@@ -1,0 +1,19 @@
+<h1 class="center">Inhibit/Disinhibit Device</h1>
+
+<form (ngSubmit)="inhibitDevice()" #formulario="ngForm" class="form-to-create">
+    <div class="form-group">
+        <label for="device">Device Code:</label>
+        <input list="deviceList" id="device" name="device" [(ngModel)]="selectedDevice" (change)="onDeviceSelect()"
+            required>
+        <datalist id="deviceList">
+            <option *ngFor="let device of devices" [value]="device.code">{{ device.code }}</option>
+        </datalist>
+    </div>
+
+    <div *ngIf="buttonLabel" class="button-container">
+        <button type="submit" [disabled]="formulario.invalid">{{ buttonLabel }}</button>
+    </div>
+
+    <p *ngIf="error" class="form-alert form-alert-error"><b>Error:</b> {{error}}</p>
+    <p *ngIf="success" class="form-alert form-alert-success"><b>Success:</b> {{success}}</p>
+</form>

@@ -1,0 +1,51 @@
+<h1 class="center">Edit Passageway</h1>
+
+<form (ngSubmit)="editPassageway()" #formulario="ngForm" class="form-to-create">
+    <div class="form-group">
+        <label for="passageway">Passageway Code:</label>
+        <input list="passagewayList" id="passageway" name="passageway" [(ngModel)]="selectedPassageway" required
+            (input)="listAllPassageways()" (change)="loadPassagewayDetails()">
+        <datalist id="passagewayList">
+            <option *ngFor="let passageway of passageways" [value]="passageway.code">{{passageway.code}}</option>
+        </datalist>
+    </div>
+
+    <div class="form-group">
+        <label for="building1">Building 1 Code:</label>
+        <input list="building1List" id="building1" name="building1" [(ngModel)]="selectedBuildingCode1" required
+            (input)="loadFloorsOfBuilding1()">
+        <datalist id="building1List">
+            <option *ngFor="let building1 of buildings" [value]="building1.code">{{building1.code}}</option>
+        </datalist>
+    </div>
+
+    <div class="form-group">
+        <label for="floor1">Floor 1 number:</label>
+        <select id="floor1" name="floor1" [(ngModel)]="selectedFloorNumber1">
+            <option *ngFor="let floor1 of floors1" [value]="floor1.number">{{floor1.number}}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="building2">Building 2 Code:</label>
+        <input list="building2List" id="building2" name="building2" [(ngModel)]="selectedBuildingCode2" required
+            (input)="loadFloorsOfBuilding2()">
+        <datalist id="building2List">
+            <option *ngFor="let building2 of buildings" [value]="building2.code">{{building2.code}}</option>
+        </datalist>
+    </div>
+
+    <div class="form-group">
+        <label for="floor2">Floor 2 number:</label>
+        <select id="floor2" name="floor2" [(ngModel)]="selectedFloorNumber2">
+            <option *ngFor="let floor2 of floors2" [value]="floor2.number">{{floor2.number}}</option>
+        </select>
+    </div>
+
+    <div class="button-container">
+        <button type="submit" [disabled]="formulario.invalid">Edit</button>
+    </div>
+
+    <p *ngIf="error" class="form-alert form-alert-error"><b>Error:</b> {{error}}</p>
+    <p *ngIf="success" class="form-alert form-alert-success"><b>Success:</b> {{success}}</p>
+</form>

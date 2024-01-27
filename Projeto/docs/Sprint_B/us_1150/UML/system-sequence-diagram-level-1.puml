@@ -1,0 +1,22 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US 280
+autonumber
+
+actor "Gestor de Campus" as Gestor
+participant "RobDroneGo" as Sistema <<system (C4)>>
+
+activate Gestor
+
+    Gestor -> Sistema : PUT/PATCH (../buildings/:code/elevators)
+    activate Sistema
+
+    Sistema --> Gestor : Dados alterado
+    deactivate Sistema
+
+deactivate Gestor
+
+@enduml

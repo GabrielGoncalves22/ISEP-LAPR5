@@ -1,0 +1,106 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View) - US 460 - Pickup & Delivery Task
+autonumber
+
+Actor "User" as user
+participant "View" as View <<Component>>
+participant "Component" as Component <<Component>>
+participant "rooms :\n room.model" as roomModelList
+participant "pickupAndDeliveryTask :\n pickupAndDeliveryTaskModel.model" as pickupAndDeliveryTaskModel
+participant "Service" as Service <<Component>>
+participant "MD" as MD <<system (C4)>>
+participant "MDT" as MDT <<system (C4)>>
+
+activate user
+    user -> View : Ask to request a pickup & delivery task
+    activate View
+        View -> Component : ngOnInit()
+        activate Component
+
+            Component -> Component : loadDefaultData()
+            activate Component
+                Component -> Service : getUserData()
+                activate Service
+                    Service -> MD : GET (../api/me)
+                    activate MD
+                        Service <-- MD : status: 200/404
+                    deactivate MD
+
+                    Component <-- Service : Success / Error
+                deactivate Service
+            deactivate Component
+
+            View -> Component : loadRooms()
+            activate Component
+                Component --> roomModelList** :
+                Component -> Service : getAllRooms()
+                activate Service
+                    Service -> MD : GET (.../api/buildings/rooms)
+                    activate MD
+                        Service <-- MD : status: 200/404
+                    deactivate MD
+                deactivate Service
+            deactivate Component
+        deactivate Component
+
+        View --> user : List the existing rooms and ask to choose one for pickup
+    deactivate View
+
+    user -> View : Choose one room to pickup
+    activate View
+        View -> Component : onPickupRoomChange()
+        activate Component
+        deactivate Component
+
+        View --> user : List the existing rooms and ask to choose one for delivery
+    deactivate View
+    user -> View : Choose one room for delivery
+
+    activate View
+        View -> Component : onDeliveryRoomChange()
+        activate Component
+        deactivate Component
+
+        View --> user : Ask to insert name and phone number for pickup contact
+    deactivate View
+    user -> View : Insert data
+
+    activate View
+        View --> user : Ask to insert name and contact for pickup and another for delivery
+    deactivate View
+    user -> View : Insert data
+
+    activate View
+        View --> user : Ask to insert a description
+    deactivate View
+    user --> View : Insert description
+
+    activate View
+        View --> user : Ask to insert a confirmation code
+    deactivate View
+    user --> View : Insert a confirmation code
+
+    activate View
+        View -> Component : createPickupAndDeliveryTask()
+        activate Component
+            Component -> pickupAndDeliveryTaskModel** :
+            Component -> Service : createPickupAndDeliveryTask(pickupAndDeliveryTask)
+
+            activate Service
+                Service -> MDT : POST (.../api/tasks/deliveries)
+                activate MDT
+                    Service <-- MDT : status: 201/400
+                deactivate MDT
+                Component <-- Service : Success / Error
+            deactivate Service
+            View <-- Component : Information about the success/error
+        deactivate Component
+        View --> user : Task created / Data error
+    deactivate View
+deactivate user
+
+@enduml

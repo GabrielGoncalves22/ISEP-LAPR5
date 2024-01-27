@@ -1,0 +1,26 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+autonumber
+
+title System Sequence Diagram (Level 1 - Process View) - US 1010
+
+
+actor "Gestor de Frota" as actor
+participant "RobDroneGo" as System <<system (C4)>>
+
+activate actor
+actor -> System: Asks to create a device
+activate System
+actor <-- System: Asks for device information
+deactivate System
+actor -> System: Inputs information
+activate System
+actor <-- System: success
+deactivate System
+deactivate actor
+
+
+
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+
+skinparam titleFontSize 25
+title <u>US 250 - Domain classes</u>
+
+hide methods
+skinparam classAttributeIconSize 0
+
+'Passageway aggregate
+package "<<aggregate>> Passageway" {
+    entity Passageway <<entity>> <<root>>
+}
+
+'Building aggregate
+package "<<aggregate>> Building" {
+    entity Building <<entity>> <<root>>
+    class Code <<(V, #FF8B40) value object>>
+
+    entity Floor <<entity>> {
+        number
+    }
+}
+
+Building -down-> Code
+
+Building "1" -- "*" Floor : has >
+
+Passageway "1" -- "*" Floor : through >
+Passageway "*" -- "*" Building : has >
+
+@enduml

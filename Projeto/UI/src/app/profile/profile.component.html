@@ -1,0 +1,49 @@
+<h1 class="center">My profile</h1>
+
+<form (ngSubmit)="editPersonalData()" #formulario="ngForm" class="form-to-create">
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" [(ngModel)]="user.name">
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" [(ngModel)]="user.email" readonly>
+    </div>
+
+    <div class="form-group">
+        <label for="telephone">Telephone number:</label>
+        <input type="text" id="telephone" name="telephone" [(ngModel)]="user.telephone" required>
+    </div>
+
+    <div class="form-group">
+        <label for="taxPayerNumber">Tax Payer Number:</label>
+        <input type="text" id="taxPayerNumber" name="taxPayerNumber" [(ngModel)]="user.taxPayerNumber" required>
+    </div>
+
+    <div class="button-container">
+        <button type="submit" [disabled]="formulario.invalid">Edit</button>
+    </div>
+
+    <p *ngIf="error" class="form-alert form-alert-error"><b>Error:</b> {{error}}</p>
+    <p *ngIf="success" class="form-alert form-alert-success"><b>Success:</b> {{success}}</p>
+</form>
+
+<div class="large-card">
+    <div class="large-card-header">
+        Download your personal data
+    </div>
+    <div class="large-card-body">
+        You can download your personal data that is used by our web application. Click on the button to download it in a JSON format file.
+    </div>
+    <button (click)="downloadUserData()">Download personal data</button>
+</div>
+<div class="large-card">
+    <div class="large-card-header">
+        Delete your account
+    </div>
+    <div class="large-card-body">
+        Your account will be deleted, incluing all your personal data and created tasks.
+    </div>
+    <button (click)="deleteUser()">Delete account</button>
+</div>

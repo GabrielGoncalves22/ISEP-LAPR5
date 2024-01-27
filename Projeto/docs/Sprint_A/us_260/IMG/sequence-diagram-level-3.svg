@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="289px" preserveAspectRatio="none" style="width:892px;height:289px;background:#FFFFFF;" version="1.1" viewBox="0 0 892 289" width="892px" zoomAndPan="magnify"><defs/><g><rect fill="none" height="27.6094" id="_title" style="stroke:none;stroke-width:1.0;" width="374" x="258" y="10"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="364" x="263" y="29.5332">Sequence Diagram (Level 3 - Process View) - US 260</text><rect fill="#FFFFFF" height="91.0547" style="stroke:#181818;stroke-width:1.0;" width="10" x="439" y="126.1797"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="828" y="156.5313"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="444" x2="444" y1="93.8281" y2="235.2344"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="833" x2="833" y1="93.8281" y2="235.2344"/><rect fill="#E3E3E3" height="49.2188" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="106" x="391" y="43.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="92" x="398" y="65.1426">«system (C4)»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="18" x="435" y="82.752">BE</text><rect fill="#E3E3E3" height="49.2188" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="106" x="391" y="234.2344"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="92" x="398" y="255.7676">«system (C4)»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="18" x="435" y="273.377">BE</text><rect fill="#E3E3E3" height="49.2188" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="106" x="780" y="43.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="92" x="787" y="65.1426">«system (C4)»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="19" x="823.5" y="82.752">BD</text><rect fill="#E3E3E3" height="49.2188" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="106" x="780" y="234.2344"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="92" x="787" y="255.7676">«system (C4)»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="19" x="823.5" y="273.377">BD</text><rect fill="#FFFFFF" height="91.0547" style="stroke:#181818;stroke-width:1.0;" width="10" x="439" y="126.1797"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="828" y="156.5313"/><ellipse cx="4.5" cy="125.4297" fill="none" rx="4" ry="4" style="stroke:#181818;stroke-width:1.5;"/><polygon fill="#181818" points="427,122.1797,437,126.1797,427,130.1797,431,126.1797" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="9" x2="433" y1="126.1797" y2="126.1797"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="12" y="121.3232">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="401" x="23" y="121.3232">GET (.../passageways?building_1=:building_1&amp;building_2=building_2)</text><polygon fill="#181818" points="816,152.5313,826,156.5313,816,160.5313,820,156.5313" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="449" x2="822" y1="156.5313" y2="156.5313"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="456" y="151.6748">2</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="349" x="467" y="151.6748">Select passageway with or without building_1 and building_2</text><polygon fill="#181818" points="460,182.8828,450,186.8828,460,190.8828,456,186.8828" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="454" x2="832" y1="186.8828" y2="186.8828"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="466" y="182.0264">3</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="477" y="182.0264"> </text><polygon fill="#181818" points="11,213.2344,1,217.2344,11,221.2344,7,217.2344" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="5" x2="443" y1="217.2344" y2="217.2344"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="17" y="212.3779">4</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="90" x="28" y="212.3779">status: 200/404</text><!--MD5=[801659e82791305d32b77567d47a6c41]
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View) - US 260
+autonumber
+
+participant "BE" as BE <<system (C4)>>
+participant "BD" as BD <<system (C4)>>
+
+?o-> BE : GET (.../passageways?building_1=:building_1&building_2=building_2)
+activate BE
+
+    BE - -> BD : Select passageway with or without building_1 and building_2
+    activate BD
+        BD - -> BE :
+    deactivate BD
+
+<- - BE : status: 200/404
+deactivate BE
+
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 18:01:30 WEST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: Cp1252
+Language: pt
+Country: PT
+--></g></svg>

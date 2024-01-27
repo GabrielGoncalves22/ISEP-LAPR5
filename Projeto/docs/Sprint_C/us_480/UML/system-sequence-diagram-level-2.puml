@@ -1,0 +1,40 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 2 - Process View) - US 480
+autonumber
+
+participant "UI" as UI <<system (C4)>>
+participant "MDT" as MD <<system (C4)>>
+
+?o-> UI : Ask to view tasks not approved
+activate UI
+
+<-- UI : asks to select task type (delivery or surveillance tasks)
+deactivate UI
+
+?o-> UI :  selects task type
+activate UI
+
+    alt surveillance
+
+    UI -> MD : GET (.../tasks/surveillances)
+    activate MD
+        UI <-- MD : status: 200/400
+    deactivate MD
+
+    else delivery
+
+        UI -> MD : GET (.../tasks/delivery)
+    activate MD
+        UI <-- MD : status: 200/400
+    deactivate MD
+
+    end
+
+<-- UI : shows select task type list
+deactivate UI
+
+@enduml

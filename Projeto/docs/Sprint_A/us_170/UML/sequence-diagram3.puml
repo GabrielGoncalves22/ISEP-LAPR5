@@ -1,0 +1,51 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (SD) - US 170
+autonumber
+
+participant buildingRoute as route <<Web>>
+control "buildingController :\n buildingController" as controller <<Controllers>>
+participant "buildingDTODresult :\n BuildingDTO" as dtoResult <<DTO>>
+participant "buildingService :\n buildingService" as service <<Use Cases>>
+database "buildingRepo :\n buildingRepo" as repo <<Gateways>>
+participant BuildingMap as map <<Mapper>>
+participant "BuildingSchema" as schema <<Schema>>
+participant "buildingResult: \n building" as buildingResult <<Domain>>
+
+
+?o->route : GET (../buildings)
+    activate route
+    route -> controller : getAllBuildings()
+
+    activate controller
+    controller -> service : getBuildings()
+
+    activate service
+    service -> repo : findAll(): buildings
+    activate repo
+    repo -> schema: find(): document
+    activate schema
+    deactivate schema
+
+loop for each building
+    repo -> map: toDomain(documentLine)
+    activate map
+    map -> buildingResult** : create()
+    deactivate map
+    deactivate repo
+end
+loop for each building
+    service -> map : buildingsDTO = toDTO(buildings)
+    activate map
+    map --> dtoResult** : create()
+    deactivate map
+end
+    deactivate service
+    controller --> route : response
+    deactivate controller
+<-- route : status: 201 mostra edificios
+
+@enduml

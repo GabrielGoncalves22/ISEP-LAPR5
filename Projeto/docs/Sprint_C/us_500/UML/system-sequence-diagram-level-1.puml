@@ -1,0 +1,21 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 1 - Process View) - US 500
+autonumber
+
+Actor "System Manager" as SystemManager
+participant "RobDroneGo" as Sistema <<system (C4)>>
+
+activate SystemManager
+    SystemManager -> Sistema : Ask to calculate the best task execution order
+    activate Sistema
+
+    Sistema --> SystemManager : Calculates and shows best task execution order
+    deactivate Sistema
+
+deactivate SystemManager
+
+@enduml

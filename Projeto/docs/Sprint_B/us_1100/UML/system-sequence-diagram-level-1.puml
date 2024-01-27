@@ -1,0 +1,30 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 1 - Process View) - US 1100
+autonumber
+
+Actor "Campus Manager" as campusManager
+participant "RobDroneGo WebApp" as WebSite <<system (C4)>>
+participant "RobDroneGo" as Sistema <<system (C4)>>
+
+activate campusManager
+    campusManager -> WebSite : Ask to list floors of a building
+    activate WebSite
+        WebSite --> campusManager : Ask to insert building
+    deactivate WebSite
+
+    campusManager -> WebSite : Insert building
+    activate WebSite
+        WebSite -> Sistema : GET (.../buildings/code/floors)
+        activate Sistema
+            WebSite <-- Sistema : status: 200/404
+        deactivate Sistema
+
+        WebSite --> campusManager : Success / Error
+    deactivate WebSite
+deactivate campusManager
+
+@enduml

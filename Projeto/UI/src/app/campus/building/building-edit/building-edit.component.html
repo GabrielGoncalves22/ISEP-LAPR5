@@ -1,0 +1,39 @@
+<h1 class="center">Edit Building</h1>
+
+<form (ngSubmit)="editBuilding()" #formulario="ngForm" class="form-to-create">
+    <div class="form-group">
+        <label for="building">Building Code:</label>
+        <input list="buildingList" id="building" name="building" [(ngModel)]="selectedBuildingCode"
+               (input)="onBuildingChange()" required>
+        <datalist id="buildingList">
+            <option *ngFor="let building of buildings" [value]="building.code">{{ building.code }}</option>
+        </datalist>
+    </div>
+
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" [(ngModel)]="building.name">
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" [(ngModel)]="building.description"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="numXCells">Number of cells in the axis X:</label>
+        <input type="number" id="numXCells" name="numXCells" [(ngModel)]="building.numXCells" required>
+    </div>
+
+    <div class="form-group">
+        <label for="numYCells">Number of cells in the axis Y:</label>
+        <input type="number" id="numYCells" name="numYCells" [(ngModel)]="building.numYCells" required>
+    </div>
+
+    <div class="button-container">
+        <button type="submit" [disabled]="formulario.invalid">Edit</button>
+    </div>
+
+    <p *ngIf="error" class="form-alert form-alert-error"><b>Error:</b> {{error}}</p>
+    <p *ngIf="success" class="form-alert form-alert-success"><b>Success:</b> {{success}}</p>
+</form>

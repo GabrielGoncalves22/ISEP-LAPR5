@@ -1,0 +1,48 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US 280/1150
+autonumber
+
+actor "Gestor de Campus" as actor
+participant "UI" as Sistema <<system (C4)>>
+participant "MD" as MD <<system (C4)>>
+
+
+actor -> Sistema : Asks to edit elevator
+activate actor
+activate Sistema
+
+Sistema -> MD : GET(../buildings)
+activate MD
+MD --> Sistema: status: 200/400
+deactivate MD
+Sistema --> actor: asks to choose a\nbuilding to edit its elevator
+deactivate Sistema
+
+actor -> Sistema: selects building
+activate Sistema
+Sistema -> MD: GET(../buildings/building/elevator)
+activate MD
+
+MD --> Sistema: status: 200/400
+deactivate MD
+Sistema --> actor
+
+deactivate Sistema
+
+actor -> Sistema: selects elevator
+activate Sistema
+
+Sistema -> MD: PUT/PATCH(../buildings/building/elevator)
+activate MD
+
+    MD --> Sistema : status: 200/400
+    deactivate MD
+    actor <-- Sistema : Dados alterados
+    deactivate actor
+    deactivate Sistema
+
+@enduml

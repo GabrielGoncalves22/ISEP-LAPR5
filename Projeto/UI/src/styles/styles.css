@@ -1,0 +1,270 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+    background-color: #D3D3D3;
+}
+
+.form-to-create {
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 500px;
+    color: black;
+    background-color: white;
+    box-shadow: 0.063rem 0 1.25rem 0 #8690A3;
+    border: 2px solid #9A1A24;
+}
+
+.center {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.form-to-create .form-group {
+    margin: 15px 0;
+}
+
+.form-to-create .form-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.form-to-create .form-group input,
+.form-to-create .form-group select,
+.form-to-create .form-group textarea {
+    display: block;
+    width: 100%;
+    height: 40px;
+    border: 2px solid #D3D3D3;
+    border-radius: 5px;
+    padding: 0 10px;
+    margin-bottom: 10px;
+}
+
+.form-to-create .form-group textarea {
+    height: 80px;
+    resize: none;
+}
+
+.form-group-input-file input[type="file"] {
+    border: none;
+    padding: 0;
+}
+
+.form-group-input-file input[type="file"]:hover {
+    cursor: pointer;
+}
+
+.form-to-create .button-container {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-to-create .button-container button[type="submit"],
+.button-style-1 {
+    width: 100%;
+    max-width: 200px;
+    border: 2px solid #006400;
+    border-radius: 5px;
+    padding: 10px 15px;
+    background-color: #006400;
+    color: white;
+}
+
+.form-to-create .button-container button[type="submit"]:hover:not([disabled]),
+.button-style-1:hover {
+    font-weight: bold;
+    cursor: pointer;
+    color: #006400;
+    background-color: transparent;
+}
+
+.form-alert {
+    border: 2px solid;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 15px auto;
+}
+
+.form-alert-error {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+}
+
+.form-alert-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #3c763d;
+}
+
+.list-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 50px auto;
+}
+
+.list-box {
+    border: 2px solid gray;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    padding: 10px 20px;
+    margin: 30px 0;
+}
+
+.list-box-title {
+    position: relative;
+    font-size: large;
+    border-bottom: 2px solid #9A1A24;
+    margin: 15px 0;
+    font-weight: bold;
+}
+
+.list-box-title:hover {
+    cursor: pointer;
+}
+
+.list-box-title-collapsed::before, 
+.list-box-title-collapsed::after,
+.list-box-title-expanded::before, 
+.list-box-title-expanded::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 3px;
+    background-color: gray;
+    top: 10px;
+    transition: transform 0.5s ease-in-out;
+}
+
+.list-box-title-collapsed::after,
+.list-box-title-expanded::after {
+    right: 10px;
+}
+
+.list-box-title-collapsed::before {
+    right: 16px;
+    transform: rotate(45deg);
+}
+
+.list-box-title-collapsed::after {
+    transform: rotate(-45deg);
+}
+
+.list-box-title-expanded::before {
+    right: 16px;
+    transform: rotate(-45deg);
+}
+
+.list-box-title-expanded::after {
+    transform: rotate(45deg);
+}
+
+.list-box-title p {
+    margin-bottom: 10px;
+}
+
+.expandable {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+}
+
+.list-box-body p {
+    margin: 10px 0;
+    word-wrap: break-word;
+}
+
+.list-box-body.expanded {
+    max-height: 500px;
+}
+  
+.list-box-body.collapsed {
+    max-height: 0;
+}
+
+.table {
+    display: table;
+}
+
+.table > .row {
+    display: table-row;
+    height: 20px;
+}
+
+.row > .column-info,
+.row > .column-data {
+    display: table-column;
+}
+
+.column-info {
+    width: 15%;
+}
+
+.column-data {
+    width: 85%;
+}
+
+.options-box {
+    border: 2px solid gray;
+    border-radius: 5px;
+    background-color: white;
+    margin: 30px auto;
+    width: 100%;
+    max-width: 1000px;
+    padding: 20px 40px;
+}
+
+.options-box-option {
+    margin: 10px 0;
+}
+
+.options-box-option > label {
+    padding-left: 10px;
+}
+
+.options-box-option input[type="radio"]:hover,
+.options-box-option > label:hover {
+    cursor: pointer;
+}
+
+.options-box-separator {
+    width: 100%;
+    height: 4px;
+    margin: 30px auto;
+    background-color: gray;
+    border-radius: 10px;
+}
+
+.options-box-option-values {
+    display: flex;
+    margin: 20px 0;
+}
+
+.options-box-option-values-value {
+    display: block;
+}
+
+.options-box-option-values-value:nth-child(2) {
+    margin-left: 40px;
+}
+
+.options-box-option-values-value label {
+    margin-right: 10px;
+}
+
+.textarea-style-2 {
+    resize: vertical !important;
+}

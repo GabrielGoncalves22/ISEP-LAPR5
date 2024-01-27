@@ -1,0 +1,26 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 1 - Process View) - US 1140
+autonumber
+
+Actor "Campus Manager" as CampusManager
+participant "RobDroneGo" as Sistema <<system (C4)>>
+
+activate CampusManager
+    CampusManager -> Sistema : Ask to list an elevator in a building
+    activate Sistema
+
+    Sistema --> CampusManager : Ask to choose an building
+    deactivate Sistema
+
+    CampusManager -> Sistema : Choose the building
+    activate Sistema
+
+    Sistema --> CampusManager : Sucess / Error
+    deactivate Sistema
+deactivate CampusManager
+
+@enduml

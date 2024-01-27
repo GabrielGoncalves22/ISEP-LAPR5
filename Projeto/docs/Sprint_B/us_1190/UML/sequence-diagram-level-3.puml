@@ -1,0 +1,91 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 3 - Process View) - US 1190
+autonumber
+
+Actor "Campus Manager" as campusManager
+participant "List Passageway \n WebApp UI" as UI <<UI>>
+participant ":\n PassagewayListComponent" as feComponent <<Component>>
+participant "buildingService :\n BuildingService (FE)" as feBuildingService <<Service>>
+participant "service :\n PassagewayService (FE)" as feService <<Service>>
+participant "buildingModel :\n building.model" as buildingModel
+participant "passagewayModel :\n passageway.model" as passagewayModel
+
+participant "buildingRoute" as route <<Route>>
+participant "ctrlPassageway :\n IPassagewayController" as controller <<Controller>>
+participant "passagewayServiceInstance :\n IPassagewayService" as service <<Service>>
+participant "passagewayRepo :\n IPassagewayRepository" as repo <<Repository>>
+participant "DB Driver" as db <<DataBase>>
+
+participant "allPassageway :\n passageway" as allPassageways <<Domain>>
+participant "passagewaysDTO :\n IPassagewayDTO" as passagewaysDTO <<DTO>>
+
+activate campusManager
+    campusManager -> UI : Ask to list passageways between two buildings
+    activate UI
+        UI -> feComponent : loadBuildingsCodes()
+        activate feComponent
+            feComponent -> feBuildingService : getAllBuildings()
+            activate feBuildingService
+                feBuildingService -> route : GET (../buildings)
+                activate route
+                    ' TODO
+                route --> feBuildingService : status: 200/404
+                deactivate route
+                feBuildingService --> feComponent : Success (List of the buildings) / Error (Buildings not found)
+            deactivate feBuildingService
+            feComponent --> UI : List of the buildings / Buildings not found
+        deactivate feComponent
+
+        UI --> campusManager : Ask to choose the two buildings
+    deactivate UI
+
+    campusManager -> UI : Choose the two buildings
+    activate UI
+        UI -> feComponent : listPassageways()
+        activate feComponent
+            feComponent -> feComponent : listPassagewaysBetweenTwoBuildings()
+            activate feComponent
+                feComponent -> feService : getPassagewaysBetweenTwoBuildings(codeBuilding1, codeBuilding2)
+                activate feService
+                    feService -> route : GET (.../passageways?building_1=:building_1&building_2=building_2)
+                    activate route
+                        route -> controller : execute(req, res, next)
+                        activate controller
+                            controller -> controller : getPassagewaysBetweenBuildings(req, res, next)
+                            activate controller
+                                controller -> service : getPassagewaysBetweenBuildings(building_1?, building_2?)
+
+                                activate service
+                                    service -> repo : findAllPassageways(building_1?, building_2?)
+                                    activate repo
+                                        repo -> db :
+                                        activate db
+                                            db --> repo :
+                                        deactivate db
+                                        repo --> service : allPassageways
+                                    deactivate repo
+                                    service --> controller : passagewaysDTO
+                                deactivate service
+
+                                controller --> controller : status: 200/404
+                            deactivate controller
+                            controller --> route : status: 200/404
+                        deactivate controller
+
+                        route --> feService : status: 200/404
+                    deactivate route
+                    feService --> feComponent : Success (List of the passageways) / Error (Passageways not found)
+                deactivate feService
+                feComponent --> UI : List of the passageways / Passageways not found
+            deactivate feComponent
+        deactivate feComponent
+
+        UI --> campusManager : Show the passageways list / Passageways not found error message
+    deactivate UI
+deactivate campusManager
+
+@enduml

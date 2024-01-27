@@ -1,0 +1,50 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View - MDT) - US 500
+autonumber
+
+participant "pickupAndDeliveryTaskController :\n Controller" as ControllerDelivery <<Controller>>
+participant "pickupAndDeliveryTaskServiceInstance :\n Service" as ServiceDelivery <<Service>>
+participant "pickupAndDeliveryTaskRepo :\n Repository" as RepoDelivery <<Repository>>
+participant "DB" as DB <<DataBase>>
+participant "pickupAndDeliveryTask :\n pickupAndDeliveryTask" as PickupAndDeliveryTask <<Domain>>
+participant "pickupAndDeliveryTaskDTO :\n pickupAndDeliveryTaskDTO" as PickupAndDeliveryTaskDTO <<DTO>>
+participant "Planning" as P <<system (C4)>>
+
+    ?o-> ControllerDelivery : GET (.../tasks/deliveries)
+    activate ControllerDelivery
+        ControllerDelivery -> ControllerDelivery : GetPickupAndDeliveryTask()
+        activate ControllerDelivery
+            ControllerDelivery -> ServiceDelivery : GetPickupAndDeliveryTaskAsync()
+            activate ServiceDelivery
+                ServiceDelivery -> RepoDelivery : Find()
+                activate RepoDelivery
+                    RepoDelivery -> DB :
+                    activate DB
+                    DB --> RepoDelivery :
+                    deactivate DB
+                    RepoDelivery --> ServiceDelivery :
+                deactivate RepoDelivery
+                ServiceDelivery --> PickupAndDeliveryTaskDTO**: create
+                ServiceDelivery -> P : POST (.../planning/tasks)
+                activate P
+                ServiceDelivery <-- P : status: 200/404. body: deliveriesDTO
+                deactivate P
+                ServiceDelivery -> P : GET (.../planning/tasks)
+                activate P
+                ServiceDelivery <-- P : status: 200/404. body: taskOrderId 
+                deactivate P
+                ServiceDelivery -> ServiceDelivery : deliveriesDTO.orderBy(taskOrderId)
+                ServiceDelivery --> ControllerDelivery : deliveriesDTO
+
+            deactivate ServiceDelivery
+
+            ControllerDelivery --> ControllerDelivery : status: 200/404
+        deactivate ControllerDelivery
+
+        <-- ControllerDelivery : status: 200/404
+    deactivate ControllerDelivery
+@enduml

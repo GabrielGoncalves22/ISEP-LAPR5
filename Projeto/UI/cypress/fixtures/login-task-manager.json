@@ -1,0 +1,10 @@
+{
+    "user": {
+        "id": "dd8c2536-cfbd-4402-8284-ccb0fe7e8713",
+        "name": "João Neves",
+        "email": "task@isep.ipp.pt",
+        "telephone": "922405231",
+        "role": "Task Manager"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRkOGMyNTM2LWNmYmQtNDQwMi04Mjg0LWNjYjBmZTdlODcxMyIsIm5hbWUiOiJKb8OjbyBOZXZlcyIsImVtYWlsIjoidGFza0Bpc2VwLmlwcC5wdCIsInRlbGVwaG9uZSI6IjkyMjQwNTIzMSIsInJvbGUiOiJUYXNrIE1hbmFnZXIiLCJleHAiOjE3MDQ5MjU3MjEzOTYsImlhdCI6MTcwMjMzMzcyMX0.tQvBjAoGuoRy4y1QFXoJ5kJktbE1h3j1Jn8h9zXMHJ0"
+}

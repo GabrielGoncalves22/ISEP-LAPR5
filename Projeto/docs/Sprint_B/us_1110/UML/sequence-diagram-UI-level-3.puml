@@ -1,0 +1,63 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View - UI) - US 1110
+autonumber
+
+participant "View" as View <<Component>>
+participant "Component" as Component <<Component>>
+participant "Model" as Model <<Component>>
+participant "Service" as Service <<Component>>
+
+?o-> View : Ask to edit floor
+activate View
+    View -> Component : getAllBuildings()
+    activate Component
+        Component -> Service : getAllBuildings()
+        activate Service
+            Service -> : GET (.../buildings)
+            Service <--: status: 200/404
+            Service --> Component : Success / Error
+        deactivate Service
+
+        Component --> View : Information about the success/error
+    deactivate Component
+<-- View : Ask to choose an building
+deactivate View
+
+?o-> View : Chooses the building
+activate View
+    View -> Component : loadFloorsOfBuilding()
+    activate Component
+        Component -> Service : getFloorsByBuilding()
+        activate Service
+            Service -> : GET (.../buildings/:code/floors)
+            Service <--: status: 200/404
+            Service --> Component : Success / Error
+        deactivate Service
+
+        Component --> View : Information about the success/error
+    deactivate Component
+<-- View : Ask to choose an floor and edit data
+deactivate View
+
+?o-> View : Choose the floor and edit
+activate View
+    View -> Component : editFloor()
+    activate Component
+        Component --> Model** :
+        Component -> Service : updateFloor(floor)
+        activate Service
+            Service -> : PUT/PATCH (.../buildings/:code/floors/:number)
+            Service <--: status: 200/404
+            Service --> Component : Success / Error
+        deactivate Service
+
+        Component --> View : Information about the success/error
+    deactivate Component
+<-- View : Floor edited/data error
+deactivate View
+
+@enduml

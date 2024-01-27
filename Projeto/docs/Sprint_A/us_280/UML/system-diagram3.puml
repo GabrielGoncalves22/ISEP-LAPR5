@@ -1,0 +1,66 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+
+participant buildingRoute as route <<Web>>
+control "buildingController :\n buildingController" as controller <<Controllers>>
+participant "elevatorDTOResult :\n ElevatorDTO" as dtoResult <<DTO>>
+participant "buildingService :\n buildingService" as service <<Use Cases>>
+database "buildingRepo :\n buildingRepo" as repo <<Gateways>>
+participant BuildingMap as map <<Mapper>>
+participant "elevatorDTO :\n ElevatorDTO" as dto <<DTO>>
+participant "BuildingSchema" as schema <<Schema>>
+
+?o-> route: PUT/PATCH(../buildings/:code/elevators)
+activate route
+
+route -> controller: updateElevator(req, res, next)
+activate controller
+
+controller -> map: toDto(req.body)
+
+
+activate map
+map --> dto**: create
+deactivate map
+
+controller -> service: updateElevator(code, elevatorDTO): elevatorDTOResult
+activate service
+service -> repo: findElevator(code): elevator
+
+
+activate repo
+
+repo -> schema: findOne(query: code): elevatorRecord
+activate schema
+deactivate schema
+repo -> map: toDomain(elevatorRecord): elevator
+activate map
+deactivate map
+deactivate repo
+
+service -> repo: update(elevator): elevatorResult
+activate repo
+repo -> schema: findOne(query: code)
+
+activate schema
+schema -> schema: save()
+deactivate schema
+
+deactivate repo
+
+service -> map: toDTO(elevatorResult)
+deactivate service
+
+activate map
+map --> dtoResult**: create
+deactivate map
+
+controller -> route: response
+
+<-- route : status: 201 dados alterados
+
+
+@enduml

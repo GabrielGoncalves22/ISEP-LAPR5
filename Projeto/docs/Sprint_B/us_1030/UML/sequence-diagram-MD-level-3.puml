@@ -1,0 +1,53 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 3 - Process View) - US 1030
+autonumber
+
+participant ":Route" as route
+participant ":Controller" as controller
+participant ":Service" as service
+participant ":Repository" as repo
+participant ":DB" as db
+
+participant ":DTOList" as DTOList
+
+?o-> route : GET (.../devices)
+activate route
+
+route -> controller : execute(req, res, next)
+activate controller
+
+controller -> controller : getAllDevices(req, res, next)
+activate controller
+
+controller -> service : getAllDevices()
+activate service
+
+service -> repo : findAllDevices()
+activate repo
+
+repo -> db :
+activate db
+
+db --> repo :
+deactivate db
+
+repo --> service :
+deactivate repo
+
+service --> controller : DTOList
+deactivate service
+
+controller --> controller : status: 200/404
+deactivate controller
+
+controller --> route : status: 200/404
+deactivate controller
+
+<-- route : status: 200/404
+deactivate route
+
+@enduml

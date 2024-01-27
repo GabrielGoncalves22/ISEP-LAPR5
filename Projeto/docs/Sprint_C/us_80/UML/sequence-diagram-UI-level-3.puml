@@ -1,0 +1,40 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View - UI) - US 80
+autonumber
+
+participant "View" as View <<Component>>
+participant "Component" as Component <<Component>>
+participant "Model" as Model <<Component>>
+participant "Service" as Service <<Component>>
+participant "MD" as MD <<system (C4)>>
+
+?o-> View : Ask to approve/deny user
+activate View
+
+<-- View : shows users list
+deactivate View
+
+?o-> View : approves/denys user data
+activate View
+    View -> Component : toggle()
+    activate Component
+        Component --> Model** :
+        Component -> Service : toggle(user)
+        activate Service
+            Service -> MD: PATCH (.../users/activate)
+            activate MD
+            Service <-- MD: status: 200/400
+            deactivate MD
+            Service --> Component : Success / Error
+        deactivate Service
+
+        Component --> View
+    deactivate Component
+<-- View : shows updated users list/error
+deactivate View
+
+@enduml

@@ -1,0 +1,28 @@
+<h1 class="center">Create Floor</h1>
+
+<form (ngSubmit)="createFloor()" #formulario="ngForm" class="form-to-create">
+    <div class="form-group">
+        <label for="number">Number:</label>
+        <input type="number" id="number" name="number" [(ngModel)]="floor.number" (focusout)="saveData()" required>
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" [(ngModel)]="floor.description" (focusout)="saveData()"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="building">Building Code:</label>
+        <input list="buildingList" id="building" name="building" [(ngModel)]="floor.building" (focusout)="saveData()" required>
+        <datalist id="buildingList">
+            <option *ngFor="let building of buildings" [value]="building.code">{{ building.code }}</option>
+        </datalist>
+    </div>
+
+    <div class="button-container">
+        <button type="submit" [disabled]="formulario.invalid">Create</button>
+    </div>
+
+    <p *ngIf="error" class="form-alert form-alert-error"><b>Error:</b> {{error}}</p>
+    <p *ngIf="success" class="form-alert form-alert-success"><b>Success:</b> {{success}}</p>
+</form>

@@ -1,0 +1,78 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 3 - Process View) - US 1080
+autonumber
+
+Actor "Campus Manager" as campusManager
+participant "List Buidling \n WebApp UI" as UI <<UI>>
+participant ":\n BuildingListComponent" as feComponent <<Component>>
+participant "service :\n BuildingService (FE)" as feService <<Service>>
+participant "buildingInfoModel :\n buildingInfo.model" as buildingInfoModel
+
+participant "buildingRoute" as route <<Route>>
+participant "ctrlBuilding :\n IBuildingController" as controller <<Controller>>
+participant "buildingServiceInstance :\n IBuildingService" as service <<Service>>
+participant "buildingRepo :\n IBuildingRepository" as repo <<Repository>>
+participant "DB" as db <<DataBase>>
+
+participant "buildingsInfos :\n building" as buildingsInfos <<Domain>>
+participant "buildingInfoDTOList :\n IBuildingInfoDTO" as buildingInfoDTOList <<DTO>>
+
+activate campusManager
+    campusManager -> UI : Ask to list buildings with number floors between min and max
+    activate UI
+        UI --> campusManager : Ask to insert min and max
+    deactivate UI
+
+    campusManager -> UI : Insert min and max
+    activate UI
+        UI -> feComponent : listBuildings()
+        activate feComponent
+            feComponent -> feComponent : listBuildingsWithNumFloorsBetweenMinAndMax()
+            activate feComponent
+                feComponent -> feService : getBuildingsWithNumberFloorsBetweenMinAndMax(minNumberOfFloors, maxNumberOfFloors)
+                activate feService
+                    feService -> route : GET (.../buildings?min=:min&max=:max)
+                    activate route
+                        route -> controller : execute(req, res, next)
+                        activate controller
+                            controller -> controller : getBuildingsBetweenMinAndMaxFloors(req, res, next)
+                            activate controller
+                                controller -> service : getBuildingsBetweenMinAndMaxFloors(numMinFloors, numMaxFloors)
+                                activate service
+                                    service -> repo : buildingsInfos = findBuildingsBetweenMinAndMaxFloors(numMinFloors, numMaxFloors)
+                                    activate repo
+                                        repo -> db :
+                                        activate db
+                                            db --> repo :
+                                        deactivate db
+                                        repo --> service : 
+                                    deactivate repo
+                                    service --> controller : buildingInfoDTOList
+                                deactivate service
+
+                                controller --> controller : status: 200/404
+
+                            deactivate controller
+                            
+                            controller --> route : status: 200/404
+                        
+                        deactivate controller
+
+                        route --> feService : status: 200/404
+                    deactivate route
+
+                    feService --> feComponent : Success / Error
+                deactivate feService
+                feComponent --> UI : List of the buildings / Buildings not found
+            deactivate feComponent
+        deactivate feComponent
+
+        UI --> campusManager : Show the building list / Buildings not found
+    deactivate UI
+deactivate campusManager
+
+@enduml

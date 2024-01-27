@@ -1,0 +1,58 @@
+<h1 class="center">Create Pickup And Delivery Task</h1>
+
+<form (ngSubmit)="createPickupAndDeliveryTask()" #formulario="ngForm" class="form-to-create">
+    <div class="form-group">
+        <label for="pickupRoomName">Pickup Room:</label>
+        <input list="roomList" id="pickupRoomName" name="pickupRoomName" [(ngModel)]="pickupAndDeliveryTask.pickupRoomName" required
+            (input)="onPickupRoomChange()">
+        <datalist id="roomList">
+            <option *ngFor="let room of rooms" [value]="room.name">{{ room.name }}</option>
+        </datalist>
+    </div>
+
+    <div class="form-group">
+        <label for="deliveryRoomName">Delivery Room:</label>
+        <input list="roomList" id="deliveryRoomName" name="deliveryRoomName" [(ngModel)]="pickupAndDeliveryTask.deliveryRoomName" required
+            (input)="onDeliveryRoomChange()">
+        <datalist id="roomList">
+            <option *ngFor="let room of rooms" [value]="room.name">{{ room.name }}</option>
+        </datalist>
+    </div>
+
+    <div class="form-group">
+        <label for="pickupContactName">Pickup Contact Name:</label>
+        <input type="text" id="pickupContactName" name="pickupContactName" [(ngModel)]="pickupAndDeliveryTask.pickupContactName" (focusout)="saveData()" required>
+    </div>
+
+    <div class="form-group">
+        <label for="pickupContactPhoneNumber">Pickup Contact Phone Number:</label>
+        <input type="text" id="pickupContactPhoneNumber" name="pickupContactPhoneNumber" [(ngModel)]="pickupAndDeliveryTask.pickupContactPhoneNumber" (focusout)="saveData()" required>
+    </div>
+
+    <div class="form-group">
+        <label for="deliveryContactName">Delivery Contact Name:</label>
+        <input type="text" id="deliveryContactName" name="deliveryContactName" [(ngModel)]="pickupAndDeliveryTask.deliveryContactName" (focusout)="saveData()" required>
+    </div>
+
+    <div class="form-group">
+        <label for="deliveryContactPhoneNumber">Delivery Contact Phone Number:</label>
+        <input type="text" id="deliveryContactPhoneNumber" name="deliveryContactPhoneNumber" [(ngModel)]="pickupAndDeliveryTask.deliveryContactPhoneNumber" (focusout)="saveData()" required>
+    </div>
+
+    <div class="form-group">
+        <label for="taskDescription">Task Description:</label>
+        <textarea class="textarea-style-2" id="taskDescription" name="taskDescription" [(ngModel)]="pickupAndDeliveryTask.taskDescription" rows="4" (focusout)="saveData()"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="confirmationCode">Confirmation Code:</label>
+        <input type="text" id="confirmationCode" name="confirmationCode" [(ngModel)]="pickupAndDeliveryTask.confirmationCode" (focusout)="saveData()" required>
+    </div>
+
+    <div class="button-container">
+        <button type="submit" [disabled]="formulario.invalid">Create Task</button>
+    </div>
+
+    <p *ngIf="error" class="form-alert form-alert-error"><b>Error:</b> {{error}}</p>
+    <p *ngIf="success" class="form-alert form-alert-success"><b>Success:</b> {{success}}</p>
+</form>

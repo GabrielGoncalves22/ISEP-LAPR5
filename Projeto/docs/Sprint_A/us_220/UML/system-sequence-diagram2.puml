@@ -1,0 +1,29 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US 280
+autonumber
+
+participant "RobDroneGo" as Sistema <<system (C4)>>
+participant "MD" as MD <<system (C4)>>
+
+?o-> Sistema : GET (../buildings/:code/floors?withPassageway)
+activate Sistema
+
+Sistema -> MD : getFloorsWithPassagewaysToBuildingByBuilding(buildingCode)
+
+activate MD
+MD -> MD: getPassageways(buildingCode): passageways
+loop for every passageway found
+MD -> MD: findFloor(buildingCode1, floorCode1)
+MD -> MD: findFloor(buildingCode2, floorCode2)
+end
+
+    MD --> Sistema : status: 200
+    <-- Sistema :  informação sobre o piso e a que outros edificios/pisos tem passagem
+    deactivate Sistema
+
+
+@enduml

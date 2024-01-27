@@ -1,0 +1,89 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (SD) Level 3 - US 360
+autonumber
+
+actor "Gestor de Frota" as actor
+participant deviceRoute as route <<Web>>
+control "deviceController :\n deviceController" as controller <<Controllers>>
+participant "deviceDTO :\n DeviceDTO" as deviceDTO <<DTO>>
+participant "deviceService :\n deviceService" as deviceService <<Use Cases>>
+participant "deviceDTOResult :\n DeviceDTO" as deviceDTOResult <<DTO>>
+participant "device :\n Device" as device <<Domain>>
+database "deviceRepo :\n deviceRepo" as deviceRepo <<Gateways>>
+database "deviceTypeRepo :\n deviceTypeRepo" as deviceTypeRepo <<Gateways>>
+participant DeviceMapper as deviceMapper <<Mapper>>
+participant DeviceTypeMapper as deviceTypeMapper <<Mapper>>
+participant "savedDeviceDTO :\n DeviceDTO" as savedDeviceDTO <<DTO>>
+participant "rawDevice :\n Device" as deviceData <<Domain>>
+participant "deviceSchema :\n deviceSchema" as deviceSchema <<DB>>
+participant "deviceTypeSchema :\n deviceTypeSchema" as deviceTypeSchema <<DB>>
+participant "deviceTypeResult :\n DeviceType" as deviceTypeResult <<Domain>>
+participant "deviceResult :\n Device" as savedDevice <<Domain>>
+participant "savedDeviceData :\n Device" as savedDeviceData <<Domain>>
+
+activate actor
+
+    actor -> route : Post(../Device)
+    activate route
+
+        route -> controller : createDevice(req, res, next)
+            activate controller
+
+            controller -> deviceMapper : toDTO(req.body)
+            activate deviceMapper
+                deviceMapper --> deviceDTO** : create()
+            deactivate deviceMapper
+
+           
+            controller --> deviceService : createDevice(deviceDTO): deviceDTOResult
+            activate deviceService
+            deviceService -> deviceTypeRepo: getType(id): deviceTypeResult
+            activate deviceTypeRepo
+            deviceTypeRepo -> deviceTypeSchema: findById(): document
+            activate deviceTypeSchema
+            deactivate deviceTypeSchema
+            deviceTypeRepo -> deviceTypeMapper: toDomain(document)
+            activate deviceTypeMapper
+            
+            deactivate deviceTypeRepo
+            deviceTypeMapper -> deviceTypeResult**: create()
+            deactivate deviceTypeMapper
+                deviceService --> device** : create(deviceDTO)
+
+                deviceService -> deviceRepo : save(device): deviceResult
+                activate deviceRepo
+                    deviceRepo -> deviceMapper : toPersistence(device)
+                    activate deviceMapper
+                        
+                        deviceMapper --> deviceData** : create()
+                    deactivate deviceMapper
+
+                    deviceRepo -> deviceSchema : create(rawDevice)
+                    activate deviceSchema
+                    deviceSchema -> deviceSchema: save(rawDevice): deviceCreated
+                    deactivate deviceSchema
+                    
+                    deviceRepo -> deviceMapper : toDomain(deviceCreated)
+                    activate deviceMapper
+                        deviceMapper --> savedDevice**: create()
+                    deactivate deviceMapper
+                deactivate deviceRepo
+
+                deviceService -> deviceMapper :toDTO(deviceResult): 
+                activate deviceMapper
+                deviceMapper --> deviceDTOResult**: create()
+                deactivate deviceMapper
+
+            deactivate deviceService
+
+            controller -> route : response
+        deactivate controller
+        route --> actor : status: 201 device created
+    deactivate route
+deactivate actor
+
+@enduml

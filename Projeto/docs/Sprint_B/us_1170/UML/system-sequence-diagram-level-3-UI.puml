@@ -1,0 +1,79 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+autonumber
+
+title System Sequence Diagram (Level 3 - Process View) - US 1150
+
+
+actor "Gestor de Campus" as actor
+
+participant ":Component" as Component <<Component>>
+participant ":model" as Model
+participant ":service" as Service <<Service>>
+participant "MD" as MD <<container (C4)>>
+
+activate actor
+actor -> Component: Asks to create a passageway
+activate Component
+Component -> Service: getAllBuildings()
+activate Service
+Service -> MD: GET(../buildings)
+activate MD
+Service <-- MD: status: 200/400
+deactivate MD
+Service --> Component
+deactivate Service
+actor <-- Component: asks to choose a building
+deactivate Component
+loop 2 times
+actor -> Component: chooses building
+activate Component
+
+Component -> Service: getFloorsByBuilding(building)
+activate Service
+
+Service -> MD: GET(../buildings/building/floors)
+activate MD
+
+MD --> Service: status 200/404
+
+deactivate MD
+
+
+Service --> Component
+deactivate Service
+
+Component --> actor: ask to choose floor
+deactivate Component
+
+actor -> Component: chooses floor
+
+end
+
+actor -> Component: inserts code
+activate Component
+
+Component --> Model**
+
+Component -> Service: createPassageway(passageway)
+
+activate Service
+
+
+Service -> MD: POST(../buildings/passageways)
+activate MD
+
+MD --> Service: status 201/400
+deactivate MD
+
+Service --> Component
+deactivate Service
+Component --> actor: success
+deactivate Component
+deactivate actor
+
+
+
+@enduml

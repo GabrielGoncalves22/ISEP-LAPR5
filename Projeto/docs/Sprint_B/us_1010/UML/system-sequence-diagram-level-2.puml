@@ -1,0 +1,31 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+autonumber
+
+title System Sequence Diagram (Level 2 - Process View) - US 360/1010
+
+
+actor "Gestor de Frota" as actor
+participant "<<container (C4)>>\nUI" as UI
+participant "<<container (C4)>>\nMD" as MD
+
+activate actor
+actor -> UI: Asks to create a device
+activate UI
+actor <-- UI: Asks for device information
+deactivate UI
+actor -> UI: Inputs information
+activate UI
+UI -> MD: POST(../devices)
+activate MD
+UI <-- MD: status: 201/400
+deactivate MD
+actor <-- UI: success
+deactivate UI
+deactivate actor
+
+
+
+@enduml

@@ -1,0 +1,55 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View) - US 460
+autonumber
+
+participant "controller :\n Controller" as controller <<Controller>>
+participant "serviceInstance :\n Service" as service <<Service>>
+participant "mapper :\n Mapper" as mapper <<Mapper>>
+participant "surveillanceTaskRepo :\n Repository" as repo <<Repository>>
+participant "DB" as db <<DataBase>>
+
+participant "surveillanceTask :\n SurveillanceTask" as surveillanceTask <<Domain>>
+participant "surveillanceTaskSchema :\n SurveillanceTaskSchema" as surveillanceTaskSchema <<Schema>>
+participant "newCreateSurveillanceTaskDTO :\n CreateSurveillanceTaskDTO" as surveillanceTaskDTO <<DTO>>
+participant "user :\n User" as user <<Domain>>
+
+?o-> controller : POST (.../api/tasks/surveillances)
+activate controller
+    controller -> controller : CreateSurveillanceTask(newCreateSurveillanceTaskDTO)
+    activate controller
+        controller --> surveillanceTaskDTO** :
+        controller -> service : CreateSurveillanceTask(newCreateSurveillanceTaskDTO, userEmail)
+        activate service
+            service --> surveillanceTask** : create
+            service -> service : CheckIfBuildingExists(BuildingCode)
+            activate service
+                service -> : GET (.../api/buildings/:BuildingCode)
+                service <-- : 200/404
+            deactivate service
+
+            service -> service : CheckIfFloorsExistsInBuilding(BuildingCode, SurveillanceTaskFloors)
+            activate service
+                service -> : POST (.../api/buildings/:BuildingCode/floors)
+                service <-- : 200/404
+            deactivate service
+
+            service -> mapper : surveillanceTaskSchema = ToPersistence(surveillanceTask)
+            service -> repo : InsertOneAsync(surveillanceTaskSchema)
+            activate repo
+                repo -> db : create(surveillanceTaskSchema)
+                db --> repo :
+                repo --> service :
+            deactivate repo
+            service --> controller :
+        deactivate service
+        controller --> controller : status: 201/400
+    deactivate controller
+
+    <-- controller : status: 201/400
+deactivate controller
+
+@enduml

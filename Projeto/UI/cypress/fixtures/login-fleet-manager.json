@@ -1,0 +1,10 @@
+{
+    "user": {
+        "id": "960c5e31-9ed8-4a33-be84-5748825939cc",
+        "name": "Rúben Dias",
+        "email": "fleet@isep.ipp.pt",
+        "telephone": "922404231",
+        "role": "Fleet Manager"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk2MGM1ZTMxLTllZDgtNGEzMy1iZTg0LTU3NDg4MjU5MzljYyIsIm5hbWUiOiJSw7piZW4gRGlhcyIsImVtYWlsIjoiZmxlZXRAaXNlcC5pcHAucHQiLCJ0ZWxlcGhvbmUiOiI5MjI0MDQyMzEiLCJyb2xlIjoiRmxlZXQgTWFuYWdlciIsImV4cCI6MTcwNDkyNTY5MjI5MywiaWF0IjoxNzAyMzMzNjkyfQ.XGB-swhh2cCeHAgTEAodrZRzeif6nMnVRdXZ-Fb1EGE"
+}

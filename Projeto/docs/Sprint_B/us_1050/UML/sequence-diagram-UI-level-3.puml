@@ -1,0 +1,40 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 3 - Process View) - US 1050
+autonumber
+
+Actor "Campus Manager" as campusManager
+participant "View" as View <<Component>>
+participant "Component" as Component <<Component>>
+participant "buildingModel :\n building.model" as buildingModel
+participant "Service" as Service <<Component>>
+
+activate campusManager
+    campusManager -> View : Ask to create building
+    activate View
+        View --> campusManager : Ask to insert data
+    deactivate View
+
+    campusManager -> View : Insert data
+    activate View
+        View -> Component : createBuilding()
+        activate Component
+            Component --> buildingModel** :
+            Component -> Service : createBuilding(buildingModel)
+            activate Service
+                Service -> : POST (.../buildings)
+                Service <--: status: 201/400
+                
+                Service --> Component : Success / Error
+            deactivate Service
+
+            Component --> View : Information about the success/error
+        deactivate Component
+        View --> campusManager : Informs about the operation success/error
+    deactivate View
+deactivate campusManager
+
+@enduml

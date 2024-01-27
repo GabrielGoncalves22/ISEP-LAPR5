@@ -1,0 +1,16 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 2 - Process View) - US 460 - Pickup & Delivery Task
+autonumber
+
+participant "MDT" as MDT <<system (C4)>>
+
+?o-> MDT : POST (.../api/tasks/deliveries)
+activate MDT
+    <-- MDT : status: 201/400
+deactivate MDT
+
+@enduml

@@ -1,0 +1,56 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 3 - Process View) - US 1210
+autonumber
+
+Actor "Campus Manager" as campusManager
+participant "Create Room \n WebApp UI" as UI <<UI>>
+participant ":\n RoomCreateComponent" as feComponent <<Component>>
+participant "roomModel :\n room.model" as roomModel
+participant "service :\n RoomService" as feService <<Service>>
+
+activate campusManager
+    campusManager -> UI : Asks to create a room on a given floor of a certain building
+    activate UI
+        UI --> campusManager : Ask to select the building
+        'TODO
+    deactivate UI
+
+    campusManager -> UI : Select the building
+    activate UI
+        UI --> campusManager : Ask to select the floor
+        'TODO
+    deactivate UI
+
+    campusManager -> UI : Select the floor
+    activate UI
+        UI --> campusManager : Ask to insert the new room data
+    deactivate UI
+
+    campusManager -> UI : Insert data
+    activate UI
+        UI -> feComponent : createRoom()
+        activate feComponent
+            feComponent --> roomModel** : 
+            feComponent -> feService : createRoom(roomModel)
+            activate feService
+                ' TODO
+                feService -> MD : POST (.../buildings/rooms)
+                activate MD
+                    feService <-- MD : status: 201/400
+                deactivate MD
+                ' -------
+                feService --> feComponent : Success / Error
+            deactivate feService
+
+            feComponent --> UI : Information about the success/error
+
+        deactivate feComponent
+        UI --> campusManager : Informs about the operation success/error
+    deactivate UI
+deactivate campusManager
+
+@enduml

@@ -1,0 +1,56 @@
+@startuml
+left to right direction
+
+:Gestor de Campus: as campus
+:Gestor de Frota: as frota
+
+package RobDroneGo {
+    usecase "UC150: Criar edifício" as UC150
+    usecase "UC160: Editar edifício" as UC160
+    usecase "UC170: Listar todos os edifícios" as UC170
+    usecase "UC180: Listar edifícios com min e max de pisos" as UC180
+    usecase "UC190: Criar piso de edifício" as UC190
+    usecase "UC200: Editar informação de piso de edifício" as UC200
+    usecase "UC210: Listar todos os pisos de um edifício" as UC210
+    usecase "UC220: Listar pisos de edifício com passagem para outros edifícios" as UC220
+    usecase "UC230: Carregar mapa de piso" as UC230
+    usecase "UC240: Criar passagem entre edifícios" as UC240
+    usecase "UC250: Editar passagem entre edifícios" as UC250
+    usecase "UC260: Listar passagens entre 2 edifícios" as UC260
+    usecase "UC270: Criar elevador em edifício" as UC270
+    usecase "UC280: Editar elevador em edifício" as UC280
+    usecase "UC290: Listar elevadores em edifício" as UC290
+    usecase "UC300: Listar pisos de edifício servidos por elevador" as UC300
+    usecase "UC310: Criar sala de piso de edifício" as UC310
+    usecase "UC350: Adicionar um novo tipo de robot indicando a sua designação e que tipos de tarefas pode executar da lista prédefinida de tarefas" as UC350
+    usecase "UC360: Adicionar um novo robot à frota indicando o seu tipo, designação, etc." as UC360
+    usecase "UC370: Inibir um robot" as UC370
+    usecase "UC380: Consultar todos os robots da frota" as UC380
+    usecase "UC390: Pesquisar todos os robots da frota por designação ou tarefa que pode executar" as UC390
+}
+
+campus -- UC150
+campus -- UC160
+campus -- UC170
+campus -- UC180
+campus -- UC190
+campus -- UC200
+campus -- UC210
+campus -- UC220
+campus -- UC230
+campus -- UC240
+campus -- UC250
+campus -- UC260
+campus -- UC270
+campus -- UC280
+campus -- UC290
+campus -- UC300
+campus -- UC310
+
+frota -- UC350
+frota -- UC360
+frota -- UC370
+frota -- UC380
+frota -- UC390
+
+@enduml

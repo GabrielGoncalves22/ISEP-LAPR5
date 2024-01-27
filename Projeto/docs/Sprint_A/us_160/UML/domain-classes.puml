@@ -1,0 +1,24 @@
+@startuml
+
+skinparam titleFontSize 25
+title <u>US 160 - Domain classes</u>
+
+hide methods
+skinparam classAttributeIconSize 0
+
+'Building aggregate
+package "<<aggregate>> Building" {
+    entity Building <<entity>> <<root>>
+    class BuildingCode <<(V, #FF8B40) value object>>
+    class BuildingName <<(V, #FF8B40) value object>>
+    class Description <<(V, #FF8B40) value object>>
+    class BuildingDimension <<(V, #FF8B40) value object>>
+}
+
+Building -down-> BuildingCode
+Building -down-> BuildingName
+Building -down-> Description
+Building -down-> BuildingDimension : numXCells
+Building -down-> BuildingDimension : numYCells
+
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+
+[*] --> Active  : US 360 - Add a new robot to the fleet
+
+Active -left-> Inactive : US 370 - Inhibit a robot
+Inactive -right-> Active : US 370 - Inhibit a robot
+
+@enduml

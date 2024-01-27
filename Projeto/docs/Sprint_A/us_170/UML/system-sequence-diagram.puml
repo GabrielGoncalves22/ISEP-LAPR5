@@ -1,0 +1,22 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US 170
+autonumber
+
+actor "Gestor de Campus" as Gestor
+participant "RobDroneGo" as Sistema <<system (C4)>>
+
+activate Gestor
+
+    Gestor -> Sistema : GET (../buildings)
+    activate Sistema
+
+    Sistema --> Gestor : mostra edificios
+    deactivate Sistema
+
+deactivate Gestor
+
+@enduml

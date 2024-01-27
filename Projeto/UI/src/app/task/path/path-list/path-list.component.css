@@ -1,0 +1,56 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+
+th {
+    background-color: lightgrey;
+    padding: 10px;
+    text-align: left;
+}
+
+
+td {
+    padding: 10px;
+}
+
+.odd-row {
+    background-color: white;
+}
+
+.even-row {
+    background-color: lightgrey;
+}
+
+/* Style for labels */
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Style for input elements */
+input {
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+/* Style for input groups */
+.input-group {
+    display: flex;
+}
+
+/* Style for individual input items */
+.input-group-item {
+    flex: 1;
+    margin-right: 10px; /* Adjust spacing between items as needed */
+}
+
+/* Clear the right margin for the last item in the group */
+.input-group-item:last-child {
+    margin-right: 0;
+}
+
+

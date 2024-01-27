@@ -1,0 +1,47 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View - UI) - US 1180
+autonumber
+
+participant "View" as View <<Component>>
+participant "Component" as Component <<Component>>
+participant "Model" as Model <<Component>>
+participant "Service" as Service <<Component>>
+
+?o-> View : Ask to edit passageway
+activate View
+    View -> Component : listAllPassageways()
+    activate Component
+        Component -> Service : getAllPassagways()
+        activate Service
+            Service -> : GET (.../buildings/passageways)
+            Service <--: status: 200/404
+            Service --> Component : Success / Error
+        deactivate Service
+
+        Component --> View : Information about the success/error
+    deactivate Component
+<-- View : Ask to choose an passageway and to edit data
+deactivate View
+
+?o-> View : Choose the passageway and edit
+activate View
+    View -> Component : editPassageway()
+    activate Component
+        Component --> Model** :
+        Component -> Service : updatePassageway(passageway)
+        activate Service
+            Service -> : PUT/PATCH (.../buildings/passageways/:passagewayCode)
+            Service <--: status: 200/404
+            Service --> Component : Success / Error
+        deactivate Service
+
+        Component --> View : Information about the success/error
+    deactivate Component
+<-- View : Passageway edited/data error
+deactivate View
+
+@enduml

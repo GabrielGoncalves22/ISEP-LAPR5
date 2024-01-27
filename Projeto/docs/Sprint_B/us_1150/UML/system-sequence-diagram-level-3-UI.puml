@@ -1,0 +1,75 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+autonumber
+
+title System Sequence Diagram (Level 3 - Process View) - US 1150
+
+
+actor "Gestor de Campus" as actor
+
+participant ":Component" as Component <<Component>>
+participant ":model" as Model
+participant ":service" as Service <<Service>>
+participant "MD" as MD <<container (C4)>>
+
+activate actor
+actor -> Component: Asks to edit elevator
+activate Component
+Component -> Service: getAllBuildings()
+activate Service
+Service -> MD: GET(../buildings)
+activate MD
+Service <-- MD: status: 200/400
+deactivate MD
+Service --> Component
+deactivate Service
+actor <-- Component: asks to choose a\nbuilding to edit its elevator
+deactivate Component
+
+actor -> Component: chooses building
+activate Component
+
+Component -> Service: getElevatorByBuilding(building)
+activate Service
+
+Service -> MD: GET(../buildings/building/elevator)
+activate MD
+
+MD --> Service: status 200/404
+
+deactivate MD
+
+Service --> Model**
+
+Service --> Component
+deactivate Service
+
+Component --> actor: ask to edit elevator
+deactivate Component
+
+actor -> Component: edits elevator
+activate Component
+
+Component -> Service: updateElevator(elevator)
+activate Service
+
+alt
+Service -> MD: PUT(../buildings/building/elevator)
+else
+activate MD
+Service -> MD: PATCH(../buildings/building/elevator)
+end
+MD --> Service: status 200/400
+deactivate MD
+
+Service --> Component
+deactivate Service
+Component --> actor: success
+deactivate Component
+deactivate actor
+
+
+
+@enduml

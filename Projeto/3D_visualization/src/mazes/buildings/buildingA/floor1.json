@@ -1,0 +1,85 @@
+{
+    "floor": {
+        "size": {
+            "numXCells": 20,
+            "numYCells": 12
+        },
+        "map": [
+            [3, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 3, 2, 2, 2, 3, 2, 3, 2, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 3, 2, 2, 2, 1, 0, 0, 0, 3, 2, 2, 2, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1],
+            [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0]
+        ],
+        "passageways": [],
+        "elevator": {
+            "xStartCell": 19,
+            "yStartCell": 0.5,
+            "cellOrientation": "north"
+        },
+        "rooms": [
+            {
+                "name": "Auditorio Prof Nunes",
+                "xStartCell": 0,
+                "yStartCell": 0,
+                "xEndCell": 7,
+                "yEndCell": 11,
+                "doors": [
+                    {
+                        "xPositionCell": 8,
+                        "yPositionCell": 6,
+                        "cellOrientation": "west"
+                    }
+                ]
+            },
+            {
+                "name": "Beng",
+                "xStartCell": 8,
+                "yStartCell": 0,
+                "xEndCell": 10,
+                "yEndCell": 0,
+                "doors": []
+            },
+            {
+                "name": " K1",
+                "xStartCell": 12,
+                "yStartCell": 0,
+                "xEndCell": 14,
+                "yEndCell": 0,
+                "doors": []
+            },
+            {
+                "name": "K2",
+                "xStartCell": 16,
+                "yStartCell": 0,
+                "xEndCell": 16,
+                "yEndCell": 0,
+                "doors": []
+            },
+            {
+                "name": "R1",
+                "xStartCell": 8,
+                "yStartCell": 10,
+                "xEndCell": 10,
+                "yEndCell": 10,
+                "doors": []
+            },
+            {
+                "name": "R2",
+                "xStartCell": 16,
+                "yStartCell": 10,
+                "xEndCell": 18,
+                "yEndCell": 10,
+                "doors": []
+            }
+        ]
+    }
+}

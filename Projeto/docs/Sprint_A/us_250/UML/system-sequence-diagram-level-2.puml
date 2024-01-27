@@ -1,0 +1,17 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 2 - Process View) - US 250
+autonumber
+
+participant "MD" as MD <<system (C4)>>
+
+?o-> MD : PUT/PATCH (.../buildings/passageways/:passagewayCode)
+activate MD
+
+<-- MD : status: 200/400
+deactivate MD
+
+@enduml

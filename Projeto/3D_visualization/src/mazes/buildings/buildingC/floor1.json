@@ -1,0 +1,151 @@
+{
+    "floor": {
+        "size": {
+            "numXCells": 12,
+            "numYCells": 20
+        },
+        "map": [
+            [3, 2, 2, 2, 2, 3, 2, 3, 2, 2, 2, 2, 1],
+            [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 3, 2, 2, 2, 2, 1],
+            [3, 2, 2, 2, 2, 1, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 3, 2, 2, 2, 2, 1],
+            [3, 2, 2, 2, 2, 0, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [3, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 3, 2, 2, 2, 2, 1],
+            [3, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            [3, 2, 2, 2, 2, 1, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 3, 2, 2, 2, 2, 1],
+            [1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+            [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0]
+        ], 
+        "passageways": [],
+        "elevator": {
+            "xStartCell": 1,
+            "yStartCell": 11.5,
+            "cellOrientation": "west"
+        },
+        "rooms": [
+            {
+                "name": "C101",
+                "xStartCell": 0,
+                "yStartCell": 0,
+                "xEndCell": 4,
+                "yEndCell": 4,
+                "doors": [
+                    {
+                        "xPositionCell": 5,
+                        "yPositionCell": 3,
+                        "cellOrientation": "west"
+                    }
+                ]
+            },
+            {
+                "name": "C102",
+                "xStartCell": 7,
+                "yStartCell": 0,
+                "xEndCell": 11,
+                "yEndCell": 4,
+                "doors": [
+                    {
+                        "xPositionCell": 7,
+                        "yPositionCell": 2,
+                        "cellOrientation": "west"
+                    }
+                ]
+            },
+            {
+                "name": "C103",
+                "xStartCell": 0,
+                "yStartCell": 5,
+                "xEndCell": 4,
+                "yEndCell": 8,
+                "doors": [
+                    {
+                        "xPositionCell": 5,
+                        "yPositionCell": 7,
+                        "cellOrientation": "west"
+                    }
+                ]
+            },
+            {
+                "name": "C104",
+                "xStartCell": 7,
+                "yStartCell": 4,
+                "xEndCell": 11,
+                "yEndCell": 7,
+                "doors": [
+                    {
+                        "xPositionCell": 7,
+                        "yPositionCell": 6,
+                        "cellOrientation": "west"
+                    }
+                ]
+            },
+            {
+                "name": "C106",
+                "xStartCell": 7,
+                "yStartCell": 8,
+                "xEndCell": 11,
+                "yEndCell": 11,
+                "doors": [
+                    {
+                        "xPositionCell": 7,
+                        "yPositionCell": 10,
+                        "cellOrientation": "west"
+                    }
+                ]
+            },
+            {
+                "name": "C108",
+                "xStartCell": 7,
+                "yStartCell": 12,
+                "xEndCell": 11,
+                "yEndCell": 15,
+                "doors": [
+                    {
+                        "xPositionCell": 7,
+                        "yPositionCell": 14,
+                        "cellOrientation": "west"
+                    }
+                ]
+            },
+            {
+                "name": "C110",
+                "xStartCell": 7,
+                "yStartCell": 16,
+                "xEndCell": 11,
+                "yEndCell": 19,
+                "doors": [
+                    {
+                        "xPositionCell": 7,
+                        "yPositionCell": 18,
+                        "cellOrientation": "west"
+                    }
+                ]
+            },
+            {
+                "name": "C105",
+                "xStartCell": 0,
+                "yStartCell": 15,
+                "xEndCell": 4,
+                "yEndCell": 19,
+                "doors": [
+                    {
+                        "xPositionCell": 5,
+                        "yPositionCell": 17,
+                        "cellOrientation": "west"
+                    }
+                ]
+            }
+        ]
+    }
+}

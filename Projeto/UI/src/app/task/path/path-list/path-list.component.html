@@ -1,0 +1,77 @@
+<div class="options-box">
+    <h1>List of Paths</h1>
+
+    <div class="options-box-separator"></div>
+
+    <div class="input-group">
+        <div class="input-group-item">
+            <label for="building1">Building Code 1:</label>
+            <input list="buildingList1" id="building1" name="building" [(ngModel)]="selectedBuilding1" required>
+            <datalist id="buildingList1">
+                <option *ngFor="let building of buildings" [value]="building.code">{{building.code}}</option>
+            </datalist>
+        </div>
+
+        <div class="input-group-item">
+            <label for="building2">Building Code 2:</label>
+            <input list="buildingList2" id="building2" name="building" [(ngModel)]="selectedBuilding2" required>
+            <datalist id="buildingList2">
+                <option *ngFor="let building of buildings" [value]="building.code">{{building.code}}</option>
+            </datalist>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <div class="input-group-item">
+            <label for="selectedCel1">Selected Cell 1:</label>
+            <input type="text" id="selectedCel1" [(ngModel)]="selectedCel1" />
+        </div>
+
+        <div class="input-group-item">
+            <label for="selectedCel2">Selected Cell 2:</label>
+            <input type="text" id="selectedCel2" [(ngModel)]="selectedCel2" />
+        </div>
+    </div>
+
+
+    <div class="option-box-button">
+        <button class="button-style-1" (click)="getPath()">Search</button>
+    </div>
+
+
+    <!--    <div class="options-box-separator"></div>-->
+
+    <table class="path-table">
+        <thead>
+        <tr>
+            <th>Cor/Elev</th>
+            <th>Path</th>
+        </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngFor="let path of paths; let i = index">
+            <tr [class.odd-row]="i % 2 === 0" [class.even-row]="i % 2 !== 0">
+                <td *ngIf="(path.cor && path.cor.length > 0) || (path.elev && path.elev.length > 0)">
+                    <ng-container *ngIf="path.cor && path.cor.length > 0">
+                        <strong>Corridor:</strong> {{ path.cor.join(', ') }}
+                    </ng-container>
+                    <ng-container *ngIf="path.elev && path.elev.length > 0">
+                        <strong>Elevator:</strong> {{ path.elev.join(', ') }}
+                    </ng-container>
+                </td>
+                <td *ngIf="!(path.cor && path.cor.length > 0) && !(path.elev && path.elev.length > 0)">
+                    <!-- Empty cell for left column -->
+                </td>
+                <td>{{ path.path.join(', ') }}</td>
+            </tr>
+        </ng-container>
+        </tbody>
+    </table>
+
+    <div class="options-box-separator"></div>
+
+    <div class="cost-row">
+        <strong>Cost: </strong>
+        <span>{{ cost | number: '1.2-2' }}</span>
+    </div>
+</div>

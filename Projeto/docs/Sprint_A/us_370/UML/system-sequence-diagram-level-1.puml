@@ -1,0 +1,21 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 1 - Process View) - US 370
+autonumber
+
+actor "Fleet Manager" as Gestor
+participant "RobDroneGo" as Sistema <<system (C4)>>
+
+    activate Gestor
+    Gestor -> Sistema : PATCH (.../devices/:code)
+    activate Sistema
+
+    Gestor <-- Sistema : status: 200/404
+    deactivate Sistema
+
+deactivate Gestor
+
+@enduml

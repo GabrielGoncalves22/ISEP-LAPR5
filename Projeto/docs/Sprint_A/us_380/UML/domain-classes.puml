@@ -1,0 +1,33 @@
+@startuml
+
+skinparam titleFontSize 25
+title <u>US 380 - Domain classes</u>
+
+hide methods
+skinparam classAttributeIconSize 0
+
+'Device aggregate
+package "<<aggregate>> Device" {
+    entity Device <<entity>> <<root>>
+
+    class Code <<(V, #FF8B40) value object>>
+    class Description <<(V, #FF8B40) value object>>
+    class SerialNumber <<(V, #FF8B40) value object>>
+    class Nickname <<(V, #FF8B40) value object>>
+    class Status <<(V, #FF8B40) value object>>
+
+    entity DeviceType <<entity>>
+
+    class Type <<(V, #FF8B40) value object>>
+}
+
+Device -Down-> Code
+Device -Down-> Description
+Device -Down-> SerialNumber
+Device -Down-> Nickname
+Device -Down-> Status
+
+DeviceType -Down-> Type
+
+Device "1" -- "1" DeviceType : has >
+@enduml

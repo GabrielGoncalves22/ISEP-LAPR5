@@ -1,0 +1,30 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 2 - Process View) - US 1080
+autonumber
+
+Actor "Campus Manager" as campusManager
+participant "UI" as UI <<system (C4)>>
+participant "MD" as MD <<system (C4)>>
+
+activate campusManager
+    campusManager -> UI : Ask to list buildings with number floors between min and max
+    activate UI
+        UI --> campusManager : Ask to insert min and max
+    deactivate UI
+
+    campusManager -> UI : Insert min and max
+    activate UI
+        UI -> MD : GET (.../buildings?min=:min&max=:max)
+        activate MD
+            UI <-- MD : status: 200/404
+        deactivate MD
+
+        UI --> campusManager : Success / Error
+    deactivate UI
+deactivate campusManager
+
+@enduml

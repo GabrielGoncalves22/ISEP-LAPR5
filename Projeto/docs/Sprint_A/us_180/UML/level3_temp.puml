@@ -1,0 +1,47 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 3 - Process View) - US 150
+autonumber
+
+participant "buildingRoute" as route <<Route>>
+participant "ctrlBuilding :\n IBuildingController" as controller <<Controller>>
+participant "buildingServiceInstance :\n IBuildingService" as service <<Service>>
+participant "buildingRepo :\n IBuildingRepository" as repo <<Repository>>
+participant "DB" as db <<DataBase>>
+
+participant "buildingsInfos :\n building" as buildingsInfos <<Domain>>
+participant "buildingInfoDTOList :\n IBuildingInfoDTO" as buildingInfoDTOList <<DTO>>
+
+?o-> route : GET (.../buildings?min=:min&max=:max)
+activate route
+
+    route -> controller : execute(req, res, next)
+    activate controller
+        controller -> controller : getBuildingsBetweenMinAndMaxFloors(req, res, next)
+        activate controller
+            controller -> service : getBuildingsBetweenMinAndMaxFloors(numMinFloors, numMaxFloors)
+            activate service
+                service -> repo : buildingsInfos = findBuildingsBetweenMinAndMaxFloors(numMinFloors, numMaxFloors)
+                activate repo
+                    repo -> db :
+                    db --> repo :
+                    repo --> service : 
+                deactivate repo
+                service --> controller : buildingInfoDTOList
+            deactivate service
+
+            controller --> controller : status: 200/404
+
+        deactivate controller
+        
+        controller --> route : status: 200/404
+    
+    deactivate controller
+
+    <-- route : status: 200/404
+deactivate route
+
+@enduml

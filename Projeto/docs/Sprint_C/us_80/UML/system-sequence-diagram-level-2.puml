@@ -1,0 +1,29 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 2 - Process View) - US 80
+autonumber
+
+participant "UI" as UI <<system (C4)>>
+participant "MD" as MD <<system (C4)>>
+
+?o-> UI : Ask to approve/deny user
+activate UI
+
+<-- UI : shows users list
+deactivate UI
+
+?o-> UI :  approves/denys user data
+activate UI
+
+    UI -> MD : PATCH (.../users/activate)
+    activate MD
+        UI <-- MD : status: 200/400
+    deactivate MD
+
+<-- UI : shows updated users list
+deactivate UI
+
+@enduml

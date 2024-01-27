@@ -1,0 +1,52 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View - MD) - US 1020
+autonumber
+
+participant "deviceRoute" as Route <<Route>>
+participant "ctrlDevice :\n IDeviceController" as Controller <<Controller>>
+participant "deviceDTO :\n IDeviceDTO" as DeviceDTO <<DTO>>
+participant "deviceServiceInstance :\n IDeviceService" as Service <<Service>>
+participant "device :\n device" as Device <<Domain>>
+participant "deviceRepo :\n IDeviceRepository" as Repo <<Repository>>
+participant "DB" as DB <<DataBase>>
+
+?o-> Route : PATH (.../devices/:code)
+activate Route
+
+    Route -> Controller : execute(req, res, next)
+    activate Controller
+        Controller -> Controller : updateStateDevice(req, res, next)
+        activate Controller
+            Controller --> DeviceDTO** : create
+            Controller -> Service : updateStateDevice(code)
+
+            activate Service
+                Service --> Device** : create
+                Service -> Device : nextStatus()
+                activate Device
+                Device --> Service
+                deactivate Device
+                Service -> Repo : update(device)
+                activate Repo
+                    Repo -> DB : save(device)
+                    activate DB
+                    DB --> Repo :
+                    deactivate DB
+                    Repo --> Service :
+                deactivate Repo
+                Service --> Controller :
+            deactivate Service
+
+            Controller --> Controller : status: 200/404
+        deactivate Controller
+    Controller --> Route : status: 200/404
+    deactivate Controller
+
+<-- Route : status: 200/404
+deactivate Route
+
+@enduml

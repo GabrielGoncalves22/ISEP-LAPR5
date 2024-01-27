@@ -1,0 +1,34 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 2 - Process View) - US 1090
+autonumber
+
+participant "UI" as UI <<system (C4)>>
+participant "MD" as MD <<system (C4)>>
+
+?o-> UI : Ask to create floor
+activate UI
+
+    UI -> MD : GET (.../buildings)
+    activate MD
+        UI <-- MD : status: 200/404
+    deactivate MD
+
+<-- UI : Ask to insert data
+deactivate UI
+
+?o-> UI : Insert floor data
+activate UI
+
+    UI -> MD : POST (.../buildings/floors)
+    activate MD
+        UI <-- MD : status: 201/400
+    deactivate MD
+
+<-- UI : Floor created/data error
+deactivate UI
+
+@enduml

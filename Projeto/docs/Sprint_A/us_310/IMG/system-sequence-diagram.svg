@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="344px" preserveAspectRatio="none" style="width:357px;height:344px;background:#FFFFFF;" version="1.1" viewBox="0 0 357 344" width="357px" zoomAndPan="magnify"><defs/><g><rect fill="none" height="27.6094" id="_title" style="stroke:none;stroke-width:1.0;" width="298" x="28.75" y="10"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="288" x="33.75" y="29.5332">System Sequence Diagram (SSD) - US 310</text><rect fill="#FFFFFF" height="122.4063" style="stroke:#181818;stroke-width:1.0;" width="10" x="62.5" y="131.2188"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="293.5" y="153.5703"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="293.5" y="214.2734"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="67" x2="67" y1="121.2188" y2="262.625"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="298.5" x2="298.5" y1="121.2188" y2="262.625"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="119" x="5" y="118.1426">Gestor de Campus</text><ellipse cx="67.5" cy="52.1094" fill="#E3E3E3" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M67.5,60.1094 L67.5,87.1094 M54.5,68.1094 L80.5,68.1094 M67.5,87.1094 L54.5,102.1094 M67.5,87.1094 L80.5,102.1094 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="119" x="5" y="276.1582">Gestor de Campus</text><ellipse cx="67.5" cy="287.7344" fill="#E3E3E3" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M67.5,295.7344 L67.5,322.7344 M54.5,303.7344 L80.5,303.7344 M67.5,322.7344 L54.5,337.7344 M67.5,322.7344 L80.5,337.7344 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><rect fill="#E3E3E3" height="49.2188" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="106" x="245.5" y="71"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="92" x="252.5" y="92.5332">«system (C4)»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="84" x="256.5" y="110.1426">RobDroneGo</text><rect fill="#E3E3E3" height="49.2188" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="106" x="245.5" y="261.625"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="92" x="252.5" y="283.1582">«system (C4)»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="84" x="256.5" y="300.7676">RobDroneGo</text><rect fill="#FFFFFF" height="122.4063" style="stroke:#181818;stroke-width:1.0;" width="10" x="62.5" y="131.2188"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="293.5" y="153.5703"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="293.5" y="214.2734"/><polygon fill="#181818" points="281.5,149.5703,291.5,153.5703,281.5,157.5703,285.5,153.5703" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="72.5" x2="287.5" y1="153.5703" y2="153.5703"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="79.5" y="148.7139">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="163" x="90.5" y="148.7139">Criar sala de piso de edifício</text><polygon fill="#181818" points="83.5,179.9219,73.5,183.9219,83.5,187.9219,79.5,183.9219" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="77.5" x2="297.5" y1="183.9219" y2="183.9219"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="89.5" y="179.0654">2</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="85" x="100.5" y="179.0654">Introduz dados</text><polygon fill="#181818" points="281.5,210.2734,291.5,214.2734,281.5,218.2734,285.5,214.2734" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="72.5" x2="287.5" y1="214.2734" y2="214.2734"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="79.5" y="209.417">3</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="191" x="90.5" y="209.417">Dados da sala de piso de edifício</text><polygon fill="#181818" points="83.5,240.625,73.5,244.625,83.5,248.625,79.5,244.625" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="77.5" x2="297.5" y1="244.625" y2="244.625"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="89.5" y="239.7686">4</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="155" x="100.5" y="239.7686">Sala criado/erro nos dados</text><!--MD5=[bb1fee155de625434963c1bdd427aaf0]
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US 310
+autonumber
+
+actor "Gestor de Campus" as Gestor
+participant "RobDroneGo" as Sistema <<system (C4)>>
+
+
+activate Gestor
+
+    Gestor -> Sistema : Criar sala de piso de edifício
+    activate Sistema
+        Sistema - -> Gestor : Introduz dados
+    deactivate Sistema
+
+    Gestor -> Sistema : Dados da sala de piso de edifício
+    activate Sistema
+        Sistema - -> Gestor : Sala criado/erro nos dados
+    deactivate Sistema
+
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 18:01:30 WEST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: Cp1252
+Language: pt
+Country: PT
+--></g></svg>

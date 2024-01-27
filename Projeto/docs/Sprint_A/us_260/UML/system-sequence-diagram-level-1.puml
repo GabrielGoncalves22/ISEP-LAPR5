@@ -1,0 +1,16 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 1 - Process View) - US 260
+autonumber
+
+participant "RobDroneGo" as Sistema <<system (C4)>>
+
+?o-> Sistema : GET (.../passageways?building_1=:building_1&building_2=building_2)
+activate Sistema
+    <-- Sistema : status: 200/404
+deactivate Sistema
+
+@enduml

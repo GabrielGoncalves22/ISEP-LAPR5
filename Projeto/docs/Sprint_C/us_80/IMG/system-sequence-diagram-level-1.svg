@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="377px" preserveAspectRatio="none" style="width:438px;height:377px;background:#FFFFFF;" version="1.1" viewBox="0 0 438 377" width="438px" zoomAndPan="magnify"><defs/><g><rect fill="none" height="27.6094" id="_title" style="stroke:none;stroke-width:1.0;" width="420" x="5" y="10"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="410" x="10" y="29.5332">System Sequence Diagram (Level 1 - Process View) - US 80</text><rect fill="#FFFFFF" height="153.7578" style="stroke:#181818;stroke-width:1.0;" width="10" x="117.5" y="131.2188"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="306.5" y="153.5703"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="306.5" y="239.625"/><rect fill="none" height="79.0547" style="stroke:#000000;stroke-width:1.5;" width="318" x="56.5" y="198.9219"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="122.5" x2="122.5" y1="121.2188" y2="294.9766"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="311.5" x2="311.5" y1="121.2188" y2="294.9766"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="106" x="66.5" y="118.1426">System Manager</text><ellipse cx="122.5" cy="52.1094" fill="#E3E3E3" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M122.5,60.1094 L122.5,87.1094 M109.5,68.1094 L135.5,68.1094 M122.5,87.1094 L109.5,102.1094 M122.5,87.1094 L135.5,102.1094 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="106" x="66.5" y="308.5098">System Manager</text><ellipse cx="122.5" cy="320.0859" fill="#E3E3E3" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M122.5,328.0859 L122.5,355.0859 M109.5,336.0859 L135.5,336.0859 M122.5,355.0859 L109.5,370.0859 M122.5,355.0859 L135.5,370.0859 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><rect fill="#E3E3E3" height="49.2188" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="106" x="258.5" y="71"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="92" x="265.5" y="92.5332">«system (C4)»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="84" x="269.5" y="110.1426">RobDroneGo</text><rect fill="#E3E3E3" height="49.2188" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="106" x="258.5" y="293.9766"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="92" x="265.5" y="315.5098">«system (C4)»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="84" x="269.5" y="333.1191">RobDroneGo</text><rect fill="#FFFFFF" height="153.7578" style="stroke:#181818;stroke-width:1.0;" width="10" x="117.5" y="131.2188"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="306.5" y="153.5703"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="306.5" y="239.625"/><polygon fill="#181818" points="294.5,149.5703,304.5,153.5703,294.5,157.5703,298.5,153.5703" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="127.5" x2="300.5" y1="153.5703" y2="153.5703"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="134.5" y="148.7139">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="147" x="145.5" y="148.7139">Ask to approve/deny user</text><polygon fill="#181818" points="138.5,179.9219,128.5,183.9219,138.5,187.9219,134.5,183.9219" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="132.5" x2="310.5" y1="183.9219" y2="183.9219"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="144.5" y="179.0654">2</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="94" x="155.5" y="179.0654">shows users list</text><path d="M56.5,198.9219 L129.5,198.9219 L129.5,207.2734 L119.5,217.2734 L56.5,217.2734 L56.5,198.9219 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.5;"/><rect fill="none" height="79.0547" style="stroke:#000000;stroke-width:1.5;" width="318" x="56.5" y="198.9219"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="28" x="71.5" y="213.417">loop</text><text fill="#000000" font-family="sans-serif" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="55" x="144.5" y="212.3408">[until exit]</text><polygon fill="#181818" points="294.5,235.625,304.5,239.625,294.5,243.625,298.5,239.625" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="127.5" x2="300.5" y1="239.625" y2="239.625"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="134.5" y="234.7686">3</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="148" x="145.5" y="234.7686">approves/denys user data</text><polygon fill="#181818" points="138.5,265.9766,128.5,269.9766,138.5,273.9766,134.5,269.9766" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="132.5" x2="310.5" y1="269.9766" y2="269.9766"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="144.5" y="265.1201">4</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="144" x="155.5" y="265.1201">shows updated users list</text><!--MD5=[d0c6db8159472035a0f3ce6d9777ddd1]
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 1 - Process View) - US 80
+autonumber
+
+Actor "System Manager" as SystemManager
+participant "RobDroneGo" as Sistema <<system (C4)>>
+
+activate SystemManager
+    SystemManager -> Sistema : Ask to approve/deny user
+    activate Sistema
+
+    Sistema - -> SystemManager : shows users list
+    deactivate Sistema
+
+    loop until exit
+    SystemManager -> Sistema : approves/denys user data
+    activate Sistema
+
+    Sistema - -> SystemManager : shows updated users list
+    deactivate Sistema
+    end
+deactivate SystemManager
+
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 18:01:30 BST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: en
+Country: GB
+--></g></svg>

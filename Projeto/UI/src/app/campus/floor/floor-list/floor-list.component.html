@@ -1,0 +1,67 @@
+<h1 class="center">List Floors</h1>
+
+<div class="options-box">
+    <div class="form-group">
+         <label for="building">Building Code: </label>
+         <input list="buildingList" id="building" name="building" [(ngModel)]="buildingCode" required>
+            <datalist id="buildingList">
+                <option *ngFor="let building of buildings" [value]="building.code">{{ building.code }}</option>
+            </datalist>
+    </div>
+
+    <div class="options-box-separator"></div>
+
+    <div class="options-box-option">
+        <input type="radio" id="allFloors" name="listFloors" [(ngModel)]="option" value="allFloors">
+        <label for="allFloors">List all floors of a building</label>
+
+        <div class="options-box-option">
+            <input type="radio" id="floorsWithPassageway" name="listFloors" [(ngModel)]="option" value="floorsWithPassageway">
+            <label for="floorsWithPassageway">List floors with passageway</label>
+
+        <div class="options-box-separator"></div>
+
+        <div class="option-box-button">
+            <button class="button-style-1" (click)="listFloors()">Search</button>
+        </div>
+
+        <p *ngIf="error" class="form-alert form-alert-error"><b>Error:</b> {{error}}</p>
+    </div>
+    </div>
+</div>
+
+<div class="list-container" *ngIf="option === 'allFloors'">
+    <div *ngFor="let floor of floors" class="list-box">
+        <div class="list-box-body">
+            <p><b>Number:</b> {{floor.number}}</p>
+            <p><b>Description:</b> {{floor.description}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="different-container" *ngIf="option === 'floorsWithPassageway'">
+    <div class="list-container">
+        <div *ngFor="let connectedFloor of floorsConnected" class="list-box">
+            <div class="list-box-body">
+                <div class="connected-floors-container">
+                    <div class="connected-floor">
+                        <p><b>Floor Building:</b> {{connectedFloor[0].building}}</p>
+                        <p><b>Floor Number:</b> {{connectedFloor[0].number}}</p>
+                        <p class="description"><b>Floor Description:</b> {{connectedFloor[0].description}}</p>
+                    </div>
+
+
+
+                    <div class="connected-floor">
+                        <p><b>Floor Building:</b> {{connectedFloor[1].building}}</p>
+                        <p><b>Floor Number:</b> {{connectedFloor[1].number}}</p>
+                        <p class="description"><b>Floor Description:</b> {{connectedFloor[1].description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

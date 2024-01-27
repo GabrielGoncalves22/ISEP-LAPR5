@@ -1,0 +1,99 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (SD) - US 310
+autonumber
+
+actor "Gestor de Campus" as actor
+participant buildingRoute as route <<Web>>
+control "buildingController :\n buildingController" as controller <<Controllers>>
+participant "roomDTO :\n RoomDTO" as roomDTO <<DTO>>
+participant "buildingService :\n buildingService" as buildingService <<Use Cases>>
+participant "floor :\n floor" as floor <<Domain>>
+participant "room :\n room" as room <<Domain>>
+database "buildingRepo :\n buildingRepo" as buildingRepo <<Gateways>>
+participant BuildingMapper as buildingMapper <<Mapper>>
+participant RoomMapper as roomMapper <<Mapper>>
+participant "savedBuildingDTO :\n BuildingDTO" as savedBuildingDTO <<DTO>>
+participant "buildingData :\n building" as buildingData <<Domain>>
+participant "buildingSchema :\n buildingSchema" as buildingSchema <<DB>>
+participant "savedBuilding :\n building" as savedBuilding <<Domain>>
+participant "savedBuildingData :\n building" as savedBuildingData <<Domain>>
+
+activate actor
+
+    actor -> route : Post / buildings/rooms / (json)
+    activate route
+        route -> controller : createRoom(json, ...)
+        activate controller
+            controller -> controller : validate(json)
+            activate controller
+            deactivate controller
+
+            controller -> roomMapper : toDTO(json)
+            activate roomMapper
+                roomMapper --> roomDTO** : create(json)
+            deactivate roomMapper
+
+            controller -> buildingService : savedRoomDTO = createRoom(roomDTO)
+            activate buildingService
+                buildingService --> room** : create(roomDTO)
+
+                buildingService -> floor : room(room)
+
+                buildingService -> buildingRepo : savedBuildingData = save(building)
+
+
+                activate buildingRepo
+                    buildingRepo -> buildingMapper : toPersistence(building)
+                    activate buildingMapper
+                        buildingMapper -> building : code = code()
+                        buildingMapper -> building : name = name()
+                        buildingMapper -> building : description = description()
+                        buildingMapper -> building : dimension = dimension()
+                        buildingMapper -> building : floors = floors()
+                        buildingMapper -> building : elevator = elevator()
+                        
+                        buildingMapper --> buildingData** : create(code, name, description, dimension, floors, elevators)
+                    deactivate buildingMapper
+
+                    buildingRepo -> buildingSchema : create(buildingData)
+                    activate buildingSchema
+                        buildingSchema --> savedBuildingData** : savedBuildingData = create(rawBuilding)
+                    deactivate buildingSchema
+                    
+                    buildingRepo -> buildingMapper : toDomain(savedBuildingData)
+                    activate buildingMapper
+                        buildingMapper --> savedBuilding**
+                    deactivate buildingMapper
+                deactivate buildingRepo
+
+                buildingService -> buildingMapper : savedBuildingDTO = toDTO(savedBuilding)
+                activate buildingMapper
+                    buildingMapper -> savedBuilding : code = code()
+                    buildingMapper -> savedBuilding : name = name()
+                    buildingMapper -> savedBuilding : description = description()
+                    buildingMapper -> savedBuilding : dimension = dimension()
+                    buildingMapper -> savedBuilding : floors = floors()
+                    buildingMapper -> savedBuilding : elevator = elevator()
+                    buildingMapper -> savedBuildingDTO** : create(code, name, description, dimension, floors, elevators)
+                deactivate buildingMapper
+
+            deactivate buildingService
+
+            controller -> roomMapper : json = toJson(roomDTO)
+            controller -> controller : generateResponse(json)
+            
+            controller --> route : response
+
+        deactivate controller
+
+        route --> actor : response
+
+    deactivate route
+
+deactivate actor
+
+@enduml

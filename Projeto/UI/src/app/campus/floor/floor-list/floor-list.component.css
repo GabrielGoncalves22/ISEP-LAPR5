@@ -1,0 +1,29 @@
+.connected-floors-container {
+    display: flex;
+    justify-content: center;
+}
+
+.connected-floor {
+    flex: 1;
+}
+
+
+.description {
+    max-width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.label-select-container {
+    display: flex;
+    align-items: center;
+}
+
+.small-select {
+    width: 150px;
+    margin-left: 10px;
+    padding: 5px;
+}
+

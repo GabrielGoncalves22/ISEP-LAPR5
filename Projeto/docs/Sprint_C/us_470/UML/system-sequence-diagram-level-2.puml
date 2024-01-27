@@ -1,0 +1,62 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 2 - Process View) - US 470
+autonumber
+
+participant "UI" as UI <<system (C4)>>
+participant "MDT" as MDT <<system (C4)>>
+
+?o-> UI : Ask to consult pending requests for a task type
+activate UI
+
+   alt pickup and delivery task
+       UI -> MDT : GET (.../tasks/deliveries/requesteds)
+       activate MDT
+           UI <-- MDT : status: 200/404
+       deactivate MDT
+   else surveillance task
+       UI -> MDT : GET (.../tasks/surveillances/requesteds)
+       activate MDT
+           UI <-- MDT : status: 200/404
+       deactivate MDT
+   end
+
+<-- UI : Ask to choose a request and the action to take
+deactivate UI
+
+?o-> UI : Choose the request and approve or refuse
+activate UI
+
+   alt pickup and delivery task
+       alt approve
+           UI -> MDT : PATCH (.../tasks/deliveries/:code/approve)
+           activate MDT
+               UI <-- MDT : status: 200/404
+           deactivate MDT
+       else reject
+          UI -> MDT : PATCH (.../tasks/deliveries/:code/reject)
+          activate MDT
+              UI <-- MDT : status: 200/404
+          deactivate MDT
+       end
+   else surveillance task
+      alt approve
+          UI -> MDT : PATCH (.../tasks/surveillances/:code/approve)
+          activate MDT
+              UI <-- MDT : status: 200/404
+          deactivate MDT
+      else reject
+         UI -> MDT : PATCH (.../tasks/surveillances/:code/reject)
+         activate MDT
+             UI <-- MDT : status: 200/404
+         deactivate MDT
+      end
+   end
+
+<-- UI : Request approved or refused/data error
+deactivate UI
+
+@enduml

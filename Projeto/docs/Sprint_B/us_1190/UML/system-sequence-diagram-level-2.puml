@@ -1,0 +1,30 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 2 - Process View) - US 1190
+autonumber
+
+Actor "Campus Manager" as campusManager
+participant "UI" as UI <<system (C4)>>
+participant "MD" as MD <<system (C4)>>
+
+activate campusManager
+    campusManager -> UI : Ask to list passageways between two buildings
+    activate UI
+        UI --> campusManager : Ask to choose the two buildings
+    deactivate UI
+
+    campusManager -> UI : Choose the two buildings
+    activate UI
+        UI -> MD : GET (.../passageways?building_1=:building_1&building_2=building_2)
+        activate MD
+            UI <-- MD : status: 200/404
+        deactivate MD
+
+        UI --> campusManager : Success / Error
+    deactivate UI
+deactivate campusManager
+
+@enduml

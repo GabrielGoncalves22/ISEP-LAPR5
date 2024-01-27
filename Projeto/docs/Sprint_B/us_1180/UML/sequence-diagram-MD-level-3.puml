@@ -1,0 +1,84 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View) - US 1180
+autonumber
+
+participant "Route:" as Route 
+participant "Controller:" as Controller
+participant "PassagewayDTO:" as DTO
+participant "PassagewayService:" as Service
+participant "Passageway:" as Passageway
+participant "PassagewayRepository" as Repo
+participant "DB:" as DB
+
+?o-> Route : GET (.../buildings/passageways)
+activate Route
+
+Route -> Controller : execute(req, res, next)
+activate Controller
+
+Controller -> Controller : getPassageways(req, res, next)
+activate Controller
+
+Controller -> Service : getPassageways(passagewayCode)
+activate Service
+
+Service -> Repo : findPassageways(passagewayCode)
+activate Repo
+
+Repo -> DB
+activate DB
+
+DB --> Repo
+deactivate DB
+
+Repo --> Service
+deactivate Repo
+
+Service --> Controller : DTOList
+deactivate Service
+
+Controller --> Controller : status: 200/404
+deactivate Controller
+
+Controller --> Route : status: 200/404
+deactivate Controller
+
+<-- Route : status: 200/404
+deactivate Route
+
+?o-> Route : PUT/PATCH (.../passageways/:passagewayCode)
+activate Route
+
+    Route -> Controller : execute(req, res, next)
+    activate Controller
+        Controller -> Controller : updatePassageway(req, res, next)
+        activate Controller
+            Controller --> DTO** : create
+            Controller -> Service : updatePassageway(passagewayDTO)
+
+            activate Service
+                Service --> Passageway** : create
+                Service -> Repo : update(passageway)
+                activate Repo
+                    Repo -> DB :
+                    activate DB
+                    DB --> Repo :
+                    deactivate DB
+                    Repo --> Service :
+                deactivate Repo
+                Service --> Controller :
+            deactivate Service
+
+            Controller --> Controller : status: 200/404
+        deactivate Controller
+    Controller --> Route : status: 200/404
+    deactivate Controller
+
+<-- Route : status: 200/404
+deactivate Route
+
+@enduml

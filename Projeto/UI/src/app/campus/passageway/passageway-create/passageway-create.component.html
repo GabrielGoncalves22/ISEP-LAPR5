@@ -1,0 +1,42 @@
+<h1 class="center">Create Passageway</h1>
+
+<form (ngSubmit)="createPassageway()" #formulario="ngForm" class="form-to-create">
+    <div class="form-group">
+        <label for="building1">Building 1:</label>
+        <input list="buildingList1" id="building1" name="building1" [(ngModel)]="passageway.building1"
+            (input)="listAllFloors(passageway.building1, 0)" required>
+        <datalist id="buildingList1">
+            <option *ngFor="let building of buildings" [value]="building.code">{{ building.code }}</option>
+        </datalist>
+    </div>
+
+    <div class="form-group">
+        <label for="floor1">Floor 1:</label>
+        <select id="floor1" name="floor1" [(ngModel)]="passageway.floor1" (focusout)="saveData()" required>
+            <option *ngFor="let floor of floorsBuilding1" [value]="floor.number">{{ floor.number }}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="building2">Building 2:</label>
+        <input list="buildingList2" id="building2" name="building2" [(ngModel)]="passageway.building2"
+            (input)="listAllFloors(passageway.building2, 1)" required>
+        <datalist id="buildingList2">
+            <option *ngFor="let building of buildings" [value]="building.code">{{ building.code }}</option>
+        </datalist>
+    </div>
+
+    <div class="form-group">
+        <label for="floor2">Floor 2:</label>
+        <select id="floor2" name="floor2" [(ngModel)]="passageway.floor2" (focusout)="saveData()" required>
+            <option *ngFor="let floor of floorsBuilding2" [value]="floor.number">{{ floor.number }}</option>
+        </select>
+    </div>
+
+    <div class="button-container">
+        <button type="submit" [disabled]="formulario.invalid">Submit</button>
+    </div>
+
+    <p *ngIf="error" class="form-alert form-alert-error"><b>Error:</b> {{error}}</p>
+    <p *ngIf="success" class="form-alert form-alert-success"><b>Success:</b> {{success}}</p>
+</form>

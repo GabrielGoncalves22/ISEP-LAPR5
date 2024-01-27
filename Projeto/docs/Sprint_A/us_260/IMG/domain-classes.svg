@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="442px" preserveAspectRatio="none" style="width:322px;height:442px;background:#FFFFFF;" version="1.1" viewBox="0 0 322 442" width="322px" zoomAndPan="magnify"><defs/><g><rect fill="none" height="41.4453" id="_title" style="stroke:none;stroke-width:1.0;" width="304" x="5" y="5"/><text fill="#000000" font-family="sans-serif" font-size="25" font-weight="bold" lengthAdjust="spacing" text-decoration="underline" textLength="294" x="10" y="35.9521">US 260 - Domain classes</text><!--MD5=[a8c72dcb0993599bf4f10d1dea215f72]
+cluster <<aggregate>> Building--><g id="cluster_&lt;&lt;aggregate&gt;&gt; Building"><path d="M15.5,60.4385 L301.5,60.4385 A3.75,3.75 0 0 1 304,62.9385 L311,97.8838 L311.5,97.8838 A2.5,2.5 0 0 1 314,100.3838 L314,432.9385 A2.5,2.5 0 0 1 311.5,435.4385 L15.5,435.4385 A2.5,2.5 0 0 1 13,432.9385 L13,62.9385 A2.5,2.5 0 0 1 15.5,60.4385 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="13" x2="311" y1="97.8838" y2="97.8838"/><text fill="#000000" font-family="sans-serif" font-size="25" font-weight="bold" lengthAdjust="spacing" textLength="285" x="17" y="88.3906">&lt;&lt;aggregate&gt;&gt; Building</text></g><!--MD5=[8560f289a30852a9f75d64e53f926853]
+class Building--><g id="elem_Building"><rect codeLine="10" fill="#F1F1F1" height="65.7969" id="Building" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="82" x="74" y="240.4385"/><ellipse cx="89" cy="269.3369" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M87.8594,270.1338 L87.8594,272.6338 L92.1875,272.6338 L92.1875,271.7119 Q92.1875,271.1025 92.4219,270.8369 Q92.6719,270.5713 93.0469,270.5713 Q93.4219,270.5713 93.6563,270.8369 Q93.8906,271.1025 93.8906,271.7119 L93.8906,274.3369 L85.8906,274.3369 Q85.2656,274.3369 85,274.1025 Q84.75,273.8682 84.75,273.4775 Q84.75,273.1025 85.0156,272.8682 Q85.2813,272.6338 85.8906,272.6338 L86.1563,272.6338 L86.1563,265.9775 L85.8906,265.9775 Q85.2656,265.9775 85,265.7432 Q84.75,265.5088 84.75,265.1182 Q84.75,264.7432 85,264.5088 Q85.2656,264.2744 85.8906,264.2744 L93.5156,264.2744 L93.5156,266.8682 Q93.5156,267.4775 93.2813,267.7432 Q93.0625,267.9932 92.6719,267.9932 Q92.2969,267.9932 92.0625,267.7432 Q91.8281,267.4775 91.8281,266.8682 L91.8281,265.9775 L87.8594,265.9775 L87.8594,268.4307 L89.3438,268.4307 Q89.3438,267.7744 89.4688,267.5869 Q89.7344,267.1807 90.2031,267.1807 Q90.5781,267.1807 90.8125,267.4463 Q91.0469,267.6963 91.0469,268.3057 L91.0469,270.2744 Q91.0469,270.8213 90.9219,271.0088 Q90.6563,271.3994 90.2031,271.3994 Q89.7344,271.3994 89.4688,270.9932 Q89.3438,270.8057 89.3438,270.1338 L87.8594,270.1338 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="106.5" y="257.8955">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="35" x="110.5" y="272.9893">«root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="50" x="103" y="290.1592">Building</text><line style="stroke:#181818;stroke-width:0.5;" x1="75" x2="155" y1="298.2354" y2="298.2354"/></g><!--MD5=[ba580110b1777f63e0f1dfe3fcefdac0]
+class Code--><g id="elem_Code"><rect codeLine="11" fill="#F1F1F1" height="50.7031" id="Code" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="109" x="32.5" y="368.4385"/><ellipse cx="47.5" cy="389.79" fill="#FF8B40" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M48.0938,393.0557 L50.5625,387.1807 L50.1719,387.1807 Q49.5625,387.1807 49.2969,386.9463 Q49.0313,386.7119 49.0313,386.3213 Q49.0313,385.9463 49.2969,385.7119 Q49.5625,385.4775 50.1719,385.4775 L52.4531,385.4775 Q53.0625,385.4775 53.3281,385.7119 Q53.5938,385.9463 53.5938,386.3213 Q53.5938,386.79 53.1875,387.0557 Q53,387.1807 52.4063,387.1807 L48.9219,395.54 L47.2813,395.54 L43.7969,387.1807 Q43.2031,387.1807 43.0156,387.0557 Q42.6094,386.79 42.6094,386.3213 Q42.6094,385.9463 42.875,385.7119 Q43.1406,385.4775 43.75,385.4775 L46.0469,385.4775 Q46.6563,385.4775 46.9063,385.7119 Q47.1719,385.9463 47.1719,386.3213 Q47.1719,386.7119 46.9063,386.9463 Q46.6563,387.1807 46.0469,387.1807 L45.6406,387.1807 L48.0938,393.0557 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="81" x="59.5" y="385.8955">«value object»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="34" x="83" y="403.0654">Code</text><line style="stroke:#181818;stroke-width:0.5;" x1="33.5" x2="140.5" y1="411.1416" y2="411.1416"/></g><!--MD5=[454d980de7ec19c426bfaad009ef01a6]
+class BuildingName--><g id="elem_BuildingName"><rect codeLine="12" fill="#F1F1F1" height="50.7031" id="BuildingName" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="118" x="177" y="368.4385"/><ellipse cx="192" cy="389.79" fill="#FF8B40" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M192.5938,393.0557 L195.0625,387.1807 L194.6719,387.1807 Q194.0625,387.1807 193.7969,386.9463 Q193.5313,386.7119 193.5313,386.3213 Q193.5313,385.9463 193.7969,385.7119 Q194.0625,385.4775 194.6719,385.4775 L196.9531,385.4775 Q197.5625,385.4775 197.8281,385.7119 Q198.0938,385.9463 198.0938,386.3213 Q198.0938,386.79 197.6875,387.0557 Q197.5,387.1807 196.9063,387.1807 L193.4219,395.54 L191.7813,395.54 L188.2969,387.1807 Q187.7031,387.1807 187.5156,387.0557 Q187.1094,386.79 187.1094,386.3213 Q187.1094,385.9463 187.375,385.7119 Q187.6406,385.4775 188.25,385.4775 L190.5469,385.4775 Q191.1563,385.4775 191.4063,385.7119 Q191.6719,385.9463 191.6719,386.3213 Q191.6719,386.7119 191.4063,386.9463 Q191.1563,387.1807 190.5469,387.1807 L190.1406,387.1807 L192.5938,393.0557 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="81" x="208.5" y="385.8955">«value object»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="86" x="206" y="403.0654">BuildingName</text><line style="stroke:#181818;stroke-width:0.5;" x1="178" x2="294" y1="411.1416" y2="411.1416"/></g><!--MD5=[b098efa4dd65edfeebe973e4edec7c36]
+class Floor--><g id="elem_Floor"><rect codeLine="14" fill="#F1F1F1" height="68.3125" id="Floor" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="71" x="191.5" y="239.4385"/><ellipse cx="206.5" cy="260.79" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M205.3594,261.5869 L205.3594,264.0869 L209.6875,264.0869 L209.6875,263.165 Q209.6875,262.5557 209.9219,262.29 Q210.1719,262.0244 210.5469,262.0244 Q210.9219,262.0244 211.1563,262.29 Q211.3906,262.5557 211.3906,263.165 L211.3906,265.79 L203.3906,265.79 Q202.7656,265.79 202.5,265.5557 Q202.25,265.3213 202.25,264.9307 Q202.25,264.5557 202.5156,264.3213 Q202.7813,264.0869 203.3906,264.0869 L203.6563,264.0869 L203.6563,257.4307 L203.3906,257.4307 Q202.7656,257.4307 202.5,257.1963 Q202.25,256.9619 202.25,256.5713 Q202.25,256.1963 202.5,255.9619 Q202.7656,255.7275 203.3906,255.7275 L211.0156,255.7275 L211.0156,258.3213 Q211.0156,258.9307 210.7813,259.1963 Q210.5625,259.4463 210.1719,259.4463 Q209.7969,259.4463 209.5625,259.1963 Q209.3281,258.9307 209.3281,258.3213 L209.3281,257.4307 L205.3594,257.4307 L205.3594,259.8838 L206.8438,259.8838 Q206.8438,259.2275 206.9688,259.04 Q207.2344,258.6338 207.7031,258.6338 Q208.0781,258.6338 208.3125,258.8994 Q208.5469,259.1494 208.5469,259.7588 L208.5469,261.7275 Q208.5469,262.2744 208.4219,262.4619 Q208.1563,262.8525 207.7031,262.8525 Q207.2344,262.8525 206.9688,262.4463 Q206.8438,262.2588 206.8438,261.5869 L205.3594,261.5869 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="218.5" y="256.8955">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="33" x="223.5" y="274.0654">Floor</text><line style="stroke:#181818;stroke-width:0.5;" x1="192.5" x2="261.5" y1="282.1416" y2="282.1416"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="48" x="197.5" y="300.6748">number</text></g><!--MD5=[e56fe874e07467227b4c0f5e776dac74]
+class Passageway--><g id="elem_Passageway"><rect codeLine="18" fill="#F1F1F1" height="50.7031" id="Passageway" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="111" x="115.5" y="110.4385"/><ellipse cx="130.5" cy="131.79" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M129.3594,132.5869 L129.3594,135.0869 L133.6875,135.0869 L133.6875,134.165 Q133.6875,133.5557 133.9219,133.29 Q134.1719,133.0244 134.5469,133.0244 Q134.9219,133.0244 135.1563,133.29 Q135.3906,133.5557 135.3906,134.165 L135.3906,136.79 L127.3906,136.79 Q126.7656,136.79 126.5,136.5557 Q126.25,136.3213 126.25,135.9307 Q126.25,135.5557 126.5156,135.3213 Q126.7813,135.0869 127.3906,135.0869 L127.6563,135.0869 L127.6563,128.4307 L127.3906,128.4307 Q126.7656,128.4307 126.5,128.1963 Q126.25,127.9619 126.25,127.5713 Q126.25,127.1963 126.5,126.9619 Q126.7656,126.7275 127.3906,126.7275 L135.0156,126.7275 L135.0156,129.3213 Q135.0156,129.9307 134.7813,130.1963 Q134.5625,130.4463 134.1719,130.4463 Q133.7969,130.4463 133.5625,130.1963 Q133.3281,129.9307 133.3281,129.3213 L133.3281,128.4307 L129.3594,128.4307 L129.3594,130.8838 L130.8438,130.8838 Q130.8438,130.2275 130.9688,130.04 Q131.2344,129.6338 131.7031,129.6338 Q132.0781,129.6338 132.3125,129.8994 Q132.5469,130.1494 132.5469,130.7588 L132.5469,132.7275 Q132.5469,133.2744 132.4219,133.4619 Q132.1563,133.8525 131.7031,133.8525 Q131.2344,133.8525 130.9688,133.4463 Q130.8438,133.2588 130.8438,132.5869 L129.3594,132.5869 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="162.5" y="127.8955">«entity»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="79" x="144.5" y="145.0654">Passageway</text><line style="stroke:#181818;stroke-width:0.5;" x1="116.5" x2="225.5" y1="153.1416" y2="153.1416"/></g><!--MD5=[727797ff5554768dd76684d70c1ef924]
+link Building to Code--><g id="link_Building_Code"><path codeLine="22" d="M107.42,306.5085 C103.25,324.1485 98.12,345.8985 94.04,363.1585 " fill="none" id="Building-to-Code" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="92.81,368.3685,98.7599,360.52,93.952,363.5006,90.9714,358.6928,92.81,368.3685" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[53e22fe04d307f496c435aecb681f20c]
+link Building to BuildingName--><g id="link_Building_BuildingName"><path codeLine="23" d="M147.74,306.5085 C166.22,324.6085 189.11,347.0185 206.95,364.4885 " fill="none" id="Building-to-BuildingName" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="210.91,368.3685,207.2818,359.2123,207.3389,364.8688,201.6824,364.926,210.91,368.3685" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[97b9c32ea555d2a4ac46f49faf95ef37]
+link Passageway to Building--><g id="link_Passageway_Building"><path codeLine="26" d="M154.86,161.4985 C149.32,170.6485 143.41,181.2685 139,191.4385 C132.23,207.0485 126.66,225.1385 122.61,240.2585 " fill="none" id="Passageway-Building" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#000000" points="142.1053,205.2414,148.2526,197.9845,142.8131,195.7572,142.1053,205.2414" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="21" x="153" y="205.9336">has</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="145.5495" y="182.8293">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="118.616" y="229.7009">*</text></g><!--MD5=[64300517f2b2458b06da27610560bc42]
+link Passageway to Floor--><g id="link_Passageway_Floor"><path codeLine="27" d="M181.14,161.4785 C190.16,183.2885 203.41,215.3585 213.35,239.4185 " fill="none" id="Passageway-Floor" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#000000" points="206.9097,205.2352,206.1712,195.7534,200.7389,197.9983,206.9097,205.2352" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="43" x="214" y="205.9336">through</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="175.6755" y="182.8047">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="205.1705" y="228.6448">*</text></g><!--MD5=[934c8b04a9f536fb853d4a6ee2db4c10]
+@startuml
+
+skinparam titleFontSize 25
+title <u>US 260 - Domain classes</u>
+
+hide methods
+skinparam classAttributeIconSize 0
+
+'Building aggregate
+package "<<aggregate>> Building" {
+    entity Building <<entity>> <<root>>
+    class Code <<(V, #FF8B40) value object>>
+    class BuildingName <<(V, #FF8B40) value object>>
+
+    entity Floor <<entity>> {
+        number
+    }
+
+    entity Passageway <<entity>>
+}
+
+'Value objects
+Building -down-> Code
+Building -down-> BuildingName
+
+'Navigation
+Passageway "*" - - "*" Building : has >
+Passageway "1" - - "*" Floor : through >
+
+@enduml
+
+@startuml
+
+skinparam titleFontSize 25
+title <u>US 260 - Domain classes</u>
+
+hide methods
+skinparam classAttributeIconSize 0
+
+package "<<aggregate>> Building" {
+    entity Building <<entity>> <<root>>
+    class Code <<(V, #FF8B40) value object>>
+    class BuildingName <<(V, #FF8B40) value object>>
+
+    entity Floor <<entity>> {
+        number
+    }
+
+    entity Passageway <<entity>>
+}
+
+Building -down-> Code
+Building -down-> BuildingName
+
+Passageway "*" - - "*" Building : has >
+Passageway "1" - - "*" Floor : through >
+
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 18:01:30 WEST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: Cp1252
+Language: pt
+Country: PT
+--></g></svg>

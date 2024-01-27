@@ -1,0 +1,24 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 1 - Process View) - US 110
+autonumber
+
+Actor "User" as User
+participant "RobDroneGo WebApp" as WebSite <<system (C4)>>
+
+activate User
+    User -> WebSite : Ask to show his/her profile
+    activate WebSite
+        WebSite --> User : Show the user profile
+    deactivate WebSite
+
+    User -> WebSite : Ask to download a copy of personal data
+    activate WebSite
+        WebSite --> User : Gives and download the user personal data in a file
+    deactivate WebSite
+deactivate User
+
+@enduml

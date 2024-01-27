@@ -1,0 +1,34 @@
+<div class="center-container">
+    <h1 class="center">Login</h1>
+
+    <form (ngSubmit)="login()" #formulario="ngForm" class="form-to-create">
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" [(ngModel)]="email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="{{ showPassword ? 'text' : 'password' }}" id="password" name="password" [(ngModel)]="password"
+                required>
+            <div class="checkbox-container">
+                <input type="checkbox" id="showPassword" (change)="togglePasswordVisibility()">
+                <label class="show-password-label" for="showPassword">Show Password</label>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button type="submit" [disabled]="formulario.invalid">Login</button>
+        </div>
+
+        <div class="button-container">
+            <a (click)="signInWithFacebook()" class="login-with-facebook-button">Login with Facebook</a>
+        </div>
+
+        <p *ngIf="error" class="form-alert form-alert-error"><b>Error:</b> {{error}}</p>
+        <p *ngIf="success" class="form-alert form-alert-success"><b>Success:</b> {{success}}</p>
+
+        <hr>
+        <a class="register-route" routerLink="/register">Do not have an account yet?</a>
+    </form>
+</div>

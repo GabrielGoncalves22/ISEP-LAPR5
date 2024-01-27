@@ -1,0 +1,23 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View) - US 180
+autonumber
+
+participant "BE" as BE <<system (C4)>>
+participant "BD" as BD <<system (C4)>>
+
+?o-> BE : GET (.../buildings?min=:min&max=:max)
+activate BE
+
+    BE --> BD : Select building with number of floors between :min and :max
+    activate BD
+        BD --> BE :
+    deactivate BD
+
+<-- BE : status: 200/404
+deactivate BE
+
+@enduml

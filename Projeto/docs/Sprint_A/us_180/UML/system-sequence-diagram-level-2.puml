@@ -1,0 +1,17 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 2 - Process View) - US 180
+autonumber
+
+participant "MD" as MD <<system (C4)>>
+
+?o-> MD : GET (.../buildings?min=:min&max=:max)
+activate MD
+
+<-- MD : status: 200/404
+deactivate MD
+
+@enduml

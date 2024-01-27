@@ -1,0 +1,53 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 3 - Process View) - US 1100
+autonumber
+
+participant ":Route" as route
+participant ":Controller" as controller
+participant ":Service" as service
+participant ":Repository" as repo
+participant ":DB" as db
+
+participant ":DTOList" as DTOList
+
+?o-> route : GET (.../buildings/:code/floors)
+activate route
+
+route -> controller : execute(req, res, next)
+activate controller
+
+controller -> controller : getFloorsByBuilding(req, res, next)
+activate controller
+
+controller -> service : getFloorsByBuilding(buildingCode)
+activate service
+
+service -> repo : findFloorsByBuilding(buildingCode)
+activate repo
+
+repo -> db :
+activate db
+
+db --> repo :
+deactivate db
+
+repo --> service :
+deactivate repo
+
+service --> controller : DTOList
+deactivate service
+
+controller --> controller : status: 200/404
+deactivate controller
+
+controller --> route : status: 200/404
+deactivate controller
+
+<-- route : status: 200/404
+deactivate route
+
+@enduml

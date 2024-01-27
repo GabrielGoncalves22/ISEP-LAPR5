@@ -1,0 +1,26 @@
+[
+    {
+        "id": "6588361383199125ba134a6d",
+        "buildingCode": "A",
+        "emergencyContactName": "André Silva Pereira",
+        "emergencyContactPhoneNumber": "922435233",
+        "robotTaskStatus": "Requested",
+        "surveillanceTaskFloors": [
+            10
+        ],
+        "createdByUser": "user1@isep.ipp.pt",
+        "createdDate": "23/12/2023 20:41:30"
+    },
+    {
+        "id": "65886597325a7d7958b74b78",
+        "buildingCode": "E",
+        "emergencyContactName": "Manuel Monteiro",
+        "emergencyContactPhoneNumber": "913453976",
+        "robotTaskStatus": "Requested",
+        "surveillanceTaskFloors": [
+            0
+        ],
+        "createdByUser": "user2@isep.ipp.pt",
+        "createdDate": "25/12/2023 09:35:30"
+    }
+]

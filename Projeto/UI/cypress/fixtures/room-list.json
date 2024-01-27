@@ -1,0 +1,38 @@
+[
+    {
+        "name":"E101",
+        "description":"Gabinete E101",
+        "category":"Gabinete",
+        "building":"E"
+    },
+    {
+        "name":"E102",
+        "description":"Laboratório E102",
+        "category":"Laboratório",
+        "building":"E"
+    },
+    {
+        "name":"E201",
+        "description":"Anfiteatro E201",
+        "category":"Anfiteatro",
+        "building":"E"
+    },
+    {
+        "name":"E202",
+        "description":"Outro E202",
+        "category":"Outro",
+        "building":"E"
+    },
+    {
+        "name":"A101",
+        "description":"Gabinete A101",
+        "category":"Gabinete",
+        "building":"A"
+    },
+    {
+        "name":"A201",
+        "description":"Gabinete A201",
+        "category":"Gabinete",
+        "building":"A"
+    }
+]

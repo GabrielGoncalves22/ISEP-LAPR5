@@ -1,0 +1,30 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View - UI) - US 1030
+autonumber
+
+participant "View" as View <<Component>>
+participant "Component" as Component <<Component>>
+participant "Model" as Model <<Component>>
+participant "Service" as Service <<Component>>
+
+?o-> View : Ask to list devices
+activate View
+    View -> Component : listAllDevices()
+    activate Component
+        Component -> Service : getAllDevices()
+        activate Service
+            Service -> : GET (.../devices)
+            Service <--: status: 200/404
+            Service --> Component : Success / Error
+        deactivate Service
+
+        Component --> View : Information about the success/error
+    deactivate Component
+<-- View : List the devices
+deactivate View
+
+@enduml

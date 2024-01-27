@@ -1,0 +1,30 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 2 - Process View) - US 1180
+autonumber
+
+Actor "Campus Manager" as manager
+participant "UI" as UI <<system (C4)>>
+participant "MD" as MD <<system (C4)>>
+
+activate manager
+    manager -> UI : Ask to edit passageway
+    activate UI
+        UI --> manager : Ask to choose an passageway to edit data
+    deactivate UI
+
+    manager -> UI : Choose the passageway, and edits
+    activate UI
+        UI -> MD : PUT/PATCH (.../passageways/:passagewayCode)
+        activate MD
+            UI <-- MD : status: 200/404
+        deactivate MD
+
+        UI --> manager : Passageway edited/data error
+    deactivate UI
+deactivate manager
+
+@enduml

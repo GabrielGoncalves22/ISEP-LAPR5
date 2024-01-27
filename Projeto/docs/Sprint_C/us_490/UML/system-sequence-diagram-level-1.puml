@@ -1,0 +1,26 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 1 - Process View) - US 490
+autonumber
+
+Actor "Task Manager" as TaskManager
+participant "RobDroneGo" as Sistema <<system (C4)>>
+
+activate TaskManager
+    TaskManager -> Sistema : Ask to list requests
+    activate Sistema
+
+    Sistema --> TaskManager : Ask to choose the filters
+    deactivate Sistema
+
+    TaskManager -> Sistema : Choose the filters and asks to list
+    activate Sistema
+
+    Sistema --> TaskManager : Lists the requests that fulllfill the filters
+    deactivate Sistema
+deactivate TaskManager
+
+@enduml

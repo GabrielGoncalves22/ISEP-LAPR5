@@ -1,0 +1,2927 @@
+{
+	"info": {
+		"_postman_id": "a6ae2aa3-ed34-42c6-955c-54cc5b59be8a",
+		"name": "RobDroneGo - C/Testes e Automatização",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "14167841",
+		"_collection_link": "https://sem5pi.postman.co/workspace/-RobDroneGo~1814ee45-4abb-43ad-b823-371a318af226/collection/14167841-a6ae2aa3-ed34-42c6-955c-54cc5b59be8a?action=share&source=collection_link&creator=14167841"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register system manager",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var name = utils.randomString(utils.randomInt(1, 50));\r",
+									"var email = utils.randomString(utils.randomInt(1, 25)) + \"@isep.ipp.pt\";\r",
+									"var password = utils.randomString(50);\r",
+									"var telephone = \"91\" + utils.randomInt(1000000, 9999999);\r",
+									"\r",
+									"pm.environment.set(\"name\", name);\r",
+									"pm.environment.set(\"email\", email);\r",
+									"pm.environment.set(\"password\", password);\r",
+									"pm.environment.set(\"telephone\", telephone);\r",
+									"\r",
+									"pm.globals.set(\"emailSystem\", email);\r",
+									"pm.globals.set(\"passwordSystem\", password);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 201 Created\r",
+									"pm.test(\"Status code is 201 Created\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"user\" object\r",
+									"pm.test(\"Check for specific properties in the 'user' object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody.user).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the \"user\" object\r",
+									"    pm.expect(responseBody.user).to.have.property('id');\r",
+									"    pm.expect(responseBody.user).to.have.property('name');\r",
+									"    pm.expect(responseBody.user).to.have.property('email');\r",
+									"    pm.expect(responseBody.user).to.have.property('telephone');\r",
+									"    pm.expect(responseBody.user).to.have.property('role');\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"token\" property\r",
+									"pm.test(\"Check for the 'token' property\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response has the \"token\" property\r",
+									"    pm.expect(responseBody).to.have.property('token');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImMxMzE5ODNiLTc4ODQtNDczMC1iZTkyLWQzOWVhYWViNTVlNSIsIm5hbWUiOiJCZXJuYXJkbyBTaWx2YSIsImVtYWlsIjoic3lzdGVtQGlzZXAuaXBwLnB0IiwidGVsZXBob25lIjoiOTIyNDA0MzMxIiwicm9sZSI6IlN5c3RlbSBNYW5hZ2VyIiwiZXhwIjoxNzg4NjQzNTk3MDAyLCJpYXQiOjE3MDIyNDcxOTd9.yI-4ApQb6lDTpGGT727EReKTW0fIaZ7Fve82jJD0yv4"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{name}}\",\r\n  \"email\": \"{{email}}\",\r\n  \"password\": \"{{password}}\",\r\n  \"telephone\": \"{{telephone}}\",\r\n  \"role\": \"System Manager\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/users/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Login system manager",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 200 OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"user\" object\r",
+									"pm.test(\"Check for specific properties in the 'user' object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody.user).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the \"user\" object\r",
+									"    pm.expect(responseBody.user).to.have.property('id');\r",
+									"    pm.expect(responseBody.user).to.have.property('name');\r",
+									"    pm.expect(responseBody.user).to.have.property('email');\r",
+									"    pm.expect(responseBody.user).to.have.property('telephone');\r",
+									"    pm.expect(responseBody.user).to.have.property('role');\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"token\" property\r",
+									"pm.test(\"Check for the 'token' property\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response has the \"token\" property\r",
+									"    pm.expect(responseBody).to.have.property('token');\r",
+									"\r",
+									"    pm.globals.set(\"tokenSystem\", responseBody.token);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"{{emailSystem}}\",\r\n  \"password\": \"{{passwordSystem}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/users/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Register campus manager",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var name = utils.randomString(utils.randomInt(1, 50));\r",
+									"var email = utils.randomString(utils.randomInt(1, 25)) + \"@isep.ipp.pt\";\r",
+									"var password = utils.randomString(50);\r",
+									"var telephone = \"91\" + utils.randomInt(1000000, 9999999);\r",
+									"\r",
+									"pm.environment.set(\"name\", name);\r",
+									"pm.environment.set(\"email\", email);\r",
+									"pm.environment.set(\"password\", password);\r",
+									"pm.environment.set(\"telephone\", telephone);\r",
+									"\r",
+									"pm.globals.set(\"emailCampus\", email);\r",
+									"pm.globals.set(\"passwordCampus\", password);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 201 Created\r",
+									"pm.test(\"Status code is 201 Created\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"user\" object\r",
+									"pm.test(\"Check for specific properties in the 'user' object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody.user).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the \"user\" object\r",
+									"    pm.expect(responseBody.user).to.have.property('id');\r",
+									"    pm.expect(responseBody.user).to.have.property('name');\r",
+									"    pm.expect(responseBody.user).to.have.property('email');\r",
+									"    pm.expect(responseBody.user).to.have.property('telephone');\r",
+									"    pm.expect(responseBody.user).to.have.property('role');\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"token\" property\r",
+									"pm.test(\"Check for the 'token' property\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response has the \"token\" property\r",
+									"    pm.expect(responseBody).to.have.property('token');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{tokenSystem}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{name}}\",\r\n  \"email\": \"{{email}}\",\r\n  \"password\": \"{{password}}\",\r\n  \"telephone\": \"{{telephone}}\",\r\n  \"role\": \"Campus Manager\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/users/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Register fleet manager",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var name = utils.randomString(utils.randomInt(1, 50));\r",
+									"var email = utils.randomString(utils.randomInt(1, 25)) + \"@isep.ipp.pt\";\r",
+									"var password = utils.randomString(50);\r",
+									"var telephone = \"91\" + utils.randomInt(1000000, 9999999);\r",
+									"\r",
+									"pm.environment.set(\"name\", name);\r",
+									"pm.environment.set(\"email\", email);\r",
+									"pm.environment.set(\"password\", password);\r",
+									"pm.environment.set(\"telephone\", telephone);\r",
+									"\r",
+									"pm.globals.set(\"emailFleet\", email);\r",
+									"pm.globals.set(\"passwordFleet\", password);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 201 Created\r",
+									"pm.test(\"Status code is 201 Created\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"user\" object\r",
+									"pm.test(\"Check for specific properties in the 'user' object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody.user).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the \"user\" object\r",
+									"    pm.expect(responseBody.user).to.have.property('id');\r",
+									"    pm.expect(responseBody.user).to.have.property('name');\r",
+									"    pm.expect(responseBody.user).to.have.property('email');\r",
+									"    pm.expect(responseBody.user).to.have.property('telephone');\r",
+									"    pm.expect(responseBody.user).to.have.property('role');\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"token\" property\r",
+									"pm.test(\"Check for the 'token' property\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response has the \"token\" property\r",
+									"    pm.expect(responseBody).to.have.property('token');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{tokenSystem}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{name}}\",\r\n  \"email\": \"{{email}}\",\r\n  \"password\": \"{{password}}\",\r\n  \"telephone\": \"{{telephone}}\",\r\n  \"role\": \"Fleet Manager\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/users/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Register user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var name = utils.randomString(utils.randomInt(1, 50));\r",
+									"var email = utils.randomString(utils.randomInt(1, 25)) + \"@isep.ipp.pt\";\r",
+									"var password = utils.randomString(50);\r",
+									"var telephone = \"91\" + utils.randomInt(1000000, 9999999);\r",
+									"\r",
+									"var taxPayerNumber;\r",
+									"do {\r",
+									"    taxPayerNumber = utils.randomInt(100000000, 999999999).toString();\r",
+									"} while (!validateTaxPayerNumber(taxPayerNumber));\r",
+									"\r",
+									"pm.environment.set(\"name\", name);\r",
+									"pm.environment.set(\"email\", email);\r",
+									"pm.environment.set(\"password\", password);\r",
+									"pm.environment.set(\"telephone\", telephone);\r",
+									"pm.environment.set(\"taxPayerNumber\", taxPayerNumber);\r",
+									"\r",
+									"pm.globals.set(\"emailUser\", email);\r",
+									"pm.globals.set(\"passwordUser\", password);\r",
+									"\r",
+									"function validateTaxPayerNumber(userTaxPayerNumber) {\r",
+									"    const max = 9;\r",
+									"\r",
+									"    if (!userTaxPayerNumber.match(/^[0-9]+$/) || userTaxPayerNumber.length !== max) {\r",
+									"        return false;\r",
+									"    }\r",
+									"\r",
+									"    let checkSum = 0;\r",
+									"    for (let i = 0; i < max - 1; i++) {\r",
+									"        checkSum += parseInt(userTaxPayerNumber[i]) * (max - i);\r",
+									"    }\r",
+									"\r",
+									"    let checkDigit = 11 - (checkSum % 11);\r",
+									"    if (checkDigit > 9) {\r",
+									"        checkDigit = 0;\r",
+									"    }\r",
+									"\r",
+									"    return checkDigit === parseInt(userTaxPayerNumber[max - 1]);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 201 Created\r",
+									"pm.test(\"Status code is 201 Created\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"user\" object\r",
+									"pm.test(\"Check for specific properties in the 'user' object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody.user).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the \"user\" object\r",
+									"    pm.expect(responseBody.user).to.have.property('id');\r",
+									"    pm.expect(responseBody.user).to.have.property('name');\r",
+									"    pm.expect(responseBody.user).to.have.property('email');\r",
+									"    pm.expect(responseBody.user).to.have.property('telephone');\r",
+									"    pm.expect(responseBody.user).to.have.property('taxPayerNumber');\r",
+									"    pm.expect(responseBody.user).to.have.property('role');\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"token\" property\r",
+									"pm.test(\"Check for the 'token' property\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response has the \"token\" property\r",
+									"    pm.expect(responseBody).to.have.property('token');\r",
+									"\r",
+									"    pm.globals.set(\"tokenUser\", responseBody.token);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{tokenSystem}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{name}}\",\r\n  \"email\": \"{{email}}\",\r\n  \"password\": \"{{password}}\",\r\n  \"telephone\": \"{{telephone}}\",\r\n  \"taxPayerNumber\": \"{{taxPayerNumber}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/users/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Login campus manager",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 200 OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"user\" object\r",
+									"pm.test(\"Check for specific properties in the 'user' object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody.user).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the \"user\" object\r",
+									"    pm.expect(responseBody.user).to.have.property('id');\r",
+									"    pm.expect(responseBody.user).to.have.property('name');\r",
+									"    pm.expect(responseBody.user).to.have.property('email');\r",
+									"    pm.expect(responseBody.user).to.have.property('telephone');\r",
+									"    pm.expect(responseBody.user).to.have.property('role');\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"token\" property\r",
+									"pm.test(\"Check for the 'token' property\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response has the \"token\" property\r",
+									"    pm.expect(responseBody).to.have.property('token');\r",
+									"\r",
+									"    pm.globals.set(\"tokenCampus\", responseBody.token);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"{{emailCampus}}\",\r\n  \"password\": \"{{passwordCampus}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/users/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Login fleet manager",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 200 OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"user\" object\r",
+									"pm.test(\"Check for specific properties in the 'user' object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody.user).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the \"user\" object\r",
+									"    pm.expect(responseBody.user).to.have.property('id');\r",
+									"    pm.expect(responseBody.user).to.have.property('name');\r",
+									"    pm.expect(responseBody.user).to.have.property('email');\r",
+									"    pm.expect(responseBody.user).to.have.property('telephone');\r",
+									"    pm.expect(responseBody.user).to.have.property('role');\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"token\" property\r",
+									"pm.test(\"Check for the 'token' property\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response has the \"token\" property\r",
+									"    pm.expect(responseBody).to.have.property('token');\r",
+									"\r",
+									"    pm.globals.set(\"tokenFleet\", responseBody.token);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"{{emailFleet}}\",\r\n  \"password\": \"{{passwordFleet}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/users/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Login user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 200 OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"user\" object\r",
+									"pm.test(\"Check for specific properties in the 'user' object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody.user).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the \"user\" object\r",
+									"    pm.expect(responseBody.user).to.have.property('id');\r",
+									"    pm.expect(responseBody.user).to.have.property('name');\r",
+									"    pm.expect(responseBody.user).to.have.property('email');\r",
+									"    pm.expect(responseBody.user).to.have.property('telephone');\r",
+									"    pm.expect(responseBody.user).to.have.property('taxPayerNumber');\r",
+									"    pm.expect(responseBody.user).to.have.property('role');\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"token\" property\r",
+									"pm.test(\"Check for the 'token' property\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response has the \"token\" property\r",
+									"    pm.expect(responseBody).to.have.property('token');\r",
+									"\r",
+									"    pm.globals.set(\"tokenUser\", responseBody.token);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"{{emailUser}}\",\r\n  \"password\": \"{{passwordUser}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/users/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Me system manager",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 200 OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"user\" object\r",
+									"pm.test(\"Check for specific properties in the 'user' object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the \"user\" object\r",
+									"    pm.expect(responseBody).to.have.property('id');\r",
+									"    pm.expect(responseBody).to.have.property('name');\r",
+									"    pm.expect(responseBody).to.have.property('email');\r",
+									"    pm.expect(responseBody).to.have.property('telephone');\r",
+									"    pm.expect(responseBody).to.have.property('role');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{tokenSystem}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/users/me"
+					},
+					"response": []
+				},
+				{
+					"name": "Me campus manager",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 200 OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"user\" object\r",
+									"pm.test(\"Check for specific properties in the 'user' object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the \"user\" object\r",
+									"    pm.expect(responseBody).to.have.property('id');\r",
+									"    pm.expect(responseBody).to.have.property('name');\r",
+									"    pm.expect(responseBody).to.have.property('email');\r",
+									"    pm.expect(responseBody).to.have.property('telephone');\r",
+									"    pm.expect(responseBody).to.have.property('role');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{tokenCampus}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/users/me"
+					},
+					"response": []
+				},
+				{
+					"name": "Me fleet manager",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 200 OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"user\" object\r",
+									"pm.test(\"Check for specific properties in the 'user' object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the \"user\" object\r",
+									"    pm.expect(responseBody).to.have.property('id');\r",
+									"    pm.expect(responseBody).to.have.property('name');\r",
+									"    pm.expect(responseBody).to.have.property('email');\r",
+									"    pm.expect(responseBody).to.have.property('telephone');\r",
+									"    pm.expect(responseBody).to.have.property('role');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{tokenFleet}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/users/me"
+					},
+					"response": []
+				},
+				{
+					"name": "Me user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 200 OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"user\" object\r",
+									"pm.test(\"Check for specific properties in the 'user' object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the \"user\" object\r",
+									"    pm.expect(responseBody).to.have.property('id');\r",
+									"    pm.expect(responseBody).to.have.property('name');\r",
+									"    pm.expect(responseBody).to.have.property('email');\r",
+									"    pm.expect(responseBody).to.have.property('telephone');\r",
+									"    pm.expect(responseBody).to.have.property('taxPayerNumber');\r",
+									"    pm.expect(responseBody).to.have.property('role');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{tokenUser}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/users/me"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": {
+					"token": ""
+				}
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Building",
+			"item": [
+				{
+					"name": "Create a building 1",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var code = utils.randomString(5);\r",
+									"var name = utils.randomString(utils.randomInt(0, 50));\r",
+									"var description = utils.randomString(utils.randomInt(0, 255));\r",
+									"var numXCells = utils.randomInt(1, 100);\r",
+									"var numYCells = utils.randomInt(1, 100);\r",
+									"\r",
+									"pm.environment.set(\"building1Code\", code);\r",
+									"pm.environment.set(\"building1Name\", name);\r",
+									"pm.environment.set(\"building1Description\", description);\r",
+									"pm.environment.set(\"building1NumXCells\", numXCells);\r",
+									"pm.environment.set(\"building1NumYCells\", numYCells);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 201 Created\r",
+									"pm.test(\"Status code is 201 Created\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"building\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the object\r",
+									"    pm.expect(responseBody).to.have.property('code');\r",
+									"    pm.expect(responseBody).to.have.property('name');\r",
+									"    pm.expect(responseBody).to.have.property('description');\r",
+									"    pm.expect(responseBody).to.have.property('floors').and.to.be.an('array');\r",
+									"    pm.expect(responseBody).to.have.property('elevator').and.to.eql(null);\r",
+									"\r",
+									"    pm.globals.set(\"building1Code\", responseBody.code);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"{{building1Code}}\",\r\n    \"name\": \"{{building1Name}}\",\r\n    \"description\": \"{{building1Description}}\",\r\n    \"numXCells\": {{building1NumXCells}},\r\n    \"numYCells\": {{building1NumYCells}}\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/buildings"
+					},
+					"response": []
+				},
+				{
+					"name": "Create a building 2",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var code = utils.randomString(5);\r",
+									"var name = utils.randomString(utils.randomInt(0, 50));\r",
+									"var description = utils.randomString(utils.randomInt(0, 255));\r",
+									"var numXCells = utils.randomInt(1, 100);\r",
+									"var numYCells = utils.randomInt(1, 100);\r",
+									"\r",
+									"pm.environment.set(\"building2Code\", code);\r",
+									"pm.environment.set(\"building2Name\", name);\r",
+									"pm.environment.set(\"building2Description\", description);\r",
+									"pm.environment.set(\"building2NumXCells\", numXCells);\r",
+									"pm.environment.set(\"building2NumYCells\", numYCells);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 201 Created\r",
+									"pm.test(\"Status code is 201 Created\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"building\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the object\r",
+									"    pm.expect(responseBody).to.have.property('code');\r",
+									"    pm.expect(responseBody).to.have.property('name');\r",
+									"    pm.expect(responseBody).to.have.property('description');\r",
+									"    pm.expect(responseBody).to.have.property('floors').and.to.be.an('array');\r",
+									"    pm.expect(responseBody).to.have.property('elevator').and.to.eql(null);\r",
+									"\r",
+									"    pm.globals.set(\"building2Code\", responseBody.code);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"{{building2Code}}\",\r\n    \"name\": \"{{building2Name}}\",\r\n    \"description\": \"{{building2Description}}\",\r\n    \"numXCells\": {{building2NumXCells}},\r\n    \"numYCells\": {{building2NumYCells}}\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/buildings"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all buildings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 200 OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"building\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an array\r",
+									"    pm.expect(responseBody).to.be.an('array');\r",
+									"\r",
+									"    responseBody.forEach(function (item) {\r",
+									"        pm.expect(item).to.have.property('code');\r",
+									"        pm.expect(item).to.have.property('name');\r",
+									"        pm.expect(item).to.have.property('description');\r",
+									"        pm.expect(item).to.have.property('hasElevator');\r",
+									"        pm.expect(item).to.have.property('numFloors');\r",
+									"    });\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{HOST}}/api/buildings"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all buildings between min and max",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"min\", utils.randomInt(0, 5));\r",
+									"pm.globals.set(\"max\", utils.randomInt(6, 10));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 200 OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"building\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an array\r",
+									"    pm.expect(responseBody).to.be.an('array');\r",
+									"\r",
+									"    responseBody.forEach(function (item) {\r",
+									"        pm.expect(item).to.have.property('code');\r",
+									"        pm.expect(item).to.have.property('name');\r",
+									"        pm.expect(item).to.have.property('description');\r",
+									"        pm.expect(item).to.have.property('numXCells');\r",
+									"        pm.expect(item).to.have.property('numYCells');\r",
+									"        pm.expect(item).to.have.property('hasElevator');\r",
+									"        pm.expect(item).to.have.property('numFloors');\r",
+									"    });\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/buildings?min={{min}}&max={{max}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"buildings"
+							],
+							"query": [
+								{
+									"key": "min",
+									"value": "{{min}}"
+								},
+								{
+									"key": "max",
+									"value": "{{max}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update building 1",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var name = utils.randomString(utils.randomInt(0, 50));\r",
+									"var description = utils.randomString(utils.randomInt(0, 255));\r",
+									"var numXCells = utils.randomInt(1, 100);\r",
+									"var numYCells = utils.randomInt(1, 100);\r",
+									"\r",
+									"pm.environment.set(\"building1Name\", name);\r",
+									"pm.environment.set(\"building1Description\", description);\r",
+									"pm.environment.set(\"building1NumXCells\", numXCells);\r",
+									"pm.environment.set(\"building1NumYCells\", numYCells);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 200 OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"building\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"    \r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody).to.be.an('object');\r",
+									"\r",
+									"    // Verifique as propriedades específicas do edifício\r",
+									"    pm.expect(responseBody).to.have.property('code');\r",
+									"    pm.expect(responseBody).to.have.property('name');\r",
+									"    pm.expect(responseBody).to.have.property('description');\r",
+									"    pm.expect(responseBody).to.have.property('numXCells');\r",
+									"    pm.expect(responseBody).to.have.property('numYCells');\r",
+									"    pm.expect(responseBody).to.have.property('floors').that.is.an('array');\r",
+									"\r",
+									"    // Verifique a estrutura de cada piso no edifício\r",
+									"    responseBody.floors.forEach(function (floor) {\r",
+									"        pm.expect(floor).to.be.an('object');\r",
+									"        pm.expect(floor).to.have.property('number');\r",
+									"        pm.expect(floor).to.have.property('description');\r",
+									"    });\r",
+									"\r",
+									"    if (responseBody.elevator !== null) {\r",
+									"\r",
+									"        // Check if the elevator is an object\r",
+									"        pm.expect(responseBody.elevator).to.be.an('object');\r",
+									"\r",
+									"        pm.expect(responseBody.elevator).to.have.property('brand');\r",
+									"        pm.expect(responseBody.elevator).to.have.property('model');\r",
+									"        pm.expect(responseBody.elevator).to.have.property('serialNumber');\r",
+									"        pm.expect(responseBody.elevator).to.have.property('description');\r",
+									"        pm.expect(responseBody.elevator).to.have.property('floors').that.is.an('array');\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{building1Name}}\",\r\n    \"description\": \"{{building1Description}}\",\r\n    \"numXCells\": {{building1NumXCells}},\r\n    \"numYCells\": {{building1NumYCells}}\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/buildings/{{building2Code}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update building 1",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var description = utils.randomString(utils.randomInt(0, 255));\r",
+									"\r",
+									"pm.environment.set(\"building1Description\", description);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 200 OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"building\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"    \r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody).to.be.an('object');\r",
+									"\r",
+									"    // Verifique as propriedades específicas do edifício\r",
+									"    pm.expect(responseBody).to.have.property('code');\r",
+									"    pm.expect(responseBody).to.have.property('name');\r",
+									"    pm.expect(responseBody).to.have.property('description');\r",
+									"    pm.expect(responseBody).to.have.property('numXCells');\r",
+									"    pm.expect(responseBody).to.have.property('numYCells');\r",
+									"    pm.expect(responseBody).to.have.property('floors').that.is.an('array');\r",
+									"\r",
+									"    // Verifique a estrutura de cada piso no edifício\r",
+									"    responseBody.floors.forEach(function (floor) {\r",
+									"        pm.expect(floor).to.be.an('object');\r",
+									"        pm.expect(floor).to.have.property('number');\r",
+									"        pm.expect(floor).to.have.property('description');\r",
+									"    });\r",
+									"\r",
+									"    if (responseBody.elevator !== null) {\r",
+									"\r",
+									"        // Check if the elevator is an object\r",
+									"        pm.expect(responseBody.elevator).to.be.an('object');\r",
+									"\r",
+									"        pm.expect(responseBody.elevator).to.have.property('brand');\r",
+									"        pm.expect(responseBody.elevator).to.have.property('model');\r",
+									"        pm.expect(responseBody.elevator).to.have.property('serialNumber');\r",
+									"        pm.expect(responseBody.elevator).to.have.property('description');\r",
+									"        pm.expect(responseBody.elevator).to.have.property('floors').that.is.an('array');\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"{{building1Description}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/buildings/{{building2Code}}"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": {
+					"token": "{{tokenCampus}}"
+				}
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Device",
+			"item": [
+				{
+					"name": "Create a device type",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var type = utils.randomString(utils.randomInt(1, 25));\r",
+									"var brand = utils.randomString(utils.randomInt(1, 50));\r",
+									"var model = utils.randomString(utils.randomInt(1, 50));\r",
+									"\r",
+									"pm.environment.set(\"deviceType\", type);\r",
+									"pm.environment.set(\"deviceBrand\", brand);\r",
+									"pm.environment.set(\"deviceModel\", model);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 201 Created\r",
+									"pm.test(\"Status code is 201 Created\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"device type\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the object\r",
+									"    pm.expect(responseBody).to.have.property('id');\r",
+									"    pm.expect(responseBody).to.have.property('type');\r",
+									"    pm.expect(responseBody).to.have.property('brand');\r",
+									"    pm.expect(responseBody).to.have.property('model');\r",
+									"    pm.expect(responseBody).to.have.property('taskTypes').and.to.be.an(\"array\");\r",
+									"\r",
+									"    pm.globals.set(\"deviceType\", responseBody.id);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"{{deviceType}}\",\r\n    \"brand\": \"{{deviceBrand}}\",\r\n    \"model\": \"{{deviceModel}}\",\r\n    \"taskTypes\": [0, 1]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/devices/types"
+					},
+					"response": []
+				},
+				{
+					"name": "Create a device",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 201 Created\r",
+									"pm.test(\"Status code is 201 Created\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"device\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the object\r",
+									"    pm.response.to.have.jsonBody(\"code\");\r",
+									"    pm.response.to.have.jsonBody(\"description\");\r",
+									"    pm.response.to.have.jsonBody(\"type\");\r",
+									"    pm.response.to.have.jsonBody(\"serialNumber\");\r",
+									"    pm.response.to.have.jsonBody(\"nickname\");\r",
+									"    pm.response.to.have.jsonBody(\"status\", \"Active\");\r",
+									"});\r",
+									"\r",
+									"pm.globals.set(\"deviceCode\", responseBody.code);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var code = utils.randomString(utils.randomInt(5, 30));\r",
+									"var description = utils.randomString(utils.randomInt(0, 250));\r",
+									"var serialNumber = utils.randomString(utils.randomInt(1, 50));\r",
+									"var nickname = utils.randomString(utils.randomInt(1, 30));\r",
+									"\r",
+									"pm.environment.set(\"deviceCode\", code);\r",
+									"pm.environment.set(\"deviceDescription\", description);\r",
+									"pm.environment.set(\"deviceSerialNumber\", serialNumber);\r",
+									"pm.environment.set(\"deviceNickname\", nickname);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"{{deviceCode}}\",\r\n    \"type\": \"{{deviceType}}\",\r\n    \"description\": \"{{deviceDescription}}\",\r\n    \"serialNumber\": \"{{deviceSerialNumber}}\",\r\n    \"nickname\": \"{{deviceNickname}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/devices"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all devices",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 200 OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"device\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an array\r",
+									"    pm.expect(responseBody).to.be.an('array');\r",
+									"\r",
+									"    responseBody.forEach(function (item) {\r",
+									"        pm.expect(item).to.have.property('code');\r",
+									"        pm.expect(item).to.have.property('description');\r",
+									"        pm.expect(item).to.have.property('type');\r",
+									"        pm.expect(item).to.have.property('serialNumber');\r",
+									"        pm.expect(item).to.have.property('nickname');\r",
+									"        pm.expect(item).to.have.property('status');       \r",
+									"    });\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{HOST}}/api/devices"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Status in device",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 200 OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"device\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an obejct\r",
+									"    pm.expect(responseBody).to.be.an('object');\r",
+									"\r",
+									"    pm.expect(responseBody).to.have.property('code');\r",
+									"    pm.expect(responseBody).to.have.property('description');\r",
+									"    pm.expect(responseBody).to.have.property('type');\r",
+									"    pm.expect(responseBody).to.have.property('serialNumber');\r",
+									"    pm.expect(responseBody).to.have.property('nickname');\r",
+									"    pm.expect(responseBody).to.have.property('status');           \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status of the device is 'Inactive'\", function() {\r",
+									"    pm.expect(pm.response.json().status).to.equals('Inactive');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "{{HOST}}/api/devices/{{deviceCode}}"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": {
+					"token": "{{tokenFleet}}"
+				}
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Elevator",
+			"item": [
+				{
+					"name": "Create a elevator in building 1",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var brand = utils.randomString(utils.randomInt(0, 50));\r",
+									"var model = utils.randomString(utils.randomInt(0, 50));\r",
+									"\r",
+									"if (brand != '') {\r",
+									"    model = utils.randomString(utils.randomInt(1, 50));\r",
+									"}\r",
+									"\r",
+									"var model = utils.randomString(utils.randomInt(0, 50));\r",
+									"var serialNumber = utils.randomString(utils.randomInt(0, 50));\r",
+									"var description = utils.randomString(utils.randomInt(0, 250));\r",
+									"\r",
+									"pm.environment.set(\"elevatorBrand\", brand);\r",
+									"pm.environment.set(\"elevatorModel\", model);\r",
+									"pm.environment.set(\"elevatorSerialNumber\", serialNumber);\r",
+									"pm.environment.set(\"elevatorDescripion\", description);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 201 Created\r",
+									"pm.test(\"Status code is 201 Created\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"elevator\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the object\r",
+									"    pm.expect(responseBody).to.have.property('brand');\r",
+									"    pm.expect(responseBody).to.have.property('model');\r",
+									"    pm.expect(responseBody).to.have.property('serialNumber');\r",
+									"    pm.expect(responseBody).to.have.property('description');\r",
+									"    pm.expect(responseBody).to.have.property('floors').and.to.be.an('array');\r",
+									"    \r",
+									"    // Check properties inside the \"floors\" array\r",
+									"    responseBody.floors.forEach(function(floor) {\r",
+									"        pm.expect(floor).to.be.an('object');\r",
+									"        pm.expect(floor).to.have.property('number');\r",
+									"    });\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"brand\": \"{{elevatorBrand}}\",\r\n    \"model\": \"{{elevatorModel}}\",\r\n    \"serialNumber\": \"{{elevatorSerialNumber}}\",\r\n    \"description\": \"{{elevatorDescripion}}\", \r\n    \"building\": \"{{building1Code}}\",\r\n    \"floors\": [\r\n        {\r\n            \"number\": {{building1Floor1Number}} \r\n        },\r\n        {\r\n            \"number\": {{building1Floor2Number}}\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/buildings/elevators"
+					},
+					"response": []
+				},
+				{
+					"name": "List elevator in building 1",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 200 OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"elevator\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the elevator is an object\r",
+									"    pm.expect(responseBody).to.be.an('object');\r",
+									"\r",
+									"    pm.expect(responseBody).to.have.property('brand');\r",
+									"    pm.expect(responseBody).to.have.property('model');\r",
+									"    pm.expect(responseBody).to.have.property('serialNumber');\r",
+									"    pm.expect(responseBody).to.have.property('description');\r",
+									"    \r",
+									"    responseBody.floors.forEach(function (floor) {\r",
+									"        pm.expect(floor).to.be.an('object');\r",
+									"        pm.expect(floor).to.have.property('number');\r",
+									"    });\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{HOST}}/api/buildings/{{building1Code}}/elevators"
+					},
+					"response": []
+				},
+				{
+					"name": "Update elevator in building 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 200 OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"elevator\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the object\r",
+									"    pm.expect(responseBody).to.have.property('brand');\r",
+									"    pm.expect(responseBody).to.have.property('model');\r",
+									"    pm.expect(responseBody).to.have.property('serialNumber');\r",
+									"    pm.expect(responseBody).to.have.property('description');\r",
+									"    pm.expect(responseBody).to.have.property('floors').and.to.be.an('array');\r",
+									"    \r",
+									"    // Check properties inside the \"floors\" array\r",
+									"    responseBody.floors.forEach(function(floor) {\r",
+									"        pm.expect(floor).to.be.an('object');\r",
+									"        pm.expect(floor).to.have.property('number');\r",
+									"    });\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var description = utils.randomString(utils.randomInt(0, 250));\r",
+									"\r",
+									"pm.environment.set(\"elevatorDescripion\", description);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"{{elevatorDescripion}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/buildings/{{building1Code}}/elevators/"
+					},
+					"response": []
+				},
+				{
+					"name": "Update elevator in building 1",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var brand = utils.randomString(utils.randomInt(0, 50));\r",
+									"var model = utils.randomString(utils.randomInt(0, 50));\r",
+									"\r",
+									"if (brand != '') {\r",
+									"    model = utils.randomString(utils.randomInt(1, 50));\r",
+									"}\r",
+									"\r",
+									"var model = utils.randomString(utils.randomInt(0, 50));\r",
+									"var serialNumber = utils.randomString(utils.randomInt(0, 50));\r",
+									"var description = utils.randomString(utils.randomInt(0, 250));\r",
+									"\r",
+									"pm.environment.set(\"elevatorBrand\", brand);\r",
+									"pm.environment.set(\"elevatorModel\", model);\r",
+									"pm.environment.set(\"elevatorSerialNumber\", serialNumber);\r",
+									"pm.environment.set(\"elevatorDescripion\", description);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 200 OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"elevator\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the object\r",
+									"    pm.expect(responseBody).to.have.property('brand');\r",
+									"    pm.expect(responseBody).to.have.property('model');\r",
+									"    pm.expect(responseBody).to.have.property('serialNumber');\r",
+									"    pm.expect(responseBody).to.have.property('description');\r",
+									"    pm.expect(responseBody).to.have.property('floors').and.to.be.an('array');\r",
+									"    \r",
+									"    // Check properties inside the \"floors\" array\r",
+									"    responseBody.floors.forEach(function(floor) {\r",
+									"        pm.expect(floor).to.be.an('object');\r",
+									"        pm.expect(floor).to.have.property('number');\r",
+									"    });\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"brand\": \"{{elevatorBrand}}\",\r\n    \"model\": \"{{elevatorModel}}\",\r\n    \"serialNumber\": \"{{elevatorSerialNumber}}\",\r\n    \"description\": \"{{elevatorDescripion}}\", \r\n    \"floors\": [\r\n        {\r\n            \"number\": {{building1Floor1Number}} \r\n        },\r\n        {\r\n            \"number\": {{building1Floor2Number}}\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/buildings/{{building1Code}}/elevators/"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": {
+					"token": "{{tokenCampus}}"
+				}
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Floor",
+			"item": [
+				{
+					"name": "Create a floor 1 in building 1",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var number = utils.randomInt(-10, 10);\r",
+									"var description = utils.randomString(utils.randomInt(0, 250));\r",
+									"\r",
+									"pm.environment.set(\"building1Floor1Number\", number);\r",
+									"pm.environment.set(\"building1Floor1Description\", description);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 201 Created\r",
+									"pm.test(\"Status code is 201 Created\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"floor\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the object\r",
+									"    pm.expect(responseBody).to.have.property('number');\r",
+									"    pm.expect(responseBody).to.have.property('description');\r",
+									"});\r",
+									"\r",
+									"pm.globals.set(\"building1Floor1Number\", responseBody.number);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"number\": {{building1Floor1Number}},\r\n    \"description\": \"{{building1Floor1Description}}\",\r\n    \"building\": \"{{building1Code}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/buildings/floors"
+					},
+					"response": []
+				},
+				{
+					"name": "Create a floor 2 in building 1",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var number = utils.randomInt(-10, 10);\r",
+									"var description = utils.randomString(utils.randomInt(0, 250));\r",
+									"\r",
+									"pm.environment.set(\"building1Floor2Number\", number);\r",
+									"pm.environment.set(\"building1Floor2Description\", description);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 201 Created\r",
+									"pm.test(\"Status code is 201 Created\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"floor\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the object\r",
+									"    pm.expect(responseBody).to.have.property('number');\r",
+									"    pm.expect(responseBody).to.have.property('description');\r",
+									"});\r",
+									"\r",
+									"pm.globals.set(\"building1Floor2Number\", responseBody.number);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"number\": {{building1Floor2Number}},\r\n    \"description\": \"{{building1Floor2Description}}\",\r\n    \"building\": \"{{building1Code}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/buildings/floors"
+					},
+					"response": []
+				},
+				{
+					"name": "Create a floor 1 in building 2",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var number = utils.randomInt(-10, 10);\r",
+									"var description = utils.randomString(utils.randomInt(0, 250));\r",
+									"\r",
+									"pm.environment.set(\"building2Floor1Number\", number);\r",
+									"pm.environment.set(\"building2Floor1Description\", description);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 201 Created\r",
+									"pm.test(\"Status code is 201 Created\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"floor\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the object\r",
+									"    pm.expect(responseBody).to.have.property('number');\r",
+									"    pm.expect(responseBody).to.have.property('description');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"number\": {{building2Floor1Number}},\r\n    \"description\": \"{{building2Floor1Description}}\",\r\n    \"building\": \"{{building2Code}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/buildings/floors"
+					},
+					"response": []
+				},
+				{
+					"name": "List all floors in building 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 200 OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"floor\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an array\r",
+									"    pm.expect(responseBody).to.be.an('array');\r",
+									"\r",
+									"    responseBody.forEach(function (item) {\r",
+									"        pm.expect(item).to.have.property('number');\r",
+									"        pm.expect(item).to.have.property('description');\r",
+									"    });\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{HOST}}/api/buildings/{{building1Code}}/floors"
+					},
+					"response": []
+				},
+				{
+					"name": "List floors with passageway",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 200 OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"floor\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an array\r",
+									"    pm.expect(responseBody).to.be.an('array');\r",
+									"\r",
+									"    responseBody.forEach(function (item) {\r",
+									"\r",
+									"        pm.expect(item).to.be.an('array');\r",
+									"        item.forEach(function (item2) {\r",
+									"        \r",
+									"            pm.expect(item2).to.have.property('number');\r",
+									"            pm.expect(item2).to.have.property('description');\r",
+									"            pm.expect(item2).to.have.property('building');\r",
+									"        });\r",
+									"    });\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{HOST}}/api/buildings/{{building1Code}}/floors/passageways"
+					},
+					"response": []
+				},
+				{
+					"name": "Update a floor 2 in building 1",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var number = utils.randomInt(-10, 10);\r",
+									"var description = utils.randomString(utils.randomInt(0, 250));\r",
+									"\r",
+									"pm.environment.set(\"newFloorNumber\", number);\r",
+									"pm.environment.set(\"newFloorDescription\", description);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 200 OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"floor\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the object\r",
+									"    pm.expect(responseBody).to.have.property('number');\r",
+									"    pm.expect(responseBody).to.have.property('description');\r",
+									"});\r",
+									"\r",
+									"pm.globals.set(\"building1NewFloor2Number\", responseBody.number);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"number\": {{newFloorNumber}},\r\n    \"description\": \"{{newFloorDescription}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/buildings/{{building1Code}}/floors/{{building1Floor2Number}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update a floor 2 in building 1",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var description = utils.randomString(utils.randomInt(0, 250));\r",
+									"\r",
+									"pm.environment.set(\"newFloorDescription\", description);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 200 OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"floor\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the object\r",
+									"    pm.expect(responseBody).to.have.property('number');\r",
+									"    pm.expect(responseBody).to.have.property('description');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"{{newFloorDescription}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/buildings/{{building1Code}}/floors/{{building1Floor1Number}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Load map",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 200 OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "filekey",
+									"type": "file",
+									"src": "map.json"
+								}
+							]
+						},
+						"url": "{{HOST}}/api/buildings/zbebd/floors/1/map"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": {
+					"token": "{{tokenCampus}}"
+				}
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Passageway",
+			"item": [
+				{
+					"name": "Create a passageway",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 201 Created\r",
+									"pm.test(\"Status code is 201 Created\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"passageway\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the object\r",
+									"    pm.expect(responseBody).to.have.property('code');\r",
+									"    pm.expect(responseBody).to.have.property('building1');\r",
+									"    pm.expect(responseBody).to.have.property('floor1');\r",
+									"    pm.expect(responseBody).to.have.property('building2');\r",
+									"    pm.expect(responseBody).to.have.property('floor2');\r",
+									"\r",
+									"    pm.globals.set(\"passagewayCode\", responseBody.code);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"building1\": \"{{building1Code}}\",\r\n    \"floor1\": {{building1Floor1Number}},\r\n    \"building2\": \"{{building2Code}}\",\r\n    \"floor2\": {{building2Floor1Number}}\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/buildings/passageways"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all passageways",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 200 OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"building\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an array\r",
+									"    pm.expect(responseBody).to.be.an('array');\r",
+									"\r",
+									"    responseBody.forEach(function (item) {\r",
+									"        pm.expect(item).to.have.property('code');\r",
+									"        pm.expect(item).to.have.property('building1');\r",
+									"        pm.expect(item).to.have.property('floor1');\r",
+									"        pm.expect(item).to.have.property('building2');\r",
+									"        pm.expect(item).to.have.property('floor2');\r",
+									"    });\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{HOST}}/api/buildings/passageways"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all passageways between 2 buildings",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 200 OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"passageway\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an array\r",
+									"    pm.expect(responseBody).to.be.an('array');\r",
+									"\r",
+									"    responseBody.forEach(function (item) {\r",
+									"        pm.expect(item).to.have.property('code');\r",
+									"        pm.expect(item).to.have.property('building1');\r",
+									"        pm.expect(item).to.have.property('floor1');\r",
+									"        pm.expect(item).to.have.property('building2');\r",
+									"        pm.expect(item).to.have.property('floor2');\r",
+									"    });\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/buildings/passageways?building1={{building1Code}}&building2={{building2Code}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"buildings",
+								"passageways"
+							],
+							"query": [
+								{
+									"key": "building1",
+									"value": "{{building1Code}}"
+								},
+								{
+									"key": "building2",
+									"value": "{{building2Code}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update passageway",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 200 OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"passageway\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the object\r",
+									"    pm.expect(responseBody).to.have.property('code');\r",
+									"    pm.expect(responseBody).to.have.property('building1');\r",
+									"    pm.expect(responseBody).to.have.property('floor1');\r",
+									"    pm.expect(responseBody).to.have.property('building2');\r",
+									"    pm.expect(responseBody).to.have.property('floor2');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"building1\": \"{{building1Code}}\",\r\n    \"floor1\": {{building1Floor1Number}},\r\n    \"building2\": \"{{building2Code}}\",\r\n    \"floor2\": {{building2Floor1Number}}\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/buildings/passageways/{{passagewayCode}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update passageway",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 200 OK\r",
+									"pm.test(\"Status code is 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"passageway\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the object\r",
+									"    pm.expect(responseBody).to.have.property('code');\r",
+									"    pm.expect(responseBody).to.have.property('building1');\r",
+									"    pm.expect(responseBody).to.have.property('floor1');\r",
+									"    pm.expect(responseBody).to.have.property('building2');\r",
+									"    pm.expect(responseBody).to.have.property('floor2');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"building2\": \"{{building2Code}}\",\r\n    \"floor2\": {{building2Floor1Number}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/buildings/passageways/{{passagewayCode}}"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": {
+					"token": "{{tokenCampus}}"
+				}
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Room",
+			"item": [
+				{
+					"name": "Create a room in building 1 on floor 1",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var name = utils.randomString(utils.randomInt(1, 50));\r",
+									"\r",
+									"var categoryOptions = ['Gabinete', 'Anfiteatro', 'Laboratório', 'Outro'];\r",
+									"var category = categoryOptions[utils.randomInt(0, categoryOptions.length - 1)];\r",
+									"\r",
+									"var description = utils.randomString(utils.randomInt(0, 250));\r",
+									"\r",
+									"pm.environment.set(\"roomName\", name);\r",
+									"pm.environment.set(\"roomCategory\", category);\r",
+									"pm.environment.set(\"roomDescription\", description);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test that the response status code is 201 Created\r",
+									"pm.test(\"Status code is 201 Created\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Test that the response is in JSON format\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"// Test the structure of the \"room\" object\r",
+									"pm.test(\"Check for specific properties in each object\", function () {\r",
+									"    const responseBody = pm.response.json();\r",
+									"\r",
+									"    // Check if the response is an object\r",
+									"    pm.expect(responseBody).to.be.an('object');\r",
+									"\r",
+									"    // Check the properties on the object\r",
+									"    pm.expect(responseBody).to.have.property('name');\r",
+									"    pm.expect(responseBody).to.have.property('description');\r",
+									"    pm.expect(responseBody).to.have.property('category');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{roomName}}\",\r\n    \"category\": \"{{roomCategory}}\",\r\n    \"description\": \"{{roomDescription}}\",\r\n    \"building\": \"{{building1Code}}\",\r\n    \"floor\": {{building1Floor1Number}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{HOST}}/api/buildings/rooms"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": {
+					"token": "{{tokenCampus}}"
+				}
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"utils = {",
+					"    randomString: function(length) {",
+					"        const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';",
+					"        var result = '';",
+					"",
+					"        for (var i = 0; i < length; i++) {",
+					"            result += chars[Math.floor(Math.random() * chars.length)]",
+					"        }",
+					"",
+					"        return result;",
+					"    },",
+					"",
+					"    randomInt: function(min, max) {",
+					"        return Math.floor(Math.random() * (max - min + 1)) + min;",
+					"    }",
+					"};",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "HOST",
+			"value": "http://localhost:4000"
+		}
+	]
+}

@@ -1,0 +1,56 @@
+@startuml
+left to right direction
+
+:Gestor de Campus: as campus
+:Gestor de Frota: as frota
+
+package RobDroneGo {
+    usecase "UC1000: Como gestor de Frota pretendo adicionar um novo tipo de robot indicando a sua designação e que tipos de tarefas pode executar da lista prédefinida de tarefas" as UC1000
+    usecase "UC1010: Como gestor de Frota pretendo adicionar um novo robot à frota indicando o seu tipo, designação, etc" as UC1010
+    usecase "UC1020: Como gestor de Frota pretendo inibir um robot" as UC1020
+    usecase "UC1030: Como gestor de Frota pretendo consultar todos os robots da frota" as UC1030
+    usecase "UC1040: Como gestor de Frota pretendo pesquisar todos os robots da frota por designação ou tarefa que pode executar" as UC1040
+    usecase "UC1050: Como gestor de Campus pretendo criar um Edifício indicando [...]" as UC1050
+    usecase "UC1060: Como gestor de Campus pretendo listar Edifícios" as UC1060
+    usecase "UC1070: Como gestor de Campus pretendo editar a informação (total ou parcial) de Edifício" as UC1070
+    usecase "UC1080: Como gestor de Campus pretendo listar Edifícios com min e max de pisos" as UC1080
+    usecase "UC1090: Como gestor de Campus pretendo criar um Piso indicando [...]" as UC1090
+    usecase "UC1100: Como gestor de Campus pretendo listar todos os Pisos de um Edifício" as UC1100
+    usecase "UC1110: Como gestor de Campus pretendo editar a informação (total ou parcial) de Piso" as UC1110
+    usecase "UC1120: Como gestor de Campus pretendo carregar mapa de Piso de Edifício" as UC1120
+    usecase "UC1130: Como gestor de Campus pretendo criar um Elevador num Edifício indicando os Pisos que serve" as UC1130
+    usecase "UC1140: Como gestor de Campus  pretendo listar Elevadores em Edifício" as UC1140
+    usecase "UC1150: Como gestor de Campus pretendo editar Elevador em Edifício" as UC1150
+    usecase "UC1160: Como gestor de Campus pretendo listar Pisos de Edifício servidos por Elevador" as UC1160
+    usecase "UC1170: Como gestor de Campus pretendo criar uma Passagem entre 2 Edifícios" as UC1170
+    usecase "UC1180: Como gestor de Campus pretendo editar uma Passagem entre 2 Edifícios" as UC1180
+    usecase "UC1190: Como gestor de Campus pretendo listar Passagens entre 2 Edifícios" as UC1190
+    usecase "UC1200: Como gestor de Campus pretendo listar Pisos de Edifício com Passagem para outros Edifícios" as UC1200
+    usecase "UC1210: Como gestor de Campus pretendo criar uma Sala num Piso de Edifício indicando [...]" as UC1210
+}
+
+campus -- UC1050
+campus -- UC1060
+campus -- UC1070
+campus -- UC1080
+campus -- UC1090
+campus -- UC1100
+campus -- UC1110
+campus -- UC1120
+campus -- UC1130
+campus -- UC1140
+campus -- UC1150
+campus -- UC1160
+campus -- UC1170
+campus -- UC1180
+campus -- UC1190
+campus -- UC1200
+campus -- UC1210
+
+frota -- UC1000
+frota -- UC1010
+frota -- UC1020
+frota -- UC1030
+frota -- UC1040
+
+@enduml

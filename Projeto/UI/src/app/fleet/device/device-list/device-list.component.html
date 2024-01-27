@@ -1,0 +1,16 @@
+<h1 class="center">List Devices</h1>
+
+<div class="list-container">
+    <div *ngFor="let device of devices" class="list-box">
+        <div class="list-box-title">
+            <p>{{device.nickname}}</p>
+        </div>
+        <div class="list-box-body">
+            <p><b>Code:</b> {{device.code}}</p>
+            <p><b>Description:</b> {{device.description}}</p>
+            <p><b>Type:</b> {{device.type}}</p>
+            <p><b>SerialNumber:</b> {{device.serialNumber}}</p>
+            <p><b>Status:</b> {{device.status}}</p>
+        </div>
+    </div>
+</div>

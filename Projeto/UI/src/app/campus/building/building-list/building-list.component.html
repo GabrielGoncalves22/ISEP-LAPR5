@@ -1,0 +1,52 @@
+    <h1 class="center">List Buildings</h1>
+
+    <div class="options-box">
+        <div class="options-box-option">
+            <input type="radio" id="allBuilings" name="listBuildings" [(ngModel)]="option" value="allBuildings">
+            <label for="allBuilings">List all buildings</label>
+        </div>
+
+        <div class="options-box-separator"></div>
+
+        <div class="options-box-option">
+            <input type="radio" id="listBetweenMinMax" name="listBuildings" [(ngModel)]="option" value="buildingsWithNumFloorBetweenMinAndMax">
+            <label for="listBetweenMinMax">List buildings with number of floors between a minimum and maximum</label>
+
+            <div class="options-box-option-values">
+                <div class="options-box-option-values-value">
+                    <label for="min">Minimum number:</label>
+                    <input type="number" id="min" name="min" [(ngModel)]="minNumberOfFloors">
+                </div>
+
+                <div class="options-box-option-values-value">
+                    <label for="max">Maximum number:</label>
+                    <input type="number" id="max" name="max" [(ngModel)]="maxNumberOfFloors">
+                </div>
+            </div>
+        </div>
+
+        <div class="options-box-separator"></div>
+
+        <div class="option-box-button">
+            <button class="button-style-1" (click)="listBuildings()">Search</button>
+        </div>
+
+        <p *ngIf="error" class="form-alert form-alert-error"><b>Error:</b> {{error}}</p>
+
+    </div>
+
+    <div class="list-container">
+        <div *ngFor="let building of buildings" class="list-box">
+            <div class="list-box-title" [ngClass]="{'list-box-title-expanded': building.expanded, 'list-box-title-collapsed': !building.expanded}" (click)="building.expanded = !building.expanded">
+                <p>{{building.name}}</p>
+            </div>
+            <div class="list-box-body expandable" [ngClass]="{'expanded': building.expanded, 'collapsed': !building.expanded}">
+                <p><b>Code:</b> {{building.code}}</p>
+                <p><b>Description:</b> {{building.description}}</p>
+                <p><b>Number of X cells:</b> {{building.numXCells}}</p>
+                <p><b>Number of Y cells:</b> {{building.numYCells}}</p>
+                <p><b>Has elevator:</b> {{building.hasElevator}}</p>
+                <p><b>Number of floors:</b> {{building.numFloors}}</p>
+            </div>
+        </div>
+    </div>

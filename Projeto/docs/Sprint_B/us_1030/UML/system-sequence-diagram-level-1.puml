@@ -1,0 +1,25 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 1 - Process View) - US 1030
+autonumber
+
+Actor "Fleet Manager" as manager
+participant "RobDroneGo WebApp" as WebSite <<system (C4)>>
+participant "RobDroneGo" as Sistema <<system (C4)>>
+
+activate manager
+    manager -> WebSite : Ask to list devices
+    activate WebSite
+        WebSite -> Sistema : GET (.../devices)
+        activate Sistema
+            WebSite <-- Sistema : status: 200/404
+        deactivate Sistema
+
+        WebSite --> manager : Success / Error
+    deactivate WebSite
+deactivate manager
+
+@enduml

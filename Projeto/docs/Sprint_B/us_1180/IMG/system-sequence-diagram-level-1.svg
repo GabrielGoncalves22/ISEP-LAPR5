@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="344px" preserveAspectRatio="none" style="width:454px;height:344px;background:#FFFFFF;" version="1.1" viewBox="0 0 454 344" width="454px" zoomAndPan="magnify"><defs/><g><rect fill="none" height="27.6094" id="_title" style="stroke:none;stroke-width:1.0;" width="436" x="5" y="10"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="426" x="10" y="29.5332">System Sequence Diagram (Level 1 - Process View) - US 1180</text><rect fill="#FFFFFF" height="113.4063" style="stroke:#181818;stroke-width:1.0;" width="10" x="75.5" y="131.2188"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="367.5" y="153.5703"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="367.5" y="214.2734"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="80.5" x2="80.5" y1="121.2188" y2="262.625"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="372.5" x2="372.5" y1="121.2188" y2="262.625"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="112" x="21.5" y="118.1426">Campus Manager</text><ellipse cx="80.5" cy="52.1094" fill="#E3E3E3" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M80.5,60.1094 L80.5,87.1094 M67.5,68.1094 L93.5,68.1094 M80.5,87.1094 L67.5,102.1094 M80.5,87.1094 L93.5,102.1094 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="112" x="21.5" y="276.1582">Campus Manager</text><ellipse cx="80.5" cy="287.7344" fill="#E3E3E3" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M80.5,295.7344 L80.5,322.7344 M67.5,303.7344 L93.5,303.7344 M80.5,322.7344 L67.5,337.7344 M80.5,322.7344 L93.5,337.7344 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><rect fill="#E3E3E3" height="49.2188" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="106" x="319.5" y="71"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="92" x="326.5" y="92.5332">«system (C4)»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="84" x="330.5" y="110.1426">RobDroneGo</text><rect fill="#E3E3E3" height="49.2188" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="106" x="319.5" y="261.625"/><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="92" x="326.5" y="283.1582">«system (C4)»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="84" x="330.5" y="300.7676">RobDroneGo</text><rect fill="#FFFFFF" height="113.4063" style="stroke:#181818;stroke-width:1.0;" width="10" x="75.5" y="131.2188"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="367.5" y="153.5703"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="367.5" y="214.2734"/><polygon fill="#181818" points="355.5,149.5703,365.5,153.5703,355.5,157.5703,359.5,153.5703" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="85.5" x2="361.5" y1="153.5703" y2="153.5703"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="92.5" y="148.7139">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="139" x="103.5" y="148.7139">Ask to edit passageway</text><polygon fill="#181818" points="96.5,179.9219,86.5,183.9219,96.5,187.9219,92.5,183.9219" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="90.5" x2="371.5" y1="183.9219" y2="183.9219"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="102.5" y="179.0654">2</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="247" x="113.5" y="179.0654">Ask to choose an passageway to edit data</text><polygon fill="#181818" points="355.5,210.2734,365.5,214.2734,355.5,218.2734,359.5,214.2734" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="85.5" x2="361.5" y1="214.2734" y2="214.2734"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="92.5" y="209.417">3</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="203" x="103.5" y="209.417">Choose the passageway, and edits</text><polygon fill="#181818" points="91.5,240.625,81.5,244.625,91.5,248.625,87.5,244.625" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="85.5" x2="371.5" y1="244.625" y2="244.625"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="97.5" y="239.7686">4</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="164" x="108.5" y="239.7686">Floor passageway/data error</text><!--MD5=[cfc77915b2681391503813bdcbc1bf33]
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 1 - Process View) - US 1180
+autonumber
+
+Actor "Campus Manager" as manager
+participant "RobDroneGo" as Sistema <<system (C4)>>
+
+activate manager
+    manager -> Sistema : Ask to edit passageway
+    activate Sistema
+
+    Sistema - -> manager : Ask to choose an passageway to edit data
+    deactivate Sistema
+
+    manager -> Sistema : Choose the passageway, and edits
+    activate Sistema
+
+    Sistema - -> manager : Floor passageway/data error
+    deactivate Sistema
+deactivate manager
+
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 18:01:30 WEST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: Cp1252
+Language: pt
+Country: PT
+--></g></svg>

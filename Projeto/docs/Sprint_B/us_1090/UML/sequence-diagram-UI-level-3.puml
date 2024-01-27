@@ -1,0 +1,47 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View - UI) - US 1090
+autonumber
+
+participant "View" as View <<Component>>
+participant "Component" as Component <<Component>>
+participant "Model" as Model <<Component>>
+participant "Service" as Service <<Component>>
+
+?o-> View : Ask to create floor
+activate View
+    View -> Component : getAllBuildings()
+    activate Component
+        Component -> Service : getAllBuildingsInfo()
+        activate Service
+            Service -> : GET (.../buildings)
+            Service <--: status: 200/404
+            Service --> Component : Success / Error
+        deactivate Service
+
+        Component --> View : Information about the success/error
+    deactivate Component
+<-- View : Ask to insert data
+deactivate View
+
+?o-> View : Insert floor data
+activate View
+    View -> Component : createFloor()
+    activate Component
+        Component --> Model** :
+        Component -> Service : createFloor(floor)
+        activate Service
+            Service -> : POST (.../buildings/floors)
+            Service <--: status: 201/400
+            Service --> Component : Success / Error
+        deactivate Service
+
+        Component --> View : Information about the success/error
+    deactivate Component
+<-- View : Floor created/data error
+deactivate View
+
+@enduml

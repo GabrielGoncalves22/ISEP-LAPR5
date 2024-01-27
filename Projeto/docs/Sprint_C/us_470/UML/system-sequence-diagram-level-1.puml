@@ -1,0 +1,26 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 1 - Process View) - US 470
+autonumber
+
+Actor "Task Manager" as TaskManager
+participant "RobDroneGo" as Sistema <<system (C4)>>
+
+activate TaskManager
+    TaskManager -> Sistema : Ask to consult pending requests for a task type
+    activate Sistema
+
+    Sistema --> TaskManager : Ask to choose a request and the action to take
+    deactivate Sistema
+
+    TaskManager -> Sistema : Choose the request and approve or refuse
+    activate Sistema
+
+    Sistema --> TaskManager : Request approved or refused/data error
+    deactivate Sistema
+deactivate TaskManager
+
+@enduml

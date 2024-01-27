@@ -1,0 +1,56 @@
+hr {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.center-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#showPassword {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #333;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+}
+
+.show-password-label {
+    margin-left: 5px;
+    font-weight: normal !important;
+}
+
+.register-route {
+    text-decoration: none;
+    color: black;
+}
+
+.login-with-facebook-button {
+    width: 100%;
+    max-width: 200px;
+    border: 2px solid #1877F2;
+    border-radius: 5px;
+    padding: 10px 15px;
+    text-align: center;
+    background-color: #1877F2;
+    color: white;
+    font-size: 14px;
+}
+
+.login-with-facebook-button:hover {
+    font-weight: bold;
+    cursor: pointer;
+    color: #135492;
+    background-color: transparent;
+}

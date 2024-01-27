@@ -1,0 +1,32 @@
+.large-card {
+    width: 100%;
+    margin: 20px;
+    margin-top: 40px;
+    background-color: #bfbebe;
+    border: 2px solid #9A1A24;
+    border-radius: 5px;
+    padding: 20px 35px;
+}
+
+
+.large-card-header {
+    font-weight: bold;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.large-card-body {
+    margin-bottom: 20px;
+}
+
+.large-card button {
+    padding: 20px 30px;
+    border: 2px solid black;
+    transition: scale .5s ease-in-out;
+}
+
+.large-card button:hover {
+    border-color: #9A1A24;
+    cursor: pointer;
+    scale: calc(1.1);
+}

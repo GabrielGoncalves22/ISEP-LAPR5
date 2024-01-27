@@ -1,0 +1,23 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View) - US 380
+autonumber
+
+participant "BE" as BE <<system (C4)>>
+participant "BD" as BD <<system (C4)>>
+
+?o-> BE : GET (.../devices)
+activate BE
+
+    BE --> BD :
+    activate BD
+    BD --> BE :
+    deactivate BD
+
+<-- BE : status: 200/404
+deactivate BE
+
+@enduml

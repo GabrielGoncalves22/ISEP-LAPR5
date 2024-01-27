@@ -1,0 +1,34 @@
+<h1 class="center">Create Device Type</h1>
+
+<form (ngSubmit)="createDeviceType()" #formulario="ngForm" class="form-to-create">
+    <div class="form-group">
+        <label for="type">Type:</label>
+        <input type="text" id="type" name="type" [(ngModel)]="deviceType.type" (focusout)="saveData()" required>
+    </div>
+
+    <div class="form-group">
+        <label for="brand">Brand:</label>
+        <input type="text" id="brand" name="brand" [(ngModel)]="deviceType.brand" (focusout)="saveData()" required>
+    </div>
+
+    <div class="form-group">
+        <label for="model">Model:</label>
+        <input type="text" id="model" name="model" [(ngModel)]="deviceType.model" (focusout)="saveData()" required>
+    </div>
+
+    <div>
+        <label><b>Task types:</b></label>
+        <div *ngFor="let checkbox of checkboxesTaskTypes; let i = index">
+            <input type="checkbox" id="{{checkbox.id}}" name="{{checkbox.name}}" [ngModel]="checkbox.checked"
+                (ngModelChange)="onCheckboxChange($event, i)">
+            {{checkbox.name}}
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button type="submit" [disabled]="formulario.invalid">Create</button>
+    </div>
+
+    <p *ngIf="error" class="form-alert form-alert-error"><b>Error:</b> {{error}}</p>
+    <p *ngIf="success" class="form-alert form-alert-success"><b>Success:</b> {{success}}</p>
+</form>

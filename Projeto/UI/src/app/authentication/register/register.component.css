@@ -1,0 +1,38 @@
+.center-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-route {
+    text-decoration: none;
+    color: black;
+}
+
+.rgpd-route {
+    margin-left: 5px;
+    text-decoration: none;
+    color: black;
+    text-decoration: underline;
+}
+
+.register-with-facebook-button {
+    width: 100%;
+    max-width: 200px;
+    border: 2px solid #1877F2;
+    border-radius: 5px;
+    padding: 10px 15px;
+    text-align: center;
+    background-color: #1877F2;
+    color: white;
+    font-size: 14px;
+}
+
+.register-with-facebook-button:hover {
+    font-weight: bold;
+    cursor: pointer;
+    color: #135492;
+    background-color: transparent;
+}

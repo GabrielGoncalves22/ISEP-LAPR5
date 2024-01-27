@@ -1,0 +1,40 @@
+<h1 class="center">Edit Elevator</h1>
+
+<form (ngSubmit)="editElevator()" #formulario="ngForm" class="form-to-create">
+
+    <div class="form-group">
+        <label for="building">Building Code:</label>
+        <input list="buildingList" id="building" name="building" [(ngModel)]="selectedBuildingCode"
+               (input)="loadElevatorDetails()" required>
+        <datalist id="buildingList">
+            <option *ngFor="let building of buildings" [value]="building.code">{{ building.code }}</option>
+        </datalist>
+    </div>
+
+    <div class="form-group">
+        <label for="brand">Brand:</label>
+        <input type="text" id="brand" name="brand" [(ngModel)]="elevator.brand">
+    </div>
+
+    <div class="form-group">
+        <label for="model">Model:</label>
+        <input type="text" id="model" name="model" [(ngModel)]="elevator.model">
+    </div>
+
+    <div class="form-group">
+        <label for="serialNumber">Serial Number:</label>
+        <input type="text" id="serialNumber" name="serialNumber" [(ngModel)]="elevator.serialNumber">
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" [(ngModel)]="elevator.description">
+    </div>
+
+    <div class="button-container">
+        <button type="submit" [disabled]="formulario.invalid">Edit</button>
+    </div>
+
+    <p *ngIf="error" class="form-alert form-alert-error"><b>Error:</b> {{error}}</p>
+    <p *ngIf="success" class="form-alert form-alert-success"><b>Success:</b> {{success}}</p>
+</form>

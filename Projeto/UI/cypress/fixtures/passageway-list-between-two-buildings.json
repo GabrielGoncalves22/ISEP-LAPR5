@@ -1,0 +1,50 @@
+[
+    [
+        {
+            "number": -8,
+            "description": "test123",
+            "building": "E"
+        },
+        {
+            "number": 11222,
+            "description": "Piso de ferramentas",
+            "building": "A"
+        }
+    ],
+    [
+        {
+            "number": 1,
+            "description": "Piso de ferramentas",
+            "building": "E"
+        },
+        {
+            "number": 11,
+            "description": "Piso de ferramentas",
+            "building": "A"
+        }
+    ],
+    [
+        {
+            "number": 10,
+            "description": "Piso de ferramentas",
+            "building": "A"
+        },
+        {
+            "number": 2,
+            "description": "Piso de fios",
+            "building": "E"
+        }
+    ],
+    [
+        {
+            "number": -2,
+            "description": "test123",
+            "building": "E"
+        },
+        {
+            "number": 1,
+            "description": "First Floor",
+            "building": "A"
+        }
+    ]
+]

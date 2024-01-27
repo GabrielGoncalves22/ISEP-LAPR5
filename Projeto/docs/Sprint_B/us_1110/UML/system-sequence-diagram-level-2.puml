@@ -1,0 +1,30 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 2 - Process View) - US 1110
+autonumber
+
+Actor "Campus Manager" as manager
+participant "UI" as UI <<system (C4)>>
+participant "MD" as MD <<system (C4)>>
+
+activate manager
+    manager -> UI : Ask to edit floor
+    activate UI
+        UI --> manager : Ask to choose an building and floor to edit data
+    deactivate UI
+
+    manager -> UI : Choose the building and floor, and edits
+    activate UI
+        UI -> MD : PUT/PATCH (.../buildings/:code/floor)
+        activate MD
+            UI <-- MD : status: 200/404
+        deactivate MD
+
+        UI --> manager : Floor edited/data error
+    deactivate UI
+deactivate manager
+
+@enduml

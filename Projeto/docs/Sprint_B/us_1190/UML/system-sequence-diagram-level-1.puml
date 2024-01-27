@@ -1,0 +1,30 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 1 - Process View) - US 1190
+autonumber
+
+Actor "Campus Manager" as campusManager
+participant "RobDroneGo WebApp" as WebSite <<system (C4)>>
+participant "RobDroneGo" as Sistema <<system (C4)>>
+
+activate campusManager
+    campusManager -> WebSite : Ask to list passageways between two buildings
+    activate WebSite
+        WebSite --> campusManager : Ask to choose the two buildings
+    deactivate WebSite
+
+    campusManager -> WebSite : Choose the two buildings
+    activate WebSite
+        WebSite -> Sistema : GET (.../passageways?building_1=:building_1&building_2=building_2)
+        activate Sistema
+            WebSite <-- Sistema : status: 200/404
+        deactivate Sistema
+
+        WebSite --> campusManager : Success / Error
+    deactivate WebSite
+deactivate campusManager
+
+@enduml

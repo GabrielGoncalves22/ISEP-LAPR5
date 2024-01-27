@@ -1,0 +1,35 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View - UI) - US 500
+autonumber
+
+participant "View" as View <<Component>>
+participant "Component" as Component <<Component>>
+participant "Model" as Model <<Component>>
+participant "Service" as Service <<Component>>
+participant "MDT" as MD <<system (C4)>>
+
+?o-> View : Ask to calculate the best task execution order
+activate View
+    View -> Component : getTaskOrder()
+    activate Component
+        Component --> Model** :
+        Component -> Service : getTaskOrder()
+        activate Service
+            Service -> MD: GET (.../tasks/exec)
+
+            activate MD
+            Service <-- MD: status: 200/400
+            deactivate MD
+            Service --> Component : Success / Error
+        deactivate Service
+
+        Component --> View
+    deactivate Component
+<-- View :  shows select task type list
+deactivate View
+
+@enduml

@@ -1,0 +1,115 @@
+pipelines:
+  default:
+    - parallel:
+        - step:
+            name: Build and Test MD & Deploy to production
+            image: node:18.17.1
+            deployment: production
+            caches:
+              - node
+            script:
+              - cd MD
+              - npm install
+              - npm run build
+              - npm test tests/**/*.test.ts
+              - echo "Deploying to production environment"
+              - pipe: atlassian/ssh-run:0.2.2
+                variables:
+                  SSH_USER: 'root'
+                  SERVER: 'vsgate-ssh.dei.isep.ipp.pt'
+                  PORT: '10197'
+                  COMMAND: '~/apps/RobDroneGo-MD/deployApi.sh'
+        - step:
+            name: Build and Test MDT
+            image: mcr.microsoft.com/dotnet/sdk:8.0
+            caches:
+              - dotnetcore
+            script:
+              - cd MDT
+              - dotnet restore
+              - dotnet build
+              - dotnet test
+        - step:
+            name: Build and Test UI & Deploy to production (Server 1)
+            image: mcr.microsoft.com/dotnet/sdk:8.0
+            caches:
+              - node
+              - dotnetcore
+            script:
+              - apt-get update
+              - apt-get install -y npm libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+              - cd MDT
+              - dotnet run &
+              - cd ../MD
+              - npm install
+              - npm run start &
+              - cd ../UI
+              - npm install --legacy-peer-deps
+              - npm install -g @angular/cli
+              - ng build
+              - ng serve &
+              - sleep 30
+              - npx cypress run
+              - echo "Deploying to production environment"
+              - pipe: atlassian/ssh-run:0.2.2
+                variables:
+                  SSH_USER: 'root'
+                  SERVER: 'vsgate-ssh.dei.isep.ipp.pt'
+                  PORT: '10484'
+                  COMMAND: '/root/apps/RobDroneGo-UI/deployUI.sh'
+        - step:
+            name: Build and Test UI & Deploy to production (Server 2)
+            image: mcr.microsoft.com/dotnet/sdk:8.0
+            caches:
+              - node
+              - dotnetcore
+            script:
+              - apt-get update
+              - apt-get install -y npm libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+              - cd MDT
+              - dotnet run &
+              - cd ../MD
+              - npm install
+              - npm run start &
+              - cd ../UI
+              - npm install --legacy-peer-deps
+              - npm install -g @angular/cli
+              - ng build
+              - ng serve &
+              - sleep 30
+              - npx cypress run
+              - echo "Deploying to production environment"
+              - pipe: atlassian/ssh-run:0.2.2
+                variables:
+                  SSH_USER: 'root'
+                  SERVER: 'vsgate-ssh.dei.isep.ipp.pt'
+                  PORT: '11172'
+                  COMMAND: '/root/apps/RobDroneGo-UI/deployUI.sh'
+        - step:
+            name: Build and Test UI & Deploy to production (Server 3)
+            image: mcr.microsoft.com/dotnet/sdk:8.0
+            caches:
+              - node
+              - dotnetcore
+            script:
+              - apt-get update
+              - apt-get install -y npm libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+              - cd MDT
+              - dotnet run &
+              - cd ../MD
+              - npm install
+              - npm run start &
+              - cd ../UI
+              - npm install --legacy-peer-deps
+              - npm install -g @angular/cli
+              - ng build
+              - ng serve &
+              - sleep 30
+              - npx cypress run
+              - echo "Deploying to production environment"
+              - pipe: atlassian/ssh-run:0.2.2
+                variables:
+                  SSH_USER: 'root'
+                  SERVER: 'vsgate-ssh.dei.isep.ipp.pt'
+                  PORT: '11248'
+                  COMMAND: '/root/apps/RobDroneGo-UI/deployUI.sh'

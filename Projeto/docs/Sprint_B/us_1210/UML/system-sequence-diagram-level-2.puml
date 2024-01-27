@@ -1,0 +1,30 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 2 - Process View) - US 1210
+autonumber
+
+Actor "Campus Manager" as campusManager
+participant "UI" as UI <<system (C4)>>
+participant "MD" as MD <<system (C4)>>
+
+activate campusManager
+    campusManager -> UI : Asks to create a room on a given floor of a certain building
+    activate UI
+        UI --> campusManager : Ask to insert data
+    deactivate UI
+
+    campusManager -> UI : Insert data
+    activate UI
+        UI -> MD : POST (.../buildings/rooms)
+        activate MD
+            UI <-- MD : status: 201/400
+        deactivate MD
+
+        UI --> campusManager : Success / Error
+    deactivate UI
+deactivate campusManager
+
+@enduml

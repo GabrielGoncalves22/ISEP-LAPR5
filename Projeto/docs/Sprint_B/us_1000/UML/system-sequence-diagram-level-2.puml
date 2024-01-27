@@ -1,0 +1,29 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 2 - Process View) - US 1000
+autonumber
+
+participant "UI" as UI <<system (C4)>>
+participant "MD" as MD <<system (C4)>>
+
+?o-> UI : Ask to create device type
+activate UI
+
+<-- UI : Ask to insert data
+deactivate UI
+
+?o-> UI : Insert device type data
+activate UI
+
+    UI -> MD : POST (.../devices/types)
+    activate MD
+        UI <-- MD : status: 201/400
+    deactivate MD
+
+<-- UI : Device type created/data error
+deactivate UI
+
+@enduml

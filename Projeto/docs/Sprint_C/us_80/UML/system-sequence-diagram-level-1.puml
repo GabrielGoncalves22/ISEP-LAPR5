@@ -1,0 +1,28 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 1 - Process View) - US 80
+autonumber
+
+Actor "System Manager" as SystemManager
+participant "RobDroneGo" as Sistema <<system (C4)>>
+
+activate SystemManager
+    SystemManager -> Sistema : Ask to approve/deny user
+    activate Sistema
+
+    Sistema --> SystemManager : shows users list
+    deactivate Sistema
+
+    loop until exit
+    SystemManager -> Sistema : approves/denys user data
+    activate Sistema
+
+    Sistema --> SystemManager : shows updated users list
+    deactivate Sistema
+    end
+deactivate SystemManager
+
+@enduml

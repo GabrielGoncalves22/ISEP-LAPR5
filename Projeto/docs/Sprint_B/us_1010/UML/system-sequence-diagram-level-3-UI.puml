@@ -1,0 +1,39 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+autonumber
+
+title System Sequence Diagram (Level 3 - Process View) - US 1010
+
+
+actor "Gestor de Frota" as actor
+
+participant ":Component" as Component <<Component>>
+participant ":model" as Model
+participant ":service" as Service <<Service>>
+participant "MD" as MD <<container (C4)>>
+
+activate actor
+actor -> Component: Asks to create a device
+activate Component
+actor <-- Component: Asks for device information
+deactivate Component
+actor -> Component: Inputs information
+activate Component
+Component --> Model**
+Component -> Service: createDevice(device)
+activate Service
+Service -> MD: POST(../devices)
+activate MD
+Service <-- MD: status: 201/400
+deactivate MD
+Service --> Component
+deactivate Service
+actor <-- Component: success
+deactivate Component
+deactivate actor
+
+
+
+@enduml

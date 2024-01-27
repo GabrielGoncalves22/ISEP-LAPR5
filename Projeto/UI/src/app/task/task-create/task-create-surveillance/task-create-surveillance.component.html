@@ -1,0 +1,38 @@
+<h1 class="center">Create Surveillance Task</h1>
+
+<form (ngSubmit)="createSurveillanceTask()" #formulario="ngForm" class="form-to-create">
+    <div class="form-group">
+        <label for="building">Building Code:</label>
+        <input list="buildingList" id="building" name="building" [(ngModel)]="surveillanceTask.buildingCode" required
+            (input)="onBuildingChange()">
+        <datalist id="buildingList">
+            <option *ngFor="let building of buildings" [value]="building.code">{{ building.code }}</option>
+        </datalist>
+    </div>
+
+    <div class="form-group">
+        <label for="emergencyContactName">Emergency Contact Name:</label>
+        <input type="text" id="emergencyContactName" name="emergencyContactName" [(ngModel)]="surveillanceTask.emergencyContactName" (focusout)="saveData()" required>
+    </div>
+
+    <div class="form-group">
+        <label for="emergencyContactNumber">Emergency Contact Number:</label>
+        <input type="text" id="emergencyContactNumber" name="emergencyContactNumber" [(ngModel)]="surveillanceTask.emergencyContactPhoneNumber" (focusout)="saveData()" required>
+    </div>
+
+    <div *ngIf="surveillanceTask.buildingCode != ''">
+        <label *ngIf="checkboxesFloors.length > 0"><b>Floors:</b></label>
+        <div *ngFor="let checkboxFloor of checkboxesFloors;">
+            <input type="checkbox" [id]="'floor' + checkboxFloor.number" [(ngModel)]="checkboxFloor.checked" name="checkboxFloor.number"
+                [value]="checkboxFloor.number" (change)="onFloorSelectionChange(checkboxFloor)" />
+            {{ checkboxFloor.number }}
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button type="submit" [disabled]="formulario.invalid">Create</button>
+    </div>
+
+    <p *ngIf="error" class="form-alert form-alert-error"><b>Error:</b> {{error}}</p>
+    <p *ngIf="success" class="form-alert form-alert-success"><b>Success:</b> {{success}}</p>
+</form>

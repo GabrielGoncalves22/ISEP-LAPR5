@@ -1,0 +1,30 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 2 - Process View) - US 1120
+autonumber
+
+Actor "Campus Manager" as campusManager
+participant "UI" as UI <<system (C4)>>
+participant "MD" as MD <<system (C4)>>
+
+activate campusManager
+    campusManager -> UI : Asks to load a map that represents a floor from a building
+    activate UI
+        UI --> campusManager : Asks to choose a file
+    deactivate UI
+
+    campusManager -> UI : Choose a file
+    activate UI
+        UI -> MD : PATCH (.../buildings/:buildingCode/floors/:floorNumber/map)
+        activate MD
+            UI <-- MD : status: 200/400
+        deactivate MD
+
+        UI --> campusManager : Success / Error
+    deactivate UI
+deactivate campusManager
+
+@enduml

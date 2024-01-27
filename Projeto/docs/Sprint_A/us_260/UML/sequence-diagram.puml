@@ -1,0 +1,49 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (SD) - US 180
+autonumber
+
+participant passagewayRoute as route <<Web>>
+control "passagewayController :\n passagewayController" as controller <<Controllers>>
+participant "passagewayService :\n passagewayService" as passagewayService <<Use Cases>>
+participant "passageway :\n passageway" as passageway <<Domain>>
+participant "floor :\n floor" as floor <<Domain>>
+database "passagewayRepo :\n passagewayRepo" as passagewayRepo <<Gateways>>
+participant PassagewayMapper as passagewayMapper <<Mapper>>
+participant "passagewayDTO :\n PassagewayDTO" as passagewayDTO <<DTO>>
+
+alt
+    ?o->route : GET (.../passageways/)
+else
+    ?o->route : GET (.../passageways?building_1=:b1&building_2=:b2)
+end
+activate route
+    route -> controller : getPassagewaysBetweenBuildings()
+
+    activate controller
+        controller -> passagewayService : getPassagewaysBetweenBuildings(building_1?, building_2?)
+
+        activate passagewayService
+            passagewayService -> passagewayRepo : passageways = getPassagewaysBetweenBuildings(building_1?, building_2?)
+            activate passagewayRepo
+            deactivate passagewayRepo
+
+            loop each passageways
+                passagewayService -> passagewayMapper : passagewaysDTO = toDTO(passageway)
+                activate passagewayMapper
+                    passagewayMapper --> passagewayDTO** : create()
+                deactivate passagewayMapper
+            end
+
+            passagewayService --> controller : passagewaysDTO
+        deactivate passagewayService
+
+        controller --> route : passagewaysDTO
+    deactivate controller
+    <-- route : passagewaysDTO
+deactivate route
+
+@enduml

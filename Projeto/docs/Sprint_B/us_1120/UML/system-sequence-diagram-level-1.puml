@@ -1,0 +1,30 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 1 - Process View) - US 1120
+autonumber
+
+Actor "Campus Manager" as campusManager
+participant "RobDroneGo WebApp" as WebSite <<system (C4)>>
+participant "RobDroneGo" as Sistema <<system (C4)>>
+
+activate campusManager
+    campusManager -> WebSite : Asks to load a map that represents a floor from a building
+    activate WebSite
+        WebSite --> campusManager : Asks to choose a file
+    deactivate WebSite
+
+    campusManager -> WebSite : Choose a file
+    activate WebSite
+        WebSite -> Sistema : PATCH (.../buildings/:buildingCode/floors/:floorNumber/map)
+        activate Sistema
+            WebSite <-- Sistema : status: 200/400
+        deactivate Sistema
+
+        WebSite --> campusManager : Success / Error
+    deactivate WebSite
+deactivate campusManager
+
+@enduml

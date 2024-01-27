@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Basic Thumb Raiser</title>
+</head>
+
+<body>
+    <div #gameContainer id="game-container" class="game-container">
+        <div id="parent">
+            <div id="views-panel">
+                <table class="views">
+                    <tr>
+                        <td>
+                            <label for="building">Building Code:</label>
+                            <select id="building" name="building" [(ngModel)]="selectedBuilding"
+                                (change)="onBuildingChange()">
+                                <option *ngFor="let building of buildings" [value]="building.code">{{ building.code }}
+                                </option>
+                            </select>
+                        </td>
+                        <td>
+                            <label for="floor">Floor Number:</label>
+                            <select id="floor" name="floor" [(ngModel)]="selectedFloor">
+                                <option *ngFor="let floor of floors" [value]="floor.number">{{ floor.number }}</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="button" id="changeMap" value="Change map" (click)="changeMap()">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>View:</label>
+                            <select id="view">
+                                <option value="fixed">Fixed</option>
+                                <option value="first">First-person</option>
+                                <option value="third">Third-person</option>
+                                <option value="top">Top</option>
+                            </select>
+                        </td>
+                        <td>
+                            <label>Orientation (h):</label>
+                            <input type="number" id="horizontal" required>
+                        </td>
+                        <td>
+                            <label>Orientation (v):</label>
+                            <input type="number" id="vertical" required>
+                        </td>
+                        <td>
+                            <input type="button" id="reset" value="Reset view">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Projection:</label>
+                            <select id="projection">
+                                <option value="perspective">Perspective</option>
+                                <option value="orthographic">Orthographic</option>
+                            </select>
+                        </td>
+                        <td>
+                            <label>Distance:</label>
+                            <input type="number" id="distance" required>
+                        </td>
+                        <td>
+                            <label>Zoom:</label>
+                            <input type="number" id="zoom" required>
+                        </td>
+                        <td>
+                            <input type="button" id="reset-all" value="Reset all views">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div class="elevator-buttons">
+                                <p class="elevator-title">Using the elevator</p>
+                                <div class="elevator-floor-selection">
+                                    <p>Choose floor: </p>
+                                    <button class="elevator-button" *ngFor="let floor of floorsServedElevator"
+                                        (click)="chosenFloorElevator(floor)" [class.selected]="floor === selectedFloor">
+                                        {{ floor }}
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div class="passageway-buttons">
+                                <p class="passageway-title"></p>
+                                <button class="passageway-button" (click)="getCurrentPassagewayCode()">Use passageway</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="help-panel">
+                <table class="help" id="help-table">
+                    <tr>
+                        <th colspan="2" style="font-size: 3.0vmin">
+                            Help
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="2" style="text-align: left">Select active view</th>
+                    </tr>
+                    <tr>
+                        <td>Digit1</td>
+                        <td>Fixed view</td>
+                    </tr>
+                    <tr>
+                        <td>Digit2</td>
+                        <td>First-person view</td>
+                    </tr>
+                    <tr>
+                        <td>Digit3</td>
+                        <td>Third-person view</td>
+                    </tr>
+                    <tr>
+                        <td>Digit4</td>
+                        <td>Top view</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2" style="text-align: left">Toggle view mode</th>
+                    </tr>
+                    <tr>
+                        <td>KeyV</td>
+                        <td>Single-view mode / multiple-views mode</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2" style="text-align: left">Display / hide subwindows</th>
+                    </tr>
+                    <tr>
+                        <td>KeyU</td>
+                        <td>User interface</td>
+                    </tr>
+                    <tr>
+                        <td>KeyM</td>
+                        <td>Mini-map</td>
+                    </tr>
+                    <tr>
+                        <td>KeyH</td>
+                        <td>Help</td>
+                    </tr>
+                    <tr>
+                        <td>KeyS</td>
+                        <td>Statistics</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2" style="text-align: left">Move character</th>
+                    </tr>
+                    <tr>
+                        <td>KeyR</td>
+                        <td>Walk / run (modifier key)</td>
+                    </tr>
+                    <tr>
+                        <td>ArrowLeft</td>
+                        <td>Turn left slowly / quickly</td>
+                    </tr>
+                    <tr>
+                        <td>ArrowRight</td>
+                        <td>Turn right slowly / quickly</td>
+                    </tr>
+                    <tr>
+                        <td>ArrowDown</td>
+                        <td>Walk / run backward</td>
+                    </tr>
+                    <tr>
+                        <td>ArrowUp</td>
+                        <td>Walk / run forward</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2" style="text-align: left">Emote character</th>
+                    </tr>
+                    <tr>
+                        <td>KeyJ</td>
+                        <td>Dance</td>
+                    </tr>
+                    <tr>
+                        <td>KeyY</td>
+                        <td>Opening</td>
+                    </tr>
+                    <tr>
+                        <td>KeyN</td>
+                        <td>Clicking</td>
+                    </tr>
+                    <tr>
+                        <td>KeyW</td>
+                        <td>Wave</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2" style="text-align: left">Interaction with objects</th>
+                    </tr>
+                    <tr>
+                        <td>KeyQ</td>
+                        <td>Open door</td>
+                    </tr>
+                    <tr>
+                        <td>KeyA</td>
+                        <td>Close door</td>
+                    </tr>
+                    <tr>
+                        <td>KeyE</td>
+                        <td>Open elevator</td>
+                    </tr>
+                    <tr>
+                        <td>KeyX</td>
+                        <td>Close elevator</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: right">
+                            Maze designed by Cecília Fernandes and Nikita.
+                            Model created by <a
+                                href='https://www.turbosquid.com/3d-models/3d-model-claptrap-borderlands-1669553'
+                                target='_blank' rel='noopener'>Oleksii Chyzhov</a>. CC0 1.0.
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="subwindows-panel">
+                <table class="subwindows">
+                    <tr>
+                        <td>
+                            <label>Multiple views:</label>
+                            <input type="checkbox" id="multiple-views">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>User interface:</label>
+                            <input type="checkbox" id="user-interface">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Mini-map:</label>
+                            <input type="checkbox" id="mini-map">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Help:</label>
+                            <input type="checkbox" id="help">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Statistics:</label>
+                            <input type="checkbox" id="statistics">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+
+</body>
+
+</html>

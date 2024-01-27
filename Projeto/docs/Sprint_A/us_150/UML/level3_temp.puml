@@ -1,0 +1,46 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 3 - Process View) - US 150
+autonumber
+
+participant "buildingRoute" as route <<Route>>
+participant "ctrlBuilding :\n IBuildingController" as controller <<Controller>>
+participant "buildingServiceInstance :\n IBuildingService" as service <<Service>>
+participant "buildingRepo :\n IBuildingRepository" as repo <<Repository>>
+participant "DB" as db <<DataBase>>
+
+participant "building :\n building" as building <<Domain>>
+participant "buildingDTO :\n IBuildingDTO" as buildingDTO <<DTO>>
+
+?o-> route : POST (.../buildings)
+activate route
+    route -> controller : execute(req, res, next)
+    activate controller
+        controller -> controller : createBuilding(req, res, next)
+        activate controller
+            controller --> buildingDTO** :
+            controller -> service : createBuilding(buildingDTO)
+
+            activate service
+                service --> building** : create
+                service -> repo : save(building)
+                activate repo
+                    repo -> db : create(building)
+                    db --> repo :
+                    repo --> service :
+                deactivate repo
+                service --> controller :
+            deactivate service
+
+            controller --> controller : status: 201/400
+        deactivate controller
+        controller --> route : status: 201/400
+    deactivate controller
+
+    <-- route : status: 201/400
+deactivate route
+
+@enduml

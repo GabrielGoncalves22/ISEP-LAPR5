@@ -1,0 +1,57 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 2 - Process View) - US 460 - Pickup & Delivery Task
+autonumber
+
+Actor "User" as user
+participant "UI" as UI <<system (C4)>>
+
+activate user
+    user -> UI : Ask to request a pickup & delivery task
+    activate UI
+        UI -> : GET (.../api/buildings/rooms)
+        UI <-- : status: 200/404
+
+        UI -> : GET (.../api/me)
+        UI <-- : status: 200/404
+
+        UI --> user : List the existing rooms and ask to choose one for pickup
+    deactivate UI
+
+    user -> UI : Choose one room to pickup
+    activate UI
+        UI --> user : List the existing rooms and ask to choose one for delivery
+    deactivate UI
+    user -> UI : Choose one room for delivery
+
+    activate UI
+        UI --> user : Ask to insert name and phone number for pickup contact
+    deactivate UI
+    user -> UI : Insert data
+
+    activate UI
+        UI --> user : Ask to insert name and phone number for delivery contact
+    deactivate UI
+    user -> UI : Insert data
+
+    activate UI
+        UI --> user : Ask to insert a description
+    deactivate UI
+    user --> UI : Insert description
+
+    activate UI
+        UI --> user : Ask to insert a confirmation code
+    deactivate UI
+    user --> UI : Insert a confirmation code
+
+    activate UI
+        UI -> : POST (.../api/tasks/deliveries)
+        UI <-- : status: 201/400
+        UI --> user : Task created / Data error
+    deactivate UI
+deactivate user
+
+@enduml

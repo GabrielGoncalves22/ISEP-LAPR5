@@ -1,0 +1,28 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View) - US 310
+autonumber
+
+participant "BE" as BE <<system (C4)>>
+participant "BD" as BD <<system (C4)>>
+
+?o-> BE : POST (.../buildings/rooms)
+activate BE
+
+    BE --> BD : Verify building exists
+    activate BD
+    BD --> BE :
+    deactivate BD
+
+    BE --> BD : Insert room
+    activate BD
+    BD --> BE :
+    deactivate BD
+
+<-- BE : status: 201/400
+deactivate BE
+
+@enduml

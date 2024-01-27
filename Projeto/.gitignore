@@ -1,0 +1,31 @@
+# Ignore node_modules folder
+node_modules/
+
+# Intellij
+.idea
+out/
+build/
+
+#Ignore three.js folder
+3D_visualization/three.js-master/
+
+#Ignore lodash folder
+3D_visualization/lodash/
+
+# VS Code
+.vscode
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Visual Paradigm
+*.bak*
+
+# Unnecessary files
+bin/
+obj/

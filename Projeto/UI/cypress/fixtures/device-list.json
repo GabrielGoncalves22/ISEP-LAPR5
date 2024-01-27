@@ -1,0 +1,26 @@
+[
+    {
+        "code": "PKjtuXHj5",
+        "description": "Main Device",
+        "type": "9951a374-02bb-4ec6-baa3-a9ab71fed5f6",
+        "serialNumber": "Dt",
+        "nickname": "CentralHub",
+        "status": "Inactive"
+    },
+    {
+        "code": "ABCD1234",
+        "description": "Secondary Device 1",
+        "type": "9951a374-02bb-4ec6-baa3-a9ab71fed5f6",
+        "serialNumber": "XYZ",
+        "nickname": "Sensor1",
+        "status": "Active"
+    },
+    {
+        "code": "EFGH5678",
+        "description": "Secondary Device 2",
+        "type": "9951a374-02bb-4ec6-baa3-a9ab71fed5f6",
+        "serialNumber": "ABC",
+        "nickname": "Sensor2",
+        "status": "Inactive"
+    }
+]

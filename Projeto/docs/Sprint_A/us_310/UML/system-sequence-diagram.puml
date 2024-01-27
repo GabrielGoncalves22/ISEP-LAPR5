@@ -1,0 +1,25 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US 310
+autonumber
+
+actor "Gestor de Campus" as Gestor
+participant "RobDroneGo" as Sistema <<system (C4)>>
+
+
+activate Gestor
+
+    Gestor -> Sistema : Criar sala de piso de edifício
+    activate Sistema
+        Sistema --> Gestor : Introduz dados
+    deactivate Sistema
+
+    Gestor -> Sistema : Dados da sala de piso de edifício
+    activate Sistema
+        Sistema --> Gestor : Sala criado/erro nos dados
+    deactivate Sistema
+
+@enduml

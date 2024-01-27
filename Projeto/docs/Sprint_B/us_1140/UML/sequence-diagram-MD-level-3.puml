@@ -1,0 +1,78 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View - MD) - US 1140
+autonumber
+
+participant "buildingRoute" as Route <<Route>>
+participant "ctrlBuilding :\n IBuildingController" as Controller <<Controller>>
+participant "buildingServiceInstance :\n IBuildingService" as Service <<Service>>
+participant "buildingDTOs :\n IBuildngDTO[]" as BuildingDTOList <<DTO>>
+participant "elevatorDTO :\n IElevatorDTO" as ElevatorDTO <<DTO>>
+participant "elevator :\n elevator" as Elevator <<Domain>>
+participant "buildingRepo :\n IBuildingRepository" as Repo <<Repository>>
+participant "DB" as DB <<DataBase>>
+
+?o-> Route : GET (.../buildings)
+activate Route
+
+    Route -> Controller : execute(req, res, next)
+    activate Controller
+        Controller -> Controller : getAllBuildings(req, res, next)
+        activate Controller
+            Controller -> Service : getBuildings()
+
+            activate Service
+                Service -> Repo : findAll()
+                activate Repo
+                    Repo -> DB :
+                    activate DB
+                    DB --> Repo :
+                    deactivate DB
+                    Repo --> Service :
+                deactivate Repo
+                Service --> BuildingDTOList** : create
+                Service --> Controller : buildingDTOs
+            deactivate Service
+
+            Controller --> Controller : status: 200/404
+        deactivate Controller
+    Controller --> Route : status: 200/404
+    deactivate Controller
+
+<-- Route : status: 200/404
+deactivate Route
+
+?o-> Route : GET (.../buildings/:code/elevators)
+activate Route
+
+    Route -> Controller : execute(req, res, next)
+    activate Controller
+        Controller -> Controller : getElevatorByBuilding(req, res, next)
+        activate Controller
+            Controller -> Service : getElevatorByBuilding(code)
+
+            activate Service
+                Service -> Repo : elevator = findElevator(code)
+                activate Repo
+                    Repo -> DB :
+                    activate DB
+                    DB --> Repo :
+                    deactivate DB
+                    Repo --> Service :
+                deactivate Repo
+                Service --> ElevatorDTO** : create
+                Service --> Controller : elevatorDTO
+            deactivate Service
+
+            Controller --> Controller : status: 200/404
+        deactivate Controller
+    Controller --> Route : status: 200/404
+    deactivate Controller
+
+<-- Route : status: 200/404
+deactivate Route
+
+@enduml

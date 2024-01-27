@@ -1,0 +1,26 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (Level 1 - Process View) - US 1020
+autonumber
+
+Actor "Fleet Manager" as FleetManager
+participant "RobDroneGo" as Sistema <<system (C4)>>
+
+activate FleetManager
+    FleetManager -> Sistema : Ask to inhibit/disinhibit device
+    activate Sistema
+
+    Sistema --> FleetManager : Ask to choose an device
+    deactivate Sistema
+
+    FleetManager -> Sistema : Choose the device
+    activate Sistema
+
+    Sistema --> FleetManager : Device inhibited or disinhibited/data error
+    deactivate Sistema
+deactivate FleetManager
+
+@enduml

@@ -1,0 +1,35 @@
+@startuml
+
+skinparam titleFontSize 25
+title <u>US 350 - Domain classes</u>
+
+hide methods
+skinparam classAttributeIconSize 0
+
+'Task aggregate
+package "<<aggregate>> Task" {
+    class TaskType <<(V, #FF8B40) enum>>
+}
+
+'Device aggregate
+package "<<aggregate>> Device" {
+    entity Device <<entity>> <<root>> {
+        designation
+    }
+
+    entity DeviceType <<entity>>
+    class Type <<(V, #FF8B40) value object>>
+    class DeviceTypeBrand <<(V, #FF8B40) value object>>
+    class DeviceTypeModel <<(V, #FF8B40) value object>>
+}
+
+DeviceType -up-> Type
+DeviceType -up-> DeviceTypeModel
+DeviceType -up-> DeviceTypeBrand
+
+Device "*" -- "1" DeviceType : has >
+
+'DeviceType to TaskType
+DeviceType "1" -- "*" TaskType : can perform >
+
+@enduml

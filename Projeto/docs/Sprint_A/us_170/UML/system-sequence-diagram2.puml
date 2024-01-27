@@ -1,0 +1,24 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US 170
+autonumber
+
+participant "RobDroneGo" as Sistema <<system (C4)>>
+participant "MD" as MD <<system (C4)>>
+
+?o-> Sistema : GET (../buildings)
+activate Sistema
+
+Sistema -> MD: getBuildings()
+
+activate MD
+MD -> MD: getAllBuildings()
+MD --> Sistema : status: 200 body:{buildings}
+deactivate MD
+<-- Sistema : mostra edificios
+
+
+@enduml

@@ -1,0 +1,52 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (Level 3 - Process View - UI) - US 490
+autonumber
+
+participant "View" as View <<Component>>
+participant "Component" as Component <<Component>>
+participant "Model" as Model <<Component>>
+participant "Service" as Service <<Component>>
+
+?o-> View : Ask to list requests
+activate View
+
+<-- View : Ask to choose the filters
+deactivate View
+
+?o-> View : Choose the filters and asks to list
+activate View
+
+        View -> Component : onTaskTypeChange()
+    activate Component
+    deactivate Component
+
+        View -> Component : onFilterButtonClick()
+    activate Component
+        alt selectedTaskType === surveillance
+            Component --> Component : getSurveillanceTasks()
+        activate Component
+            Component --> Service : getSurveillanceTasks(selectedStatus, startDate, endDate, selectedUser)
+        activate Service
+            Service --> : GET( .../tasks/surveillances)
+        deactivate Service
+        deactivate Component
+        else selectedTaskType === delivery
+            Component --> Component : getPickupAndDeliveryTask()
+        activate Component
+            Component --> Service : getPickupAndDeliveryTask(selectedStatus, startDate, endDate, selectedUser)
+        activate Service
+            Service --> : GET( .../tasks/deliveries)
+        deactivate Service
+        deactivate Component
+        end
+        Component --> View : Lists the requests that fulllfill the filters
+    deactivate Component
+
+<-- View : Lists the requests that fulllfill the filters
+deactivate View
+
+@enduml

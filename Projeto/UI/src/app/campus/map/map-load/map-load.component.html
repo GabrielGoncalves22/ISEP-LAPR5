@@ -1,0 +1,33 @@
+<h1 class="center">Upload building floor map</h1>
+
+<div class="form-to-create">
+
+    <div class="form-group">
+        <label for="building">Building Code:</label>
+        <input list="buildingList" id="building" name="building" [(ngModel)]="selectedBuilding" required
+            (input)="loadFloorsOfBuilding()">
+        <datalist id="buildingList">
+            <option *ngFor="let building of buildings" [value]="building.code">{{building.code}}</option>
+        </datalist>
+    </div>
+    
+    <div class="form-group">
+        <label for="floor">Floor number:</label>
+        
+        <select id="floor" name="floor" [(ngModel)]="selectedFloor" required>
+            <option *ngFor="let floor of floors" [value]="floor.number">{{floor.number}}</option>
+        </select>
+    </div>
+    
+    <div class="form-group form-group-input-file">
+        <label for="file">File</label>
+        <input type="file" id="file" (change)="onFileChange($event)" required/>
+    </div>
+
+    <div class="button-container">
+        <button type="button" (click)="loadMap()" class="button-style-1">Send</button>
+    </div>
+
+    <p *ngIf="error" class="form-alert form-alert-error"><b>Error:</b> {{error}}</p>
+    <p *ngIf="success" class="form-alert form-alert-success"><b>Success:</b> {{success}}</p>
+</div>
